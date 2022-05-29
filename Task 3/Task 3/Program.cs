@@ -10,8 +10,7 @@ class Program
     // Додаткове завдання. Дано цілочисельна прямокутна матриця. Знайти прямокутник найбільшої площі, заповнений однаковими числами.
     static void Main(string[] args)
     {
-
-        Console.OutputEncoding = UTF8Encoding.UTF8; // Ukrainian output in console
+        Console.OutputEncoding = UTF8Encoding.UTF8;
 
         Console.WriteLine("1. Завдання 1-3");
         Console.WriteLine("2. Завдання 4");
@@ -30,13 +29,14 @@ class Program
             int secondIndex = Convert.ToInt32(Console.ReadLine());
             Console.Clear();
             Vector arr = new Vector(n);
-            arr.InitShufle(1, 5);
+            arr.RandomInitialization(1, 5);
             Console.WriteLine($"Массив: {arr}");
-            bool palidrom = arr.palindromeCheck(firstIndex, secondIndex);
+            bool palidrom = arr.PalindromeCheck(firstIndex, secondIndex);
             Console.WriteLine($"Поле [{firstIndex}]-[{secondIndex}] є палідромом: {palidrom}");
-            arr.arrayReverse();
+            arr.ArrayReverse();
             Console.WriteLine($"Реверсивний массив: {arr}");
-            arr.sequence();
+            int indexSequence = arr.Sequence();
+            Console.WriteLine($"Перший індекс найдовшої послідовності одинакових чисел: {indexSequence}");
         }
         else if (choice == 2)
         {
@@ -49,11 +49,11 @@ class Program
             Matrix matrix = new Matrix();
             if (choice == 1)
             {
-                matrix.matrixDiagonalSnake(n, m, MatrixDirection.Down);
+                matrix.MatrixDiagonalSnake(n, m, MatrixDirection.Down);
             }
             else if (choice == 2)
             {
-                matrix.matrixDiagonalSnake(n, m, MatrixDirection.Right);
+                matrix.MatrixDiagonalSnake(n, m, MatrixDirection.Right);
             }
         }
         else if (choice == 3)
@@ -63,7 +63,11 @@ class Program
             Console.Write("Введіть кількість стовпців матриці: ");
             int m = Convert.ToInt32(Console.ReadLine());
             Matrix matrix = new Matrix();
-            matrix.matrixSquare(n, m);
+            matrix.MatrixSquare(n, m);
+        }
+        else
+        {
+            Console.WriteLine("Недійсний вибір!");
         }
     }
 }

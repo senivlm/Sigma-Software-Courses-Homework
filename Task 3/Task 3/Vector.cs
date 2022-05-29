@@ -31,9 +31,7 @@
         arr = new int[n];
     }
 
-    public Vector() { }
-
-    public void InitShufle(int a, int b)
+    public void RandomInitialization(int a, int b)
     {
         Random random = new Random();
         for (int i = 0; i < arr.Length; i++)
@@ -44,34 +42,25 @@
 
     public void InitShufle() // 5. Оптимізувати метод InitShufle класу Vector, створений на занятті.
     {
-
+        Random random = new Random();
         for (int i = 0; i < arr.Length; i++)
         {
-            arr[i] = i + 1;
-        }
-        Random random = new Random();
-        int randomNumberOfTimes = new Random().Next(5, 10);
-        int random1, random2;
-        for (int i = 0; i < randomNumberOfTimes; i++)
-        {
-            random1 = random.Next(0, arr.Length);
-            random2 = random.Next(0, arr.Length);
+            int random1 = random.Next(0, arr.Length);
+            int random2 = random.Next(0, arr.Length);
             (arr[random1], arr[random2]) = (arr[random2], arr[random1]);
         }
     }
 
     public Pair[] CalculateFreq()
     {
-
         Pair[] pairs = new Pair[arr.Length];
-
         for (int i = 0; i < arr.Length; i++)
         {
             pairs[i] = new Pair(0, 0);
 
         }
-        int countDifference = 0;
 
+        int countDifference = 0;
         for (int i = 0; i < arr.Length; i++)
         {
             bool isElement = false;
@@ -111,7 +100,7 @@
         return str;
     }
 
-    public bool palindromeCheck(int i, int j) // 1. Додати в клас Vector метод, який перевіряє, чи поле є паліндромом.
+    public bool PalindromeCheck(int i, int j) // 1. Додати в клас Vector метод, який перевіряє, чи поле є паліндромом.
     {
         bool palidrome = true;
         for (; i != j && i < j; ++i, --j)
@@ -125,15 +114,15 @@
         return palidrome;
     }
 
-    public void arrayReverse() // 2. Додати в клас Vector метод, який реверсує елементи масиву.
+    public void ArrayReverse() // 2. Додати в клас Vector метод, який реверсує елементи масиву.
     {
-        for (int i = 0, j = this.arr.Length - 1; i != j && i < j; i++, j--)
+        for (int i = 0, j = arr.Length - 1; i != j && i < j; i++, j--)
         {
-            (arr[j], arr[i])=(arr[i], arr[j]);
+            (arr[j], arr[i]) = (arr[i], arr[j]);
         }
     }
 
-    public void sequence() // 3. Додати в клас Vector метод, який в масиві знаходить найдовшу підпослідовність однакових чисел.
+    public int Sequence() // 3. Додати в клас Vector метод, який в масиві знаходить найдовшу підпослідовність однакових чисел.
     {
         int count = 0, countTemp = 0, firstIndex = 0, firstIndexTemp = 0;
         for (int i = 0; i < arr.Length - 1; i++)
@@ -156,6 +145,6 @@
                 countTemp = 0;
             }
         }
-        Console.WriteLine($"Перший індекс найдовшої послідовності одинакових чисел: {firstIndex}");
+        return firstIndex;
     }
 }

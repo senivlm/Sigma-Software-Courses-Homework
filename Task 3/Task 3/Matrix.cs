@@ -1,10 +1,10 @@
 ﻿enum MatrixDirection { Down, Right }
 class Matrix
 {
-    public void matrixDiagonalSnake(int n, int m, MatrixDirection matrixDirection) // 4. У класі Matrix створити метод, який заповнює квадратну матрицю діагональною змійкою, параметром методу має бути напрям початкового повороту змійки (вправо, чи вниз), заданий змінною типу Enum.
-
+    // 4. У класі Matrix створити метод, який заповнює квадратну матрицю діагональною змійкою,
+    // параметром методу має бути напрям початкового повороту змійки (вправо, чи вниз), заданий змінною типу Enum.
+    public void MatrixDiagonalSnake(int n, int m, MatrixDirection matrixDirection)
     {
-
         int[,] matrix = new int[n, m];
         int i = 0, j = 0, num = 0;
         bool swap = true;
@@ -60,7 +60,7 @@ class Matrix
         }
     }
 
-    public void matrixSquare(int n, int m)     // Додаткове завдання. Дано цілочисельна прямокутна матриця. Знайти прямокутник найбільшої площі, заповнений однаковими числами.
+    public void MatrixSquare(int n, int m)     // Додаткове завдання. Дано цілочисельна прямокутна матриця. Знайти прямокутник найбільшої площі, заповнений однаковими числами.
     {
         int[,] array = new int[n, m];
         Random random = new Random();
