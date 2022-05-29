@@ -32,9 +32,7 @@ class Vector
         arr = new int[n];
     }
 
-    public Vector() { }
-
-    public void InitShufle(int a, int b)
+    public void RandomInitialization(int a, int b)
     {
         Random random = new Random();
         for (int i = 0; i < arr.Length; i++)
@@ -45,33 +43,25 @@ class Vector
 
     public void InitShufle()
     {
+        Random random = new Random();
         for (int i = 0; i < arr.Length; i++)
         {
-            arr[i] = i + 1;
-        }
-        Random random = new Random();
-        int randomNumberOfTimes = new Random().Next(5, 10);
-        int random1, random2;
-        for (int i = 0; i < randomNumberOfTimes; i++)
-        {
-            random1 = random.Next(0, arr.Length);
-            random2 = random.Next(0, arr.Length);
+            int random1 = random.Next(0, arr.Length);
+            int random2 = random.Next(0, arr.Length);
             (arr[random1], arr[random2]) = (arr[random2], arr[random1]);
         }
     }
 
     public Pair[] CalculateFreq()
     {
-
         Pair[] pairs = new Pair[arr.Length];
-
         for (int i = 0; i < arr.Length; i++)
         {
             pairs[i] = new Pair(0, 0);
 
         }
-        int countDifference = 0;
 
+        int countDifference = 0;
         for (int i = 0; i < arr.Length; i++)
         {
             bool isElement = false;
@@ -111,7 +101,7 @@ class Vector
         return str;
     }
 
-    public bool palindromeCheck(int i, int j)
+    public bool PalindromeCheck(int i, int j)
     {
         bool palidrome = true;
         for (; i != j && i < j; ++i, --j)
@@ -125,15 +115,15 @@ class Vector
         return palidrome;
     }
 
-    public void arrayReverse()
+    public void ArrayReverse()
     {
-        for (int i = 0, j = this.arr.Length - 1; i != j && i < j; i++, j--)
+        for (int i = 0, j = arr.Length - 1; i != j && i < j; i++, j--)
         {
-            (arr[j], arr[i])=(arr[i], arr[j]);
+            (arr[j], arr[i]) = (arr[i], arr[j]);
         }
     }
 
-    public void sequence()
+    public int Sequence()
     {
         int count = 0, countTemp = 0, firstIndex = 0, firstIndexTemp = 0;
         for (int i = 0; i < arr.Length - 1; i++)
@@ -156,9 +146,9 @@ class Vector
                 countTemp = 0;
             }
         }
-        Console.WriteLine($"Перший індекс найдовшої послідовності одинакових чисел: {firstIndex}");
+        return firstIndex;
     }
-    public void quickSort(int leftIndex, int rightIndex, indexPos pos)
+    public void QuickSort(int leftIndex, int rightIndex, indexPos pos)
     {
         int i = leftIndex;
         int j = rightIndex;
@@ -191,11 +181,11 @@ class Vector
 
         if (leftIndex < j)
         {
-            quickSort(leftIndex, j, pos);
+            QuickSort(leftIndex, j, pos);
         }
         if (rightIndex > i)
         {
-            quickSort(i, rightIndex, pos);
+            QuickSort(i, rightIndex, pos);
         }
     }
 }

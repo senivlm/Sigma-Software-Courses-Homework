@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Visual Studio Projects\\Task 4\\Task 4\\Task 4.csproj": {}
+    "D:\\Sigma-Software-Courses-Homework\\Task 4\\Task 4\\Task 4.csproj": {}
   },
   "projects": {
-    "D:\\Visual Studio Projects\\Task 4\\Task 4\\Task 4.csproj": {
+    "D:\\Sigma-Software-Courses-Homework\\Task 4\\Task 4\\Task 4.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Visual Studio Projects\\Task 4\\Task 4\\Task 4.csproj",
+        "projectUniqueName": "D:\\Sigma-Software-Courses-Homework\\Task 4\\Task 4\\Task 4.csproj",
         "projectName": "Task 4",
-        "projectPath": "D:\\Visual Studio Projects\\Task 4\\Task 4\\Task 4.csproj",
+        "projectPath": "D:\\Sigma-Software-Courses-Homework\\Task 4\\Task 4\\Task 4.csproj",
         "packagesPath": "C:\\Users\\Maxkor\\.nuget\\packages\\",
-        "outputPath": "D:\\Visual Studio Projects\\Task 4\\Task 4\\obj\\",
+        "outputPath": "D:\\Sigma-Software-Courses-Homework\\Task 4\\Task 4\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Maxkor\\AppData\\Roaming\\NuGet\\NuGet.Config",

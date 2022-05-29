@@ -6,7 +6,7 @@ class Program
     static void Main(string[] args)
     {
 
-        Console.OutputEncoding = UTF8Encoding.UTF8; // Ukrainian output in console
+        Console.OutputEncoding = UTF8Encoding.UTF8;
 
         Console.Write("Введіть кількість елементів матриці: ");
         int n = Convert.ToInt32(Console.ReadLine());
@@ -14,14 +14,14 @@ class Program
         int pos = Convert.ToInt32(Console.ReadLine());
         Random random = new Random();
         Vector vector = new Vector(n);
-        vector.InitShufle();
+        vector.RandomInitialization(0,10);
         string output = vector.ToString();
         Console.WriteLine("Массив: " + output);
         switch (pos)
         {
-            case 1: vector.quickSort(0, n - 1, indexPos.first); break;
-            case 2: vector.quickSort(0, n - 1, indexPos.last); break;
-            case 3: vector.quickSort(0, n - 1, indexPos.middle); break;
+            case 1: vector.QuickSort(0, n - 1, indexPos.first); break;
+            case 2: vector.QuickSort(0, n - 1, indexPos.last); break;
+            case 3: vector.QuickSort(0, n - 1, indexPos.middle); break;
         }
         output = vector.ToString();
         Console.WriteLine("Відсортирований массив: " + output);
