@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Visual Studio Projects\\Task 1\\Task 1\\Task 1.csproj",
+      "projectUniqueName": "D:\\Sigma-Software-Courses-Homework\\Task 1\\Task 1\\Task 1.csproj",
       "projectName": "Task 1",
-      "projectPath": "D:\\Visual Studio Projects\\Task 1\\Task 1\\Task 1.csproj",
+      "projectPath": "D:\\Sigma-Software-Courses-Homework\\Task 1\\Task 1\\Task 1.csproj",
       "packagesPath": "C:\\Users\\Maxkor\\.nuget\\packages\\",
-      "outputPath": "D:\\Visual Studio Projects\\Task 1\\Task 1\\obj\\",
+      "outputPath": "D:\\Sigma-Software-Courses-Homework\\Task 1\\Task 1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Maxkor\\AppData\\Roaming\\NuGet\\NuGet.Config",
