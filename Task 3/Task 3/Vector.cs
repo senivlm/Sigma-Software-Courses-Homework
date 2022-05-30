@@ -42,8 +42,12 @@
 
     public void InitShufle() // 5. Оптимізувати метод InitShufle класу Vector, створений на занятті.
     {
-        Random random = new Random();
         for (int i = 0; i < arr.Length; i++)
+        {
+            arr[i] = i + 1;
+        }
+        Random random = new Random();
+        for (int i = 0; i < random.Next(arr.Length/2, arr.Length); i++)
         {
             int random1 = random.Next(0, arr.Length);
             int random2 = random.Next(0, arr.Length);

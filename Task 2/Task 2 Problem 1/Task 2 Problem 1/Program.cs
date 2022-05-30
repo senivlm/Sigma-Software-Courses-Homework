@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 
-
 public static class Program
 {
     public static void Main()

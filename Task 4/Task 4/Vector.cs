@@ -1,4 +1,4 @@
-﻿enum indexPos { first, last, middle }; // for quickSort method
+﻿enum IndexPos { first, last, middle }; // for quickSort method
 class Vector
 {
     readonly int[] arr;
@@ -43,8 +43,12 @@ class Vector
 
     public void InitShufle()
     {
-        Random random = new Random();
         for (int i = 0; i < arr.Length; i++)
+        {
+            arr[i] = i + 1;
+        }
+        Random random = new Random();
+        for (int i = 0; i < random.Next(arr.Length/2, arr.Length); i++)
         {
             int random1 = random.Next(0, arr.Length);
             int random2 = random.Next(0, arr.Length);
@@ -148,7 +152,7 @@ class Vector
         }
         return firstIndex;
     }
-    public void QuickSort(int leftIndex, int rightIndex, indexPos pos)
+    public void QuickSort(int leftIndex, int rightIndex, IndexPos pos)
     {
         int i = leftIndex;
         int j = rightIndex;
@@ -156,9 +160,9 @@ class Vector
 
         switch (pos)
         {
-            case indexPos.first: pivot = arr[leftIndex]; break;                 // First element like pivot
-            case indexPos.last: pivot = arr[rightIndex]; break;                 // Last element like pivot
-            case indexPos.middle: pivot = arr[(leftIndex+rightIndex)/2]; break; // Middle element like pivot
+            case IndexPos.first: pivot = arr[leftIndex]; break;                 // First element like pivot
+            case IndexPos.last: pivot = arr[rightIndex]; break;                 // Last element like pivot
+            case IndexPos.middle: pivot = arr[(leftIndex+rightIndex)/2]; break; // Middle element like pivot
         }
 
         while (i <= j)

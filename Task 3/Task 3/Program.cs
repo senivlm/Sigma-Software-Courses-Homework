@@ -14,7 +14,8 @@ class Program
 
         Console.WriteLine("1. Завдання 1-3");
         Console.WriteLine("2. Завдання 4");
-        Console.WriteLine("3. Додаткове завдання");
+        Console.WriteLine("3. Завдання 5");
+        Console.WriteLine("4. Додаткове завдання");
         Console.Write("Виберіть номер завдання: ");
         int choice = Convert.ToInt32(Console.ReadLine());
         Console.Clear();
@@ -56,6 +57,14 @@ class Program
             }
         }
         else if (choice == 3)
+        {
+            Console.Write("Задайте кількість елементів массиву: ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            Vector arr = new Vector(n);
+            arr.InitShufle();
+            Console.WriteLine(arr);
+        }
+        else if (choice == 4)
         {
             Console.Write("Введіть кількість рядків матриці: ");
             int n = Convert.ToInt32(Console.ReadLine());

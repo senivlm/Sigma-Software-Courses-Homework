@@ -1,6 +1,6 @@
 ﻿class Interface
 {
-    Storage storage = new Storage();
+    public Interface() { Storage storage = new(); }
     public void Menu()
     {
         Console.WriteLine("Перелік функцій.");

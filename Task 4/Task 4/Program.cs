@@ -19,9 +19,9 @@ class Program
         Console.WriteLine("Массив: " + output);
         switch (pos)
         {
-            case 1: vector.QuickSort(0, n - 1, indexPos.first); break;
-            case 2: vector.QuickSort(0, n - 1, indexPos.last); break;
-            case 3: vector.QuickSort(0, n - 1, indexPos.middle); break;
+            case 1: vector.QuickSort(0, n - 1, IndexPos.first); break;
+            case 2: vector.QuickSort(0, n - 1, IndexPos.last); break;
+            case 3: vector.QuickSort(0, n - 1, IndexPos.middle); break;
         }
         output = vector.ToString();
         Console.WriteLine("Відсортирований массив: " + output);
