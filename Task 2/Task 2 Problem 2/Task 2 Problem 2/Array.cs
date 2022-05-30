@@ -2,9 +2,7 @@
 using System.Text;
 class Array
 {
-    int[,] array;
-
-    public int[,] arrayVerticalSnake(int n, int m)
+    public static int[,] ArrayVerticalSnake(int n, int m)
     {
         int[,] arrayVerticalSnake = new int[n, m];
         int num;
@@ -27,7 +25,7 @@ class Array
         return arrayVerticalSnake;
     }
 
-    public int[,] arrayDiagonalSnake(int n, int m)
+    public static int[,] ArrayDiagonalSnake(int n, int m)
     {
         int[,] arrayDiagonalSnake = new int[n, m];
         int i = 0, j = 0, num = 0;
@@ -37,35 +35,35 @@ class Array
         {
             if (swap)
             {
-                for (; i >= 0 && j < m; j++, i--)
+                for (; (i >= 0) && (j < m); j++, i--)
                 {
                     arrayDiagonalSnake[i, j] = ++num;
                     k++;
                 }
-                if (i < 0 && j <= m - 1)
+                if ((i < 0) && (j <= m - 1))
                 {
                     i = 0;
                 }
                 if (j == m)
                 {
-                    i = i + 2;
+                    i += 2;
                     j--;
                 }
             }
             else
             {
-                for (; j >= 0 && i < n; i++, j--)
+                for (; (j >= 0) && (i < n); i++, j--)
                 {
                     arrayDiagonalSnake[i, j] = ++num;
                     k++;
                 }
-                if (j < 0 && i <= n - 1)
+                if ((j < 0) && (i <= n - 1))
                 {
                     j = 0;
                 }
                 if (i == n)
                 {
-                    j = j + 2;
+                    j += 2;
                     i--;
                 }
             }
@@ -74,11 +72,11 @@ class Array
         return arrayDiagonalSnake;
     }
 
-    public int[,] arraySpiralSnake(int n, int m)
+    public static int[,] ArraySpiralSnake(int n, int m)
     {
         int[,] arraySpiralSnake = new int[n, m];
 
-        int k, i = 0, j = 0, num = 0, tn = n, tm = m;
+        int k, i = 0, j = 0, num = 0;
 
         while (i < n && j < m)
         {
@@ -114,7 +112,7 @@ class Array
         return arraySpiralSnake;
     }
 
-    public void arrayOutput(int n, int m, int[,] array)
+    public static void ArrayOutput(int n, int m, int[,] array)
     {
         for (int i = 0; i < n; i++)
         {

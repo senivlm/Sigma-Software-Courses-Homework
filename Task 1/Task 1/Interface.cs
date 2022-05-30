@@ -1,7 +1,6 @@
 ﻿class Interface
 {
-
-    Buy buy;
+    readonly Buy buy;
 
     public Interface(Buy buy)
     {
@@ -60,7 +59,6 @@
     private void FunctionFour()
     {
         buy.PuchaseOutput();
-        Check check = new();
-        check.purchase(buy);
+        Check.Purchase(buy);
     }
 }

@@ -8,7 +8,7 @@ public static class Program
     {
         Console.OutputEncoding = UTF8Encoding.UTF8; // Ukrainian symbols in console
         Interface UserInterface = new Interface();
-        UserInterface.menu();
+        UserInterface.Menu();
         Console.ReadKey();
     }
 }

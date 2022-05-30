@@ -1,7 +1,7 @@
 ﻿class Interface
 {
     Storage storage = new Storage();
-    public void menu()
+    public void Menu()
     {
         Console.WriteLine("Перелік функцій.");
         Console.WriteLine("1. Наповнення інформацією даних у режимі діалогу з користувачем");
@@ -15,16 +15,16 @@
         Console.Clear();
         switch (input)
         {
-            case 1: functionOne(); break;
-            case 2: functionTwo(); break;
-            case 3: functionThree(); break;
-            case 4: functionFour(); break;
-            case 5: functionFive(); break;
-            case 6: functionSix(); break;
+            case 1: FunctionOne(); break;
+            case 2: FunctionTwo(); break;
+            case 3: FunctionThree(); break;
+            case 4: FunctionFour(); break;
+            case 5: FunctionFive(); break;
+            case 6: FunctionSix(); break;
         }
     }
 
-    private void functionOne() // Adding a Product in the mode of communication with the user
+    private void FunctionOne() // Adding a Product in the mode of communication with the user
     {
         Console.Write("1 - Product \n2 - Meat \n3 - Dairy Product \nВиберіть тип продукту: ");
         int input = Convert.ToInt32(Console.ReadLine());
@@ -37,11 +37,11 @@
         switch (input)
         {
             case 1:
-                storage.append(new Product(name, price, weight)); break;
+                storage.Append(new Product(name, price, weight)); break;
             case 2:
-                functionOneMeat(name, price, weight); break;
+                FunctionOneMeat(name, price, weight); break;
             case 3:
-                functionOneDairyProduct(name, price, weight); break;
+                FunctionOneDairyProduct(name, price, weight); break;
         }
 
         Console.WriteLine("\nТовар успішно доданий!\n1. Додати ще один товар. \n2. Повернутися до меню.");
@@ -49,15 +49,15 @@
         Console.Clear();
         if (input == 1)
         {
-            functionOne();
+            FunctionOne();
         }
         else if (input == 2)
         {
-            menu();
+            Menu();
         }
     }
 
-    private void functionOneMeat(string name, int price, int weight) // If we wanna add Meat product
+    private void FunctionOneMeat(string name, int price, int weight) // If we wanna add Meat product
     {
         Console.WriteLine("Виберіть сорт мяса: 1 - перший сорт, 2 - другий сорт");
         int inputType = Convert.ToInt32(Console.ReadLine());
@@ -77,9 +77,9 @@
             case 3: category = Category.pork; break;
             case 4: category = Category.chicken; break;
         }
-        storage.append(new Meat(name, price, weight, type, category));
+        storage.Append(new Meat(name, price, weight, type, category));
     }
-    private void functionOneDairyProduct(string name, int price, int weight) // If we wanna add Dairly_Product
+    private void FunctionOneDairyProduct(string name, int price, int weight) // If we wanna add Dairly_Product
     {
         Console.WriteLine("Введіть термін придатності.");
         Console.Write("Рік: ");
@@ -88,10 +88,10 @@
         int month = Convert.ToInt32(Console.ReadLine());
         Console.Write("День: ");
         int day = Convert.ToInt32(Console.ReadLine());
-        storage.append(new Dairy_products(name, price, weight, new DateTime(year, month, day)));
+        storage.Append(new Dairy_products(name, price, weight, new DateTime(year, month, day)));
     }
 
-    private void functionTwo() // Automatic generation of products
+    private void FunctionTwo() // Automatic generation of products
     {
         Console.Write("Введіть кількість товарів, яку хочете додати: ");
         int amount = Convert.ToInt32(Console.ReadLine());
@@ -104,7 +104,7 @@
             int change = random.Next(3);
             if (change == 0)
             {
-                storage.append(new Product(namesProduct[random.Next(namesProduct.Length-1)], random.Next(20, 100), random.Next(100, 2001)));
+                storage.Append(new Product(namesProduct[random.Next(namesProduct.Length-1)], random.Next(20, 100), random.Next(100, 2001)));
             }
             else if (change == 1)
             {
@@ -127,14 +127,14 @@
                     case 2: ct = Category.pork; break;
                     case 3: ct = Category.chicken; break;
                 }
-                storage.append(new Meat(namesMeat[random.Next(namesMeat.Length-1)], random.Next(20, 100), random.Next(100, 2001), mt, ct));
+                storage.Append(new Meat(namesMeat[random.Next(namesMeat.Length-1)], random.Next(20, 100), random.Next(100, 2001), mt, ct));
             }
             else if (change == 2)
             {
                 DateTime dt = DateTime.Now;
                 Random randomDay = new Random();
                 dt = dt.AddDays(randomDay.Next(31));
-                storage.append(new Dairy_products(namesDairly_Products[random.Next(namesDairly_Products.Length-1)], random.Next(20, 100), random.Next(100, 2001), dt));
+                storage.Append(new Dairy_products(namesDairly_Products[random.Next(namesDairly_Products.Length-1)], random.Next(20, 100), random.Next(100, 2001), dt));
             }
         }
         Console.Clear();
@@ -142,20 +142,20 @@
         Console.Write("Нажміть будь-яку клавішу, щоб перейти в меню...");
         Console.ReadKey();
         Console.Clear();
-        menu();
+        Menu();
     }
-    private void functionThree() // Output all products list
+    private void FunctionThree() // Output all products list
     {
-        Console.WriteLine("-------------------------------------------------------------------------------");
-        Console.WriteLine("| Назва      | Ціна  | Вага | Сорт мяса  | Вид мяса       | Термін придатності");
-        Console.WriteLine("-------------------------------------------------------------------------------");
+        Console.WriteLine("------------------------------------------------------------------------------");
+        Console.WriteLine("| Назва      | Ціна  | Вага | Сорт мяса  | Вид мяса      | Термін придатності");
+        Console.WriteLine("------------------------------------------------------------------------------");
         foreach (Product product in storage.listProduct)
         {
             Console.Write(string.Format("| {0,-10} | {1,-5:F1} | {2,-5}", product.name, product.price, product.weight));
             if (product is Meat)
             {
                 Meat p = product as Meat;
-                Console.Write(string.Format("| {0,-10} | {1,-10}", p.getMeatType(), p.getCategory()));
+                Console.Write(string.Format("| {0,-10} | {1,-10}", p.GetMeatType(), p.GetCategory()));
             }
             if (product is Dairy_products)
             {
@@ -164,14 +164,14 @@
             }
             Console.WriteLine();
         }
-        Console.WriteLine("-------------------------------------------------------------------------------");
+        Console.WriteLine("------------------------------------------------------------------------------");
         Console.Write("Нажміть будь-яку клавішу, щоб перейти в меню...");
         Console.ReadKey();
         Console.Clear();
-        menu();
+        Menu();
     }
 
-    private void functionFour() // Output Meat list
+    private void FunctionFour() // Output Meat list
     {
         Console.WriteLine("----------------------------------------------------");
         Console.WriteLine("| Назва      | Ціна  | Вага  | Сорт мяса  | Вид мяса");
@@ -181,17 +181,17 @@
             if (product is Meat)
             {
                 Meat p = product as Meat;
-                Console.WriteLine(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-10}", p.name, p.price, p.weight, p.getMeatType(), p.getCategory()));
+                Console.WriteLine(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-10}", p.name, p.price, p.weight, p.GetMeatType(), p.GetCategory()));
             }
         }
         Console.WriteLine("----------------------------------------------------");
         Console.Write("Нажміть будь-яку клавішу, щоб перейти в меню...");
         Console.ReadKey();
         Console.Clear();
-        menu();
+        Menu();
     }
 
-    public void functionFive() // Change value every Product on {percent}
+    public void FunctionFive() // Change value every Product on {percent}
     {
         Console.Write("Введіть на який відсоток змінити ціну: ");
         decimal percent = decimal.Parse(Console.ReadLine());
@@ -199,15 +199,15 @@
         {
             if (storage.listProduct[i].GetType() == typeof(Product))
             {
-                storage.listProduct[i].changeValue(percent);
+                storage.listProduct[i].ChangeValue(percent);
             }
             else if (storage.listProduct[i].GetType() == typeof(Meat))
             {
-                storage.listProduct[i].changeValue(percent);
+                storage.listProduct[i].ChangeValue(percent);
             }
             else if (storage.listProduct[i].GetType() == typeof(Dairy_products))
             {
-                storage.listProduct[i].changeValue(percent);
+                storage.listProduct[i].ChangeValue(percent);
             }
         }
         Console.Clear();
@@ -215,9 +215,9 @@
         Console.Write("Нажміть будь-яку клавішу, щоб перейти в меню...");
         Console.ReadKey();
         Console.Clear();
-        menu();
+        Menu();
     }
-    private void functionSix() // Change or check product data by index in list
+    private void FunctionSix() // Change or check product data by index in list
     {
         Console.WriteLine("1. Відобразити дані про товар");
         Console.WriteLine("2. Змінити дані про товар");
@@ -233,7 +233,7 @@
             if (storage.listProduct[index] is Meat)
             {
                 Meat p = storage.listProduct[index] as Meat;
-                Console.WriteLine($"Сорт мяса: {p.getMeatType()} \nТип мяса: {p.getCategory()}");
+                Console.WriteLine($"Сорт мяса: {p.GetMeatType()} \nТип мяса: {p.GetCategory()}");
             }
             if (storage.listProduct[index] is Dairy_products)
             {
@@ -243,7 +243,7 @@
             Console.Write("Нажміть будь-яку клавішу, щоб перейти в меню...");
             Console.ReadKey();
             Console.Clear();
-            menu();
+            Menu();
         }
         else if (choose == 2)
         {
@@ -278,7 +278,7 @@
                         Meat meatT = storage.listProduct[index] as Meat;
                         Console.Write("Виберіть сорт мяса (1 - перший сорт, 2 - другий сорт): ");
                         int choiceMeatType = Convert.ToInt32(Console.ReadLine());
-                        meatT.setMeatType(choiceMeatType);
+                        meatT.SetMeatType(choiceMeatType);
                         break;
                     }
                     else if (storage.listProduct[index] is Dairy_products)
@@ -291,20 +291,20 @@
                         int month = Convert.ToInt32(Console.ReadLine());
                         Console.Write("День: ");
                         int day = Convert.ToInt32(Console.ReadLine());
-                        dairly_product.setExpdate(year, month, day);
+                        dairly_product.SetExpdate(year, month, day);
                     }
                     break;
                 case 5:
                     Meat meatC = storage.listProduct[index] as Meat;
                     Console.Write("Виберіть тип мяса (1 - баранина, 2 - телятина, 3 - свинина, 4 - курятина): ");
                     int choiceCategory = Convert.ToInt32(Console.ReadLine());
-                    meatC.setCategory(choiceCategory);
+                    meatC.SetCategory(choiceCategory);
                     break;
             }
             Console.Write("Нажміть будь-яку клавішу, щоб перейти в меню...");
             Console.ReadKey();
             Console.Clear();
-            menu();
+            Menu();
         }
     }
 }

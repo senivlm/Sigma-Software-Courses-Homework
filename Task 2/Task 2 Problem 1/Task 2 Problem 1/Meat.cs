@@ -24,7 +24,7 @@ sealed class Meat : Product
         }
     }
    
-    public void setMeatType(int i)
+    public void SetMeatType(int i)
     {
         switch (i)
         {
@@ -33,17 +33,16 @@ sealed class Meat : Product
         }
     }
    
-    public string getMeatType()
+    public string GetMeatType()
     {
-        switch (meatType)
+        return meatType switch
         {
-            case MeatType.first: return "1-й";
-            case MeatType.second: return "2-й";
-        }
-        return "";
+            MeatType.first => "1-й",
+            MeatType.second => "2-й"
+        };
     }
 
-    public void setCategory(int i)
+    public void SetCategory(int i)
     {
         switch (i)
         {
@@ -54,19 +53,18 @@ sealed class Meat : Product
         }
     }
 
-    public string getCategory()
+    public string GetCategory()
     {
-        switch (meatCategory)
+        return meatCategory switch
         {
-            case Category.mutton: return "Баранина";
-            case Category.veal: return "Телятина";
-            case Category.pork: return "Свинина";
-            case Category.chicken: return "Курятина";
-        }
-        return "";
+            Category.mutton => "Баранина",
+            Category.veal => "Телятина",
+            Category.pork => "Свинина",
+            Category.chicken => "Курятина"
+        };
     }
 
-    public override void changeValue(decimal percent)
+    public override void ChangeValue(decimal percent)
     {
         this.price += this.price * (percent/100);
     }

@@ -46,14 +46,13 @@ class Program
             int m = Convert.ToInt32(Console.ReadLine());
             Console.Write("Виберіть напрям початкового повороту змійки (1 - вниз, 2 - вправо): ");
             choice = Convert.ToInt32(Console.ReadLine());
-            Matrix matrix = new Matrix();
             if (choice == 1)
             {
-                matrix.MatrixDiagonalSnake(n, m, MatrixDirection.Down);
+                Matrix.MatrixDiagonalSnake(n, m, MatrixDirection.Down);
             }
             else if (choice == 2)
             {
-                matrix.MatrixDiagonalSnake(n, m, MatrixDirection.Right);
+                Matrix.MatrixDiagonalSnake(n, m, MatrixDirection.Right);
             }
         }
         else if (choice == 3)
@@ -62,8 +61,7 @@ class Program
             int n = Convert.ToInt32(Console.ReadLine());
             Console.Write("Введіть кількість стовпців матриці: ");
             int m = Convert.ToInt32(Console.ReadLine());
-            Matrix matrix = new Matrix();
-            matrix.MatrixSquare(n, m);
+            Matrix.MatrixSquare(n, m);
         }
         else
         {

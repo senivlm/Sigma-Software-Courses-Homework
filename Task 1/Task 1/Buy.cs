@@ -1,12 +1,12 @@
 ﻿class Buy
 {
-    public int purchaseAmount { 
+    public int PurchaseAmount { 
         get 
         {
             return listPurchase.Count;
         } 
     }
-    public decimal purchasePrice
+    public decimal PurchasePrice
     {
         get
         {
@@ -18,7 +18,7 @@
             return purchasePrice;
         }
     }
-    public decimal purchaseWeight
+    public decimal PurchaseWeight
     {
         get
         {

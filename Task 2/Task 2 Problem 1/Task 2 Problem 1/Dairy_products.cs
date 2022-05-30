@@ -21,12 +21,12 @@
         }
     }
   
-    public void setExpdate(int year, int month, int day)
+    public void SetExpdate(int year, int month, int day)
     {
         this.expdate = new DateTime(year, month, day);
     }
    
-    public override void changeValue(decimal percent)
+    public override void ChangeValue(decimal percent)
     {
         this.price += this.price * (percent/100);
     }

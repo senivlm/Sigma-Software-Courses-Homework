@@ -1,7 +1,7 @@
 ﻿enum MatrixDirection { Down, Right }
 class Matrix
 {
-    public void matrixDiagonalSnake(int n, int m, MatrixDirection matrixDirection)
+    public static void MatrixDiagonalSnake(int n, int m, MatrixDirection matrixDirection)
     {
 
         int[,] matrix = new int[n, m];
@@ -14,35 +14,35 @@ class Matrix
         {
             if (swap)
             {
-                for (; i >= 0 && j < m; j++, i--)
+                for (; (i >= 0) && (j < m); j++, i--)
                 {
                     matrix[i, j] = ++num;
                     k++;
                 }
-                if (i < 0 && j <= m - 1)
+                if ((i < 0) && (j <= m - 1))
                 {
                     i = 0;
                 }
                 if (j == m)
                 {
-                    i = i + 2;
+                    i += 2;
                     j--;
                 }
             }
             else
             {
-                for (; j >= 0 && i < n; i++, j--)
+                for (; (j >= 0) && (i < n); i++, j--)
                 {
                     matrix[i, j] = ++num;
                     k++;
                 }
-                if (j < 0 && i <= n - 1)
+                if ((j < 0) && (i <= n - 1))
                 {
                     j = 0;
                 }
                 if (i == n)
                 {
-                    j = j + 2;
+                    j += 2;
                     i--;
                 }
             }
@@ -59,7 +59,7 @@ class Matrix
         }
     }
 
-    public void matrixSquare(int n, int m)
+    public static void MatrixSquare(int n, int m)
     {
         int[,] array = new int[n, m];
         Random random = new Random();
@@ -80,7 +80,7 @@ class Matrix
         for (int i = 0; i < n-1; i++)
         {
             for (int j = 0; j < m-1; j++)
-                if (array[i, j] == array[i, j+1] && array[i+1, j] == array[i+1, j+1] && array[i, j] == array[i+1, j])
+                if ((array[i, j] == array[i, j+1]) && (array[i+1, j] == array[i+1, j+1]) && (array[i, j] == array[i+1, j]))
                 {
                     if (countTemp == 0)
                     {

@@ -11,7 +11,7 @@ public static class Program
         buy.AddStorage(new Product("Хліб", 22, 350));
         buy.AddStorage(new Product("Макарони", 97, 500));
         buy.AddStorage(new Product("Сіль", 20, 350));
-
+        
         Interface userInterface = new(buy);
         userInterface.Menu();
     }

@@ -17,21 +17,19 @@ public static class Program
         int type = Convert.ToInt32(Console.ReadLine());
         Console.Clear();
 
-        if (type == 3 || type == 2 && n != m)
+        if (((type == 3) || (type == 2)) && (n != m))
         {
             Console.Write("Помилка! Даний тип матриці доступний тільки для квадратної матриці.");
             return;
         }
 
-        Array arrayObj = new Array();
-        int[,] array = new int[n, m];
-
+        int[,] array = new int[n,m];
         switch (type)
         {
-            case 1: array = arrayObj.arrayVerticalSnake(n, m); break;
-            case 2: array = arrayObj.arraySpiralSnake(n, m); break;
-            case 3: array = arrayObj.arrayDiagonalSnake(n, m); break;
+            case 1: array = Array.ArrayVerticalSnake(n, m); break;
+            case 2: array = Array.ArraySpiralSnake(n, m); break;
+            case 3: array = Array.ArrayDiagonalSnake(n, m); break;
         }
-        arrayObj.arrayOutput(n, m, array);
+        Array.ArrayOutput(n, m, array);
     }
 }

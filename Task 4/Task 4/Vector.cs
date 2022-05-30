@@ -1,7 +1,7 @@
 ﻿enum indexPos { first, last, middle }; // for quickSort method
 class Vector
 {
-    int[] arr;
+    readonly int[] arr;
 
     public int this[int index]
     {
@@ -104,7 +104,7 @@ class Vector
     public bool PalindromeCheck(int i, int j)
     {
         bool palidrome = true;
-        for (; i != j && i < j; ++i, --j)
+        for (; (i != j) && (i < j); ++i, --j)
         {
             if (arr[i] != arr[j])
             {
@@ -117,7 +117,7 @@ class Vector
 
     public void ArrayReverse()
     {
-        for (int i = 0, j = arr.Length - 1; i != j && i < j; i++, j--)
+        for (int i = 0, j = arr.Length - 1; (i != j) && (i < j); i++, j--)
         {
             (arr[j], arr[i]) = (arr[i], arr[j]);
         }
@@ -173,7 +173,7 @@ class Vector
             }
             if (i <= j)
             {
-                (arr[j], arr[i])=(arr[i], arr[j]);
+                (arr[j], arr[i]) = (arr[i], arr[j]);
                 i++;
                 j--;
             }

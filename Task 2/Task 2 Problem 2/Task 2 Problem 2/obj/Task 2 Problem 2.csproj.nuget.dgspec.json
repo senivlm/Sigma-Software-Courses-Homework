@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Visual Studio Projects\\Task 2 Problem 2\\Task 2 Problem 2\\Task 2 Problem 2.csproj": {}
+    "D:\\Sigma-Software-Courses-Homework\\Task 2\\Task 2 Problem 2\\Task 2 Problem 2\\Task 2 Problem 2.csproj": {}
   },
   "projects": {
-    "D:\\Visual Studio Projects\\Task 2 Problem 2\\Task 2 Problem 2\\Task 2 Problem 2.csproj": {
+    "D:\\Sigma-Software-Courses-Homework\\Task 2\\Task 2 Problem 2\\Task 2 Problem 2\\Task 2 Problem 2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Visual Studio Projects\\Task 2 Problem 2\\Task 2 Problem 2\\Task 2 Problem 2.csproj",
+        "projectUniqueName": "D:\\Sigma-Software-Courses-Homework\\Task 2\\Task 2 Problem 2\\Task 2 Problem 2\\Task 2 Problem 2.csproj",
         "projectName": "Task 2 Problem 2",
-        "projectPath": "D:\\Visual Studio Projects\\Task 2 Problem 2\\Task 2 Problem 2\\Task 2 Problem 2.csproj",
+        "projectPath": "D:\\Sigma-Software-Courses-Homework\\Task 2\\Task 2 Problem 2\\Task 2 Problem 2\\Task 2 Problem 2.csproj",
         "packagesPath": "C:\\Users\\Maxkor\\.nuget\\packages\\",
-        "outputPath": "D:\\Visual Studio Projects\\Task 2 Problem 2\\Task 2 Problem 2\\obj\\",
+        "outputPath": "D:\\Sigma-Software-Courses-Homework\\Task 2\\Task 2 Problem 2\\Task 2 Problem 2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Maxkor\\AppData\\Roaming\\NuGet\\NuGet.Config",

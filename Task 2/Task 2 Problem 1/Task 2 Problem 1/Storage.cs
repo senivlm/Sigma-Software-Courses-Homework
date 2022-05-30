@@ -2,7 +2,7 @@
 {
     public List<Product> listProduct;
     public Storage() { listProduct = new List<Product>(); }
-    public void append(Product product)
+    public void Append(Product product)
     {
         listProduct.Add(product);
     }
