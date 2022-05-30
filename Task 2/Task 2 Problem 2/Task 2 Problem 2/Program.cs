@@ -17,7 +17,7 @@ public static class Program
         int type = Convert.ToInt32(Console.ReadLine());
         Console.Clear();
 
-        if (((type == 3) || (type == 2)) && (n != m))
+        if ((type == 2) && (n != m))
         {
             Console.Write("Помилка! Даний тип матриці доступний тільки для квадратної матриці.");
             return;

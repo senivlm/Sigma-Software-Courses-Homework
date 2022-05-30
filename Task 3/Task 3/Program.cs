@@ -62,7 +62,7 @@ class Program
             int n = Convert.ToInt32(Console.ReadLine());
             Vector arr = new Vector(n);
             arr.InitShufle();
-            Console.WriteLine(arr);
+            Console.WriteLine("Массив: " + arr);
         }
         else if (choice == 4)
         {
