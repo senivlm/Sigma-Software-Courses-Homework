@@ -12,7 +12,7 @@ class Matrix
         else if (matrixDirection == MatrixDirection.Right) { swap = true; }
 
         for (int k = 0; k < n*m;)
-        {
+        {// повтор коду, якого можна уникнути
             if (swap)
             {
                 for (; (i >= 0) && (j < m); j++, i--)
