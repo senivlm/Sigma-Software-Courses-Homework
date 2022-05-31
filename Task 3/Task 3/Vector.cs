@@ -41,7 +41,7 @@
     }
 
     public void InitShufle() // 5. Оптимізувати метод InitShufle класу Vector, створений на занятті.
-    {
+    {// молодець! Тут дуже добре!
         for (int i = 0; i < arr.Length; i++)
         {
             arr[i] = i + 1;
@@ -119,7 +119,7 @@
     }
 
     public void ArrayReverse() // 2. Додати в клас Vector метод, який реверсує елементи масиву.
-    {
+    {// нестандартно
         for (int i = 0, j = arr.Length - 1; i != j && i < j; i++, j--)
         {
             (arr[j], arr[i]) = (arr[i], arr[j]);
@@ -129,8 +129,9 @@
     public int Sequence() // 3. Додати в клас Vector метод, який в масиві знаходить найдовшу підпослідовність однакових чисел.
     {
         int count = 0, countTemp = 0, firstIndex = 0, firstIndexTemp = 0;
+        
         for (int i = 0; i < arr.Length - 1; i++)
-        {
+        {// вихід за межі 
             if (arr[i] == arr[i+1])
             {
                 if (countTemp == 0)
