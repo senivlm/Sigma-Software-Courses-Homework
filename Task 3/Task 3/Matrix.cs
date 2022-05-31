@@ -12,7 +12,7 @@ class Matrix
         else if (matrixDirection == MatrixDirection.Right) { swap = true; }
 
         for (int k = 0; k < n*m;)
-        {
+        {// Повтор коду, якого можна уникнути
             if (swap)
             {
                 for (; (i >= 0) && (j < m); j++, i--)
@@ -49,7 +49,7 @@ class Matrix
             }
             swap = !swap;
         }
-
+// виведення має бути не в цьому методі
         for (i = 0; i < n; i++)
         {
             for (j = 0; j < m; j++)
@@ -101,6 +101,7 @@ class Matrix
                     countTemp = 0;
                 }
         }
+        //Знову виведення не в цьому місці
         Console.WriteLine($"Індекс першого елементу прямокутника: [{iFirstIndex},{jFirstIndex}].");
     }
 }
