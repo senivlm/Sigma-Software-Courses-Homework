@@ -129,9 +129,9 @@
     public int Sequence() // 3. Додати в клас Vector метод, який в масиві знаходить найдовшу підпослідовність однакових чисел.
     {
         int count = 0, countTemp = 0, firstIndex = 0, firstIndexTemp = 0;
-        for (int i = 0; i < arr.Length - 1; i++)
+        for (int i = 0; i < (arr.Length - 1); i++)
         {
-            if (arr[i] == arr[i+1])
+            if ((arr[i] == arr[i+1]) && (arr[i+1] < arr.Length))
             {
                 if (countTemp == 0)
                 {
