@@ -1,0 +1,30 @@
+D:\Visual Studio Projects\Task 5\Task 5\bin\Debug\net6.0\Task 5.exe
+D:\Visual Studio Projects\Task 5\Task 5\bin\Debug\net6.0\Task 5.deps.json
+D:\Visual Studio Projects\Task 5\Task 5\bin\Debug\net6.0\Task 5.runtimeconfig.json
+D:\Visual Studio Projects\Task 5\Task 5\bin\Debug\net6.0\Task 5.dll
+D:\Visual Studio Projects\Task 5\Task 5\bin\Debug\net6.0\Task 5.pdb
+D:\Visual Studio Projects\Task 5\Task 5\obj\Debug\net6.0\Task 5.csproj.AssemblyReference.cache
+D:\Visual Studio Projects\Task 5\Task 5\obj\Debug\net6.0\Task 5.GeneratedMSBuildEditorConfig.editorconfig
+D:\Visual Studio Projects\Task 5\Task 5\obj\Debug\net6.0\Task 5.AssemblyInfoInputs.cache
+D:\Visual Studio Projects\Task 5\Task 5\obj\Debug\net6.0\Task 5.AssemblyInfo.cs
+D:\Visual Studio Projects\Task 5\Task 5\obj\Debug\net6.0\Task 5.csproj.CoreCompileInputs.cache
+D:\Visual Studio Projects\Task 5\Task 5\obj\Debug\net6.0\Task 5.dll
+D:\Visual Studio Projects\Task 5\Task 5\obj\Debug\net6.0\refint\Task 5.dll
+D:\Visual Studio Projects\Task 5\Task 5\obj\Debug\net6.0\Task 5.pdb
+D:\Visual Studio Projects\Task 5\Task 5\obj\Debug\net6.0\Task 5.genruntimeconfig.cache
+D:\Visual Studio Projects\Task 5\Task 5\obj\Debug\net6.0\ref\Task 5.dll
+D:\Sigma-Software-Courses-Homework\Task 5\Task 5\bin\Debug\net6.0\Task 5.exe
+D:\Sigma-Software-Courses-Homework\Task 5\Task 5\bin\Debug\net6.0\Task 5.deps.json
+D:\Sigma-Software-Courses-Homework\Task 5\Task 5\bin\Debug\net6.0\Task 5.runtimeconfig.json
+D:\Sigma-Software-Courses-Homework\Task 5\Task 5\bin\Debug\net6.0\Task 5.dll
+D:\Sigma-Software-Courses-Homework\Task 5\Task 5\bin\Debug\net6.0\Task 5.pdb
+D:\Sigma-Software-Courses-Homework\Task 5\Task 5\obj\Debug\net6.0\Task 5.csproj.AssemblyReference.cache
+D:\Sigma-Software-Courses-Homework\Task 5\Task 5\obj\Debug\net6.0\Task 5.GeneratedMSBuildEditorConfig.editorconfig
+D:\Sigma-Software-Courses-Homework\Task 5\Task 5\obj\Debug\net6.0\Task 5.AssemblyInfoInputs.cache
+D:\Sigma-Software-Courses-Homework\Task 5\Task 5\obj\Debug\net6.0\Task 5.AssemblyInfo.cs
+D:\Sigma-Software-Courses-Homework\Task 5\Task 5\obj\Debug\net6.0\Task 5.csproj.CoreCompileInputs.cache
+D:\Sigma-Software-Courses-Homework\Task 5\Task 5\obj\Debug\net6.0\Task 5.dll
+D:\Sigma-Software-Courses-Homework\Task 5\Task 5\obj\Debug\net6.0\refint\Task 5.dll
+D:\Sigma-Software-Courses-Homework\Task 5\Task 5\obj\Debug\net6.0\Task 5.pdb
+D:\Sigma-Software-Courses-Homework\Task 5\Task 5\obj\Debug\net6.0\Task 5.genruntimeconfig.cache
+D:\Sigma-Software-Courses-Homework\Task 5\Task 5\obj\Debug\net6.0\ref\Task 5.dll
