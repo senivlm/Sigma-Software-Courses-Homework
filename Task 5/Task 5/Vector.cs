@@ -194,73 +194,80 @@
         using (StreamWriter streamWriter = new StreamWriter(path + "Sorted Array First Part.txt"))
         {
             var firstPartLine = line[..(midIndex)].Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s)).ToArray();
-            int[] firstHalf = Vector.MergeSort(firstPartLine, 0, firstPartLine.Length - 1); // first array added to memory
-            
+            int[] firstHalf = Vector.MergeSort(firstPartLine, 0, firstPartLine.Length - 1); // first half of array added to memory
+
             for (int i = 0; i < firstHalf.Length; i++)
             {
                 streamWriter.Write(firstHalf[i] + " ");
             }
-        } // first array deleted from memory
+        } // first half of array deleted from memory
 
         using (StreamWriter streamWriter = new StreamWriter(path + "Sorted Array Second Part.txt"))
         {
             var secondPartLine = line[(midIndex)..].Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s)).ToArray();
-            int[] secondHalf = Vector.MergeSort(secondPartLine, 0, secondPartLine.Length - 1); // second array added to memory
-            
+            int[] secondHalf = Vector.MergeSort(secondPartLine, 0, secondPartLine.Length - 1); // second half of array added to memory
+
             for (int i = 0; i < secondHalf.Length; i++)
             {
                 streamWriter.Write(secondHalf[i] + " ");
             }
-        } // second array deleted from memory
+        } // second half of array deleted from memory
         MergeTwoFiles(path);
     }
 
     public static void MergeTwoFiles(string path)
     {
-        StreamReader streamReaderFirst = new StreamReader(path + "Sorted Array First Part.txt");
-        StreamReader streamReaderSecond = new StreamReader(path + "Sorted Array Second Part.txt");
-        StreamWriter streamWriter = new StreamWriter(path + "Sorted Array.txt");
-
-        string lineFirst = streamReaderFirst.ReadLine();
-        string lineSecond = streamReaderSecond.ReadLine();
-        string element1, element2;
-        int first = 0, second = 0, i = 0, j = 0;
-        while (i < lineFirst.Length && j < lineSecond.Length)
+        using (StreamReader streamReaderFirst = new StreamReader(path + "Sorted Array First Part.txt"))
         {
-            element1 = "";
-            while (lineFirst[i] != ' ')
+            using (StreamReader streamReaderSecond = new StreamReader(path + "Sorted Array Second Part.txt"))
             {
-                element1 += lineFirst[i];
-                i++;
-            }
-            if (element1 != "")
-            {
-                first = int.Parse(element1);
-            }
-            element2 = "";
-            while (lineSecond[j] != ' ')
-            {
-                element2 += lineSecond[j];
-                j++;
-            }
-            if (element2 != "") 
-            { 
-                second = int.Parse(element2); 
-            }
+                int first = GetNumberFromFile(streamReaderFirst);
+                int second = GetNumberFromFile(streamReaderSecond);
+                using (StreamWriter streamWriter = new StreamWriter(path + "Sorted Array.txt"))
+                {
+                    while (true)
+                    {
+                        if (first > second)
+                        {
+                            streamWriter.Write(second + " ");
+                            second = GetNumberFromFile(streamReaderSecond);
+                        }
+                        else if (first < second)
+                        {
+                            streamWriter.Write(first + " ");
+                            first = GetNumberFromFile(streamReaderFirst);
+                        }
+                        else if (second == first)
+                        {
+                            streamWriter.Write(first + " " + second + " ");
+                            first = GetNumberFromFile(streamReaderFirst);
+                            second = GetNumberFromFile(streamReaderSecond);
+                        }
 
-            if (first < second)
-            {
-                streamWriter.Write(first + " ");
-                i++;
-            }
-            else if (first > second)
-            {
-                streamWriter.Write(second + " ");
-                j++;
+                        if (first == int.MaxValue && second == int.MaxValue) // solution with int.MaxValue is temporary
+                        {
+                            break;
+                        }
+                    }
+                }
             }
         }
-        streamWriter.Close();
     }
+    public static int GetNumberFromFile(StreamReader streamReader)
+    {
+        string first = "";
+        if (!streamReader.EndOfStream)
+        {
+            while (streamReader.Peek() != ' ')
+            {
+                first += (streamReader.Read() - '0');
+            }
+            streamReader.Read();
+            return Convert.ToInt32(first);
+        }
+        return int.MaxValue;
+    }
+
     public void HeapSort(int n) // Task 2
     {
         for (int i = n / 2 - 1; i >= 0; i--)
@@ -281,7 +288,7 @@
         if (left < n && arr[left] > arr[largest])
         {
             largest = left;
-        } 
+        }
         if (right < n && arr[right] > arr[largest])
         {
             largest = right;
