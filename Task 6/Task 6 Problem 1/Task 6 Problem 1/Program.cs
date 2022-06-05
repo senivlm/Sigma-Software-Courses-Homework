@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-// 1. З файлу зчитати інформацію, яка міститься в текстовому файлі. (class FileWorker, method GetDataFromFile)
+// 1. Зчитати інформацію про споживачів з текстового файлу. (class FileWorker, method GetDataFromFile)
 // 2. Виведення повної інформації про всіх споживачів. (class FileWorker, method OutputInFileListConsumers)
 // 3. Виведення інформації тільки по одній квартирі. (class FileWorker, method OutputInFileConsumer)
 // 4. Знайти споживача з найбільшою заборгованістю. (class Consumer, method FindLargestDebt)

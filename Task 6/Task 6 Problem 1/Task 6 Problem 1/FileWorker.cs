@@ -13,7 +13,7 @@
                 streamWriter.WriteLine($"Фамілія: {consumers[i].Surname} | Номер квартири: {consumers[i].ApartmentNumber} |");
                 for (int j = 0; j < (consumers[i].GetMeteringsCount()/4); j++)
                 {
-                    int meteringIndex = j+((quarter-1)*3);
+                    int meteringIndex = (j+(quarter-1)*3);
                     streamWriter.WriteLine($"\tДата знаття показника: {consumers[i].GetMeteringIndicatorDate(meteringIndex).ToString("dd/MM/yyyy")} | Показник: {consumers[i].GetMeteringIndicator(meteringIndex)} |");
                 }
                 streamWriter.WriteLine();
@@ -44,7 +44,7 @@
                         apartmentNumber = Convert.ToInt32(line[i+1]);
                         consumers.Add(new Consumer(surname, apartmentNumber));
                     }
-                    if (line[i] == "показника:") // must to be redone
+                    if (line[i] == "показника:")
                     {
                         string tempDate = line[i+1];
                         string tempDay = Convert.ToString(tempDate[0]);

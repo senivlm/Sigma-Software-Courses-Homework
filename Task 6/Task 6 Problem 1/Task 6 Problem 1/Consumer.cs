@@ -1,9 +1,13 @@
 ﻿class Consumer
 {
+    #region Variables
     private string _surname;
     private int _apartmentNumber;
     public const decimal price = 1.5m;
     public List<Metering> meterings;
+    #endregion
+
+    #region Properties
     public string Surname
     {
         get => _surname;
@@ -15,14 +19,18 @@
         get => _apartmentNumber;
         set => _apartmentNumber = value;
     }
+    #endregion
 
+    #region Constructors
     public Consumer(string surname, int apartmentNumber) 
     { 
         _surname = surname;
         _apartmentNumber = apartmentNumber;
         meterings = new List<Metering>();
     }
+    #endregion
 
+    #region Methods
     public void AddMetering(Metering metering)
     {
         meterings.Add(metering);
@@ -76,4 +84,5 @@
         }
         return exempts;
     }
+    #endregion
 }

@@ -2,7 +2,7 @@
 {
     public static void RandomConsumers(List <Consumer> consumers, int number)
     {
-        string[] consumersSurnames = new string[] {"Smith", "Williams", "Johnson", "Brown", "Jones", "Garcia", "Miller", "Davis" };
+        string[] consumersSurnames = new string[] {"Smith", "Williams", "Johnson", "Brown", "Jones", "Garcia", "Miller", "Davis", "Martinez", "Hernandez", "Alonso", "Wilson", "Anderson", "Jackson", "Clark" };
         Random random = new Random();
         for (int i = 0; i < number; i++)
         {
