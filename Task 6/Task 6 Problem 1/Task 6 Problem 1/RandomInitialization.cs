@@ -2,7 +2,7 @@
 {
     public static void RandomConsumers(List <Consumer> consumers, int number)
     {
-        string[] consumersSurnames = new string[] {"James", "Robert", "John", "Michael", "David", "William", "Richard", "Joseph" };
+        string[] consumersSurnames = new string[] {"Smith", "Williams", "Johnson", "Brown", "Jones", "Garcia", "Miller", "Davis" };
         Random random = new Random();
         for (int i = 0; i < number; i++)
         {
@@ -17,7 +17,7 @@
         int indicator = random.Next(0, 10000);
         for (int i = 0; i < 12; i++)
         {
-            DateTime dateTime = new DateTime(2022, (i + 1), random.Next(1,DateTime.DaysInMonth(2022,(i + 1))));
+            DateTime dateTime = new DateTime(2021, (i + 1), random.Next(1,DateTime.DaysInMonth(2021,(i + 1))));
             indicator += random.Next(0, 500);
             Metering metering = new(indicator, dateTime);
             consumer.AddMetering(metering);
