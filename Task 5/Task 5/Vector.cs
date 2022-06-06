@@ -1,7 +1,7 @@
 ﻿class Vector
 {
     #region Variables
-    public static int[] arr;
+    public int[] arr;
     #endregion
 
     #region Properties
@@ -109,7 +109,7 @@
         return arr;
     }
 
-    private static void Merge(int lowIndex, int middleIndex, int highIndex)
+    private void Merge(int lowIndex, int middleIndex, int highIndex)
     {
         var left = lowIndex;
         var right = middleIndex + 1;
@@ -162,7 +162,7 @@
         return arr;
     }
 
-    private static void MergeSort(int lowIndex, int highIndex)
+    private void MergeSort(int lowIndex, int highIndex)
     {
         if (lowIndex < highIndex)
         {
@@ -173,7 +173,7 @@
         }
     }
 
-    public static void MergeSort()
+    public void MergeSort()
     {
         MergeSort(0, arr.Length - 1);
     }
@@ -218,7 +218,7 @@
         MergeTwoFiles(path);
     }
 
-    public static void MergeTwoFiles(string path)
+    private static void MergeTwoFiles(string path)
     {
         using (StreamReader streamReaderFirst = new StreamReader(path + "Sorted Array First Part.txt"))
         {
@@ -257,7 +257,7 @@
         }
     }
 
-    public static int GetNumberFromFile(StreamReader streamReader)
+    private static int GetNumberFromFile(StreamReader streamReader)
     {
         string first = "";
         if (!streamReader.EndOfStream)
@@ -307,7 +307,7 @@
         }
     }
 
-    public void Heapify(int n, int i)
+    private void Heapify(int n, int i)
     {
         int largest = i;
         int left = 2 * i + 1;

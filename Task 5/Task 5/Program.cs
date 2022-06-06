@@ -14,10 +14,12 @@ class Program
     {
         Console.Write("Enter the number of matrix elements: ");
         int n = Convert.ToInt32(Console.ReadLine());
-        string path = "..\\..\\..\\arrays\\"; // change path here
-        Vector.FilesExistsCheck(path); // check if all files exists
 
         // Task 1
+        string path = "..\\..\\..\\arrays\\"; // change path here
+        Vector.FilesExistsCheck(path); // check if all files exists for Task 1
+        
+        // Random initialization an array and writing to Unsorted Array.txt
         Console.WriteLine("\nTask 1:");
         Vector vectorMerge = new(n);
         vectorMerge.RandomInitialization(1, n);
@@ -25,6 +27,8 @@ class Program
         {
             unsortedArrayFile.Write(vectorMerge.ToString());
         }
+
+        // Sorting an array and writing to Sorted Array.txt
         Vector.MergeSortFromFile(path);
         Console.WriteLine("Sorted Array in file!");
 
