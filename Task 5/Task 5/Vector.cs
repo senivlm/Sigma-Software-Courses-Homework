@@ -15,7 +15,7 @@
             }
             else
             {
-                throw new Exception("Index out of range array");
+                throw new Exception("Index out of range array!");
             }
         }
         set
@@ -178,15 +178,16 @@
         MergeSort(0, arr.Length - 1);
     }
 
+    #region Task 1
     public static void MergeSortFromFile(string path) // Task 1
     {
         string line = "";
 
         using (StreamReader streamReader = new StreamReader(path + "Unsorted array.txt"))
         {
-            line = streamReader.ReadLine();
+                line = streamReader.ReadLine();
         }
-
+        
         int midIndex = line.Length/2;
         while (line[midIndex] != ' ') // for cases when line is "3 15 4" and we divide it length on 2 and get 4 numbers like "4 1 5 4"
         {
@@ -271,6 +272,28 @@
         return int.MaxValue;
     }
 
+    public static void FilesExistsCheck(string path)
+    {
+        if(!File.Exists(path + "Unsorted Array.txt"))
+        {
+            throw new Exception("Unsorted Array.txt does not exist!");
+        }
+        if (!File.Exists(path + "Sorted Array First Part.txt"))
+        {
+            throw new Exception("Sorted Array First Part.txt does not exist!");
+        }
+        if (!File.Exists(path + "Sorted Array Second Part.txt"))
+        {
+            throw new Exception("Sorted Array Second Part.txt does not exist!");
+        }
+        if (!File.Exists(path + "Sorted Array.txt"))
+        {
+            throw new Exception("Sorted Array.txt does not exist!");
+        }
+    }
+    #endregion
+
+    #region Task 2
     public void HeapSort(int n) // Task 2
     {
         for (int i = n / 2 - 1; i >= 0; i--)
@@ -303,6 +326,7 @@
             Heapify(n, largest);
         }
     }
+    #endregion
     #endregion
 }
 
