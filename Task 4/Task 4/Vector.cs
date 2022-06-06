@@ -1,8 +1,11 @@
 ﻿enum IndexPos { first, last, middle }; // for quickSort method
 class Vector
 {
-    readonly int[] arr;
+    #region Variables
+    public int[] arr;
+    #endregion
 
+    #region Properties
     public int this[int index]
     {
         get
@@ -21,7 +24,9 @@ class Vector
             arr[index] = value;
         }
     }
+    #endregion
 
+    #region Constructors
     public Vector(int[] arr)
     {
         this.arr = arr;
@@ -31,7 +36,9 @@ class Vector
     {
         arr = new int[n];
     }
+    #endregion
 
+    #region Methods
     public void RandomInitialization(int a, int b)
     {
         Random random = new Random();
@@ -40,7 +47,6 @@ class Vector
             arr[i] = random.Next(a, b);
         }
     }
-
     public void InitShufle()
     {
         for (int i = 0; i < arr.Length; i++)
@@ -55,7 +61,6 @@ class Vector
             (arr[random1], arr[random2]) = (arr[random2], arr[random1]);
         }
     }
-
     public Pair[] CalculateFreq()
     {
         Pair[] pairs = new Pair[arr.Length];
@@ -94,7 +99,6 @@ class Vector
 
         return result;
     }
-
     public override string ToString()
     {
         string str = "";
@@ -104,7 +108,6 @@ class Vector
         }
         return str;
     }
-
     public bool PalindromeCheck(int i, int j)
     {
         bool palidrome = true;
@@ -118,19 +121,17 @@ class Vector
         }
         return palidrome;
     }
-
     public void ArrayReverse()
     {
-        for (int i = 0, j = arr.Length - 1; (i != j) && (i < j); i++, j--)
+        for (int i = 0, j = (arr.Length - 1); (i != j) && (i < j); i++, j--)
         {
             (arr[j], arr[i]) = (arr[i], arr[j]);
         }
     }
-
     public int Sequence()
     {
         int count = 0, countTemp = 0, firstIndex = 0, firstIndexTemp = 0;
-        for (int i = 0; i < arr.Length - 1; i++)
+        for (int i = 0; i < (arr.Length - 1); i++)
         {
             if (arr[i] == arr[i+1])
             {
@@ -192,4 +193,5 @@ class Vector
             QuickSort(i, rightIndex, pos);
         }
     }
+    #endregion
 }

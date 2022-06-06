@@ -1,7 +1,10 @@
 ﻿class Vector
 {
+    #region Variables
     public static int[] arr;
+    #endregion
 
+    #region Properties
     public int this[int index]
     {
         get
@@ -20,13 +23,16 @@
             arr[index] = value;
         }
     }
+    #endregion
 
+    #region Constructors
     public Vector(int n)
     {
         arr = new int[n];
     }
+    #endregion
 
-
+    #region Methods
     public void RandomInitialization(int a, int b)
     {
         Random random = new Random();
@@ -103,10 +109,6 @@
         return arr;
     }
 
-    private static void MergeFiles(int[] firstHalf, int[] secondHalf, string path)
-    {
-
-    }
     private static void Merge(int lowIndex, int middleIndex, int highIndex)
     {
         var left = lowIndex;
@@ -171,7 +173,7 @@
         }
     }
 
-    public void MergeSort()
+    public static void MergeSort()
     {
         MergeSort(0, arr.Length - 1);
     }
@@ -244,7 +246,7 @@
                             second = GetNumberFromFile(streamReaderSecond);
                         }
 
-                        if (first == int.MaxValue && second == int.MaxValue) // solution with int.MaxValue is temporary
+                        if ((first == int.MaxValue) && (second == int.MaxValue)) // solution with int.MaxValue is temporary
                         {
                             break;
                         }
@@ -253,6 +255,7 @@
             }
         }
     }
+
     public static int GetNumberFromFile(StreamReader streamReader)
     {
         string first = "";
@@ -280,6 +283,7 @@
             Heapify(i, 0);
         }
     }
+
     public void Heapify(int n, int i)
     {
         int largest = i;
@@ -299,5 +303,6 @@
             Heapify(n, largest);
         }
     }
+    #endregion
 }
 
