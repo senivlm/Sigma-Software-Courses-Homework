@@ -11,18 +11,18 @@ class Program
         int n = Convert.ToInt32(Console.ReadLine());
         Console.Write("Виберіть опорний елемент при сортуванні (1 - перший, 2 - останній, 3 - середній): ");
         int pos = Convert.ToInt32(Console.ReadLine());
+        
         Random random = new Random();
         Vector vector = new Vector(n);
-        vector.RandomInitialization(0,10);
-        string output = vector.ToString();
-        Console.WriteLine("Массив: " + output);
+        vector.RandomInitialization(0,n);
+        Console.WriteLine("Массив: " + vector.ToString());
+        
         switch (pos)
         {
-            case 1: vector.QuickSort(0, n - 1, IndexPos.first); break;
-            case 2: vector.QuickSort(0, n - 1, IndexPos.last); break;
-            case 3: vector.QuickSort(0, n - 1, IndexPos.middle); break;
+            case 1: vector.QuickSort(0, n - 1, IndexPos.First); break;
+            case 2: vector.QuickSort(0, n - 1, IndexPos.Last); break;
+            case 3: vector.QuickSort(0, n - 1, IndexPos.Middle); break;
         }
-        output = vector.ToString();
-        Console.WriteLine("Відсортирований массив: " + output);
+        Console.WriteLine("Відсортирований массив: " + vector.ToString());
     }
 }

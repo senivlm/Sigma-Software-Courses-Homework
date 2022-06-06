@@ -1,4 +1,4 @@
-﻿enum IndexPos { first, last, middle }; // for quickSort method
+﻿enum IndexPos { First, Last, Middle }; // for QuickSort method
 class Vector
 {
     #region Variables
@@ -27,11 +27,6 @@ class Vector
     #endregion
 
     #region Constructors
-    public Vector(int[] arr)
-    {
-        this.arr = arr;
-    }
-
     public Vector(int n)
     {
         arr = new int[n];
@@ -47,6 +42,7 @@ class Vector
             arr[i] = random.Next(a, b);
         }
     }
+
     public void InitShufle()
     {
         for (int i = 0; i < arr.Length; i++)
@@ -61,44 +57,7 @@ class Vector
             (arr[random1], arr[random2]) = (arr[random2], arr[random1]);
         }
     }
-    public Pair[] CalculateFreq()
-    {
-        Pair[] pairs = new Pair[arr.Length];
-        for (int i = 0; i < arr.Length; i++)
-        {
-            pairs[i] = new Pair(0, 0);
-
-        }
-
-        int countDifference = 0;
-        for (int i = 0; i < arr.Length; i++)
-        {
-            bool isElement = false;
-            for (int j = 0; j < countDifference; j++)
-            {
-                if (arr[i] == pairs[j].Number)
-                {
-                    pairs[j].Freq++;
-                    isElement = true;
-                    break;
-                }
-            }
-            if (!isElement)
-            {
-                pairs[countDifference].Freq++;
-                pairs[countDifference].Number = arr[i];
-                countDifference++;
-            }
-        }
-
-        Pair[] result = new Pair[countDifference];
-        for (int i = 0; i < countDifference; i++)
-        {
-            result[i] = pairs[i];
-        }
-
-        return result;
-    }
+    
     public override string ToString()
     {
         string str = "";
@@ -108,6 +67,7 @@ class Vector
         }
         return str;
     }
+
     public bool PalindromeCheck(int i, int j)
     {
         bool palidrome = true;
@@ -121,6 +81,7 @@ class Vector
         }
         return palidrome;
     }
+
     public void ArrayReverse()
     {
         for (int i = 0, j = (arr.Length - 1); (i != j) && (i < j); i++, j--)
@@ -128,6 +89,7 @@ class Vector
             (arr[j], arr[i]) = (arr[i], arr[j]);
         }
     }
+
     public int Sequence()
     {
         int count = 0, countTemp = 0, firstIndex = 0, firstIndexTemp = 0;
@@ -153,6 +115,7 @@ class Vector
         }
         return firstIndex;
     }
+
     public void QuickSort(int leftIndex, int rightIndex, IndexPos pos)
     {
         int i = leftIndex;
@@ -161,9 +124,9 @@ class Vector
 
         switch (pos)
         {
-            case IndexPos.first: pivot = arr[leftIndex]; break;                 // First element like pivot
-            case IndexPos.last: pivot = arr[rightIndex]; break;                 // Last element like pivot
-            case IndexPos.middle: pivot = arr[(leftIndex+rightIndex)/2]; break; // Middle element like pivot
+            case IndexPos.First: pivot = arr[leftIndex]; break;                 // First element like pivot
+            case IndexPos.Last: pivot = arr[rightIndex]; break;                 // Last element like pivot
+            case IndexPos.Middle: pivot = arr[(leftIndex+rightIndex)/2]; break; // Middle element like pivot
         }
 
         while (i <= j)
