@@ -9,13 +9,13 @@
     {
         get
         {
-            if (index >= 0 && index < arr.Length)
+            if ((index >= 0) && (index < arr.Length))
             {
                 return arr[index];
             }
             else
             {
-                throw new Exception("Index out of range array!");
+                throw new Exception("Index out of array range!");
             }
         }
         set
@@ -59,7 +59,7 @@
             arr[i] = i + 1;
         }
         Random random = new Random();
-        for (int i = 0; i < random.Next(arr.Length/2, arr.Length); i++)
+        for (int i = 0; i < random.Next((arr.Length / 2), arr.Length); i++)
         {
             int random1 = random.Next(0, arr.Length);
             int random2 = random.Next(0, arr.Length);
@@ -86,7 +86,6 @@
                 tempArray[index] = arr[right];
                 right++;
             }
-
             index++;
         }
 
@@ -128,7 +127,6 @@
                 tempArray[index] = arr[right];
                 right++;
             }
-
             index++;
         }
 
@@ -181,13 +179,12 @@
     #region Task 1
     public static void MergeSortFromFile(string path) // Task 1
     {
-        string line = "";
-
+        string line;
         using (StreamReader streamReader = new StreamReader(path + "Unsorted array.txt"))
         {
-                line = streamReader.ReadLine();
+            line = streamReader.ReadLine();
         }
-        
+
         int midIndex = line.Length/2;
         while (line[midIndex] != ' ') // for cases when line is "3 15 4" and we divide it length on 2 and get 4 numbers like "4 1 5 4"
         {
@@ -276,19 +273,23 @@
     {
         if(!File.Exists(path + "Unsorted Array.txt"))
         {
-            throw new Exception("Unsorted Array.txt does not exist!");
+            FileStream fs = File.Create(path + "Unsorted Array.txt");
+            fs.Close();
         }
         if (!File.Exists(path + "Sorted Array First Part.txt"))
         {
-            throw new Exception("Sorted Array First Part.txt does not exist!");
+            FileStream fs = File.Create(path + "Sorted Array First Part.txt");
+            fs.Close();
         }
         if (!File.Exists(path + "Sorted Array Second Part.txt"))
         {
-            throw new Exception("Sorted Array Second Part.txt does not exist!");
+            FileStream fs = File.Create(path + "Sorted Array Second Part.txt");
+            fs.Close();
         }
         if (!File.Exists(path + "Sorted Array.txt"))
         {
-            throw new Exception("Sorted Array.txt does not exist!");
+            FileStream fs = File.Create(path + "Sorted Array.txt");
+            fs.Close();
         }
     }
     #endregion
@@ -302,7 +303,7 @@
         }
         for (int i = (arr.Length - 1); i >= 0; i--)
         {
-            (arr[i], arr[0])=(arr[0], arr[i]);
+            (arr[i], arr[0]) = (arr[0], arr[i]);
             Heapify(i, 0);
         }
     }
@@ -312,17 +313,17 @@
         int largest = i;
         int left = 2 * i + 1;
         int right = 2 * i + 2;
-        if (left < n && arr[left] > arr[largest])
+        if ((left < n) && (arr[left] > arr[largest]))
         {
             largest = left;
         }
-        if (right < n && arr[right] > arr[largest])
+        if ((right < n) && (arr[right] > arr[largest]))
         {
             largest = right;
         }
         if (largest != i)
         {
-            (arr[largest], arr[i])=(arr[i], arr[largest]);
+            (arr[largest], arr[i]) = (arr[i], arr[largest]);
             Heapify(n, largest);
         }
     }
