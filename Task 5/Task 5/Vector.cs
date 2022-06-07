@@ -294,13 +294,13 @@
     #endregion
 
     #region Task 2
-    public void HeapSort(int n) // Task 2
+    public void HeapSort() // Task 2
     {
-        for (int i = n / 2 - 1; i >= 0; i--)
+        for (int i = (arr.Length / 2 - 1); i >= 0; i--)
         {
-            Heapify(n, i);
+            Heapify(arr.Length, i);
         }
-        for (int i = n-1; i>=0; i--)
+        for (int i = (arr.Length - 1); i >= 0; i--)
         {
             (arr[i], arr[0])=(arr[0], arr[i]);
             Heapify(i, 0);

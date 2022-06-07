@@ -37,7 +37,7 @@ class Program
         Vector vectorHeap = new(n);
         vectorHeap.RandomInitialization(1, n);
         Console.WriteLine("Unsorted Array: " + vectorHeap.ToString());
-        vectorHeap.HeapSort(n);
+        vectorHeap.HeapSort();
         Console.WriteLine("Sorted Array: " + vectorHeap.ToString());
     }
 }
