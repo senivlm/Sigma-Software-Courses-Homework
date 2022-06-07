@@ -153,6 +153,7 @@
         if (lowIndex < highIndex)
         {
             var middleIndex = (lowIndex + highIndex) / 2;
+            //ви ігноруєте результат повернення.
             MergeSort(arr, lowIndex, middleIndex);
             MergeSort(arr, middleIndex + 1, highIndex);
             Merge(arr, lowIndex, middleIndex, highIndex);
@@ -181,7 +182,7 @@
     {
         string line;
         using (StreamReader streamReader = new StreamReader(path + "Unsorted array.txt"))
-        {
+        {//файл не обов'язково поміщається в стрічку.
             line = streamReader.ReadLine();
         }
 
