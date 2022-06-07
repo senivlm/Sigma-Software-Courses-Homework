@@ -1,6 +1,6 @@
 ﻿enum IndexPos { First, Last, Middle }; // for QuickSort method
 class Vector
-{
+{// з швидким сортуванням все добре.
     #region Variables
     public int[] arr;
     #endregion
