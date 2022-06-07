@@ -12,7 +12,6 @@ class Program
         Console.Write("Виберіть опорний елемент при сортуванні (1 - перший, 2 - останній, 3 - середній): ");
         int pos = Convert.ToInt32(Console.ReadLine());
         
-        Random random = new Random();
         Vector vector = new Vector(n);
         vector.RandomInitialization(0,n);
         Console.WriteLine("Массив: " + vector.ToString());

@@ -127,7 +127,7 @@
             foreach (Consumer consumer in consumers)
             {
                 TimeSpan subtractDates = DateTime.Now.Subtract(consumer.GetMeteringIndicatorDate(0));
-                streamWriter.WriteLine(String.Format("| {0,-2} | {1,-10} | {2,-25} | {3,-15} |", consumer.ApartmentNumber, consumer.Surname, consumer.GetMeteringIndicatorDate(0).ToString("dd/MM/yyyy"), subtractDates.ToString("dd")));
+                streamWriter.WriteLine(String.Format("| {0,-2} | {1,-10} | {2,-25} | {3,-15} |", consumer.ApartmentNumber, consumer.Surname, consumer.GetMeteringIndicatorDate(2).ToString("dd/MM/yyyy"), subtractDates.ToString("dd")));
             }
             streamWriter.WriteLine("-----------------------------------------------------------------");
         }

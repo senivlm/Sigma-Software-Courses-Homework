@@ -15,7 +15,7 @@ class Program
 
         int number = UserInterface.GetNumberOfConsumers();
         int quarter = UserInterface.GetQuarter();
-        string path = "D:\\Sigma-Software-Courses-Homework\\Task 6\\Task 6 Problem 1\\Task 6 Problem 1\\data\\";
+        string path = "..\\..\\..\\data\\";
         
         List <Consumer> consumers = new List <Consumer> ();
         RandomInitialization.RandomConsumers(consumers, number);
