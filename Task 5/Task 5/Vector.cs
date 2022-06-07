@@ -153,9 +153,9 @@
         if (lowIndex < highIndex)
         {
             var middleIndex = (lowIndex + highIndex) / 2;
-            MergeSort(arr, lowIndex, middleIndex);
-            MergeSort(arr, middleIndex + 1, highIndex);
-            Merge(arr, lowIndex, middleIndex, highIndex);
+            arr = MergeSort(arr, lowIndex, middleIndex);
+            arr = MergeSort(arr, middleIndex + 1, highIndex);
+            arr = Merge(arr, lowIndex, middleIndex, highIndex);
         }
         return arr;
     }
@@ -179,13 +179,16 @@
     #region Task 1
     public static void MergeSortFromFile(string path) // Task 1
     {
-        string line;
+        string line = "";
         using (StreamReader streamReader = new StreamReader(path + "Unsorted array.txt"))
         {
-            line = streamReader.ReadLine();
-        }
+            while (!streamReader.EndOfStream)
+            {
+                line += streamReader.ReadLine() + " ";
 
-        int midIndex = line.Length/2;
+            }
+        }
+            int midIndex = line.Length/2;
         while (line[midIndex] != ' ') // for cases when line is "3 15 4" and we divide it length on 2 and get 4 numbers like "4 1 5 4"
         {
             ++midIndex;

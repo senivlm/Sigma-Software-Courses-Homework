@@ -18,7 +18,7 @@ class Program
         // Task 1
         string path = "..\\..\\..\\arrays\\"; // change path here
         Vector.FilesExistsCheck(path); // check if all files exists for Task 1
-        
+
         // Random initialization an array and writing to Unsorted Array.txt
         Console.WriteLine("\nTask 1:");
         Vector vectorMerge = new(n); // exception checking is in Properties
