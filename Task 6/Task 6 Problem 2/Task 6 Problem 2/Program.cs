@@ -4,8 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        string path = "..\\..\\..\\data\\";
-        TextWorker fileWorker = new TextWorker(path);
+        TextWorker fileWorker = new TextWorker("..\\..\\..\\data\\");
         fileWorker.ReadFromFile();
         fileWorker.SplitText();
         fileWorker.WritoToFile();

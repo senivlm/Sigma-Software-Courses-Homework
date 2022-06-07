@@ -1,10 +1,10 @@
 ﻿static class FileWorker
 {
-    public static void CreateDataFile(List<Consumer> consumers, string path, int quarter)
+    public static string? path;
+    public static void CreateDataFile(List<Consumer> consumers, int quarter)
     {
-        path += "Data.txt";
-        FileWorker.CheckIfFileExists(path);
-        using (StreamWriter streamWriter = new StreamWriter(path))
+        FileWorker.CheckIfFileExists(path + "Data.txt");
+        using (StreamWriter streamWriter = new StreamWriter(path + "Data.txt"))
         {
             streamWriter.WriteLine($"Номер кварталу: {quarter} | Кількість квартир: {consumers.Count}");
             streamWriter.WriteLine();
@@ -21,12 +21,11 @@
         }
     }
 
-    public static void GetDataFromFile(string path, List<Consumer> consumers)
+    public static void GetDataFromFile(List<Consumer> consumers)
     {
-        path += "Data.txt";
-        FileWorker.CheckIfFileExists(path);
+        FileWorker.CheckIfFileExists(path + "Data.txt");
 
-        using (StreamReader streamReader = new StreamReader(path))
+        using (StreamReader streamReader = new StreamReader(path + "Data.txt"))
         {
             string surname = "";
             int apartmentNumber = 0, indicator = 0, day = 0, month = 0, year = 0;
@@ -72,12 +71,11 @@
         }
     }
 
-    public static void OutputInFileListConsumers(List<Consumer> consumers, string path, int quarter)
+    public static void OutputInFileListConsumers(List<Consumer> consumers, int quarter)
     {
-        path += "Output.txt";
-        FileWorker.CheckIfFileExists(path);
+        FileWorker.CheckIfFileExists(path + "Output.txt");
 
-        using (StreamWriter streamWriter = new StreamWriter(path))
+        using (StreamWriter streamWriter = new StreamWriter(path + "Output.txt"))
         {
             string[] months = new string[] { "Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень" };
             int index = (quarter-1)*3;
@@ -94,12 +92,11 @@
         }
     }
 
-    public static void OutputInFileConsumer(Consumer consumer, string path, int quarter)
+    public static void OutputInFileConsumer(Consumer consumer, int quarter)
     {
-        path += "Consumer.txt";
-        FileWorker.CheckIfFileExists(path);
+        FileWorker.CheckIfFileExists(path + "Consumer.txt");
 
-        using (StreamWriter streamWriter = new StreamWriter(path))
+        using (StreamWriter streamWriter = new StreamWriter(path + "Consumer.txt"))
         {
             string[] months = new string[] { "Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень" };
             int index = (quarter-1)*3;
@@ -114,12 +111,11 @@
 
     }
 
-    public static void OutputInFileDifferenceInDates(List<Consumer> consumers, string path)
+    public static void OutputInFileDifferenceInDates(List<Consumer> consumers)
     {
-        path += "Difference in dates.txt";
-        FileWorker.CheckIfFileExists(path);
+        FileWorker.CheckIfFileExists(path + "Difference in dates.txt");
 
-        using (StreamWriter streamWriter = new StreamWriter(path))
+        using (StreamWriter streamWriter = new StreamWriter(path + "Difference in dates.txt"))
         {
             streamWriter.WriteLine("-----------------------------------------------------------------");
             streamWriter.WriteLine(String.Format("| {0,-2} | {1,-10} | {2,-25} | {3,-15} |", "#", "Прізвище", "Дата знаття показників", "Різниця в днях"));

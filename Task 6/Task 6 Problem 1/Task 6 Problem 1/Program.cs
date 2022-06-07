@@ -9,13 +9,13 @@ using System.Text;
 // 6. Видрукувати інформацію про те, скільки днів пройшло з моменту останнього зняття показу лічильника до поточної дати. (class FileWorker, method OutputInFileDifferenceInDates)
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
         Console.OutputEncoding = UTF8Encoding.UTF8;
 
         int number = UserInterface.GetNumberOfConsumers();
         int quarter = UserInterface.GetQuarter();
-        string path = "..\\..\\..\\data\\";
+        FileWorker.path = "..\\..\\..\\data\\";
         
         List <Consumer> consumers = new List <Consumer> ();
         RandomInitialization.RandomConsumers(consumers, number);
@@ -23,13 +23,13 @@ class Program
         {
             RandomInitialization.RandomMeterings(consumers[i]);
         }
-        FileWorker.CreateDataFile(consumers, path, quarter);
+        FileWorker.CreateDataFile(consumers, quarter);
         consumers.Clear(); // clearing the list of consumers after creating the input file
 
-        FileWorker.GetDataFromFile(path, consumers);
-        FileWorker.OutputInFileListConsumers(consumers, path, quarter);
-        FileWorker.OutputInFileConsumer(consumers[0], path, quarter);
-        FileWorker.OutputInFileDifferenceInDates(consumers, path);
+        FileWorker.GetDataFromFile(consumers);
+        FileWorker.OutputInFileListConsumers(consumers, quarter);
+        FileWorker.OutputInFileConsumer(consumers[0], quarter);
+        FileWorker.OutputInFileDifferenceInDates(consumers);
 
         Console.WriteLine("Програму виконано успішно!");
     }
