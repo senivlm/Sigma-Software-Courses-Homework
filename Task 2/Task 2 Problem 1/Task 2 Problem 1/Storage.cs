@@ -1,8 +1,7 @@
-﻿class Storage
+﻿static class Storage
 {
-    public List<Product> listProduct;
-    public Storage() { listProduct = new List<Product>(); }
-    public void Append(Product product)
+    public static List<Product> listProduct = new();
+    public static void Append(Product product)
     {
         listProduct.Add(product);
     }

@@ -6,6 +6,6 @@
     protected Product() { }
     public virtual void ChangeValue(decimal percent)
     {
-        this.price += this.price * (percent/100);
+        price += price * (percent/100);
     }
 }
