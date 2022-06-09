@@ -1,10 +1,11 @@
 ﻿static class RandomInitialization
 {
+    #region Methods
     public static void RandomProducts(int amount)
     {
         Random random = new Random();
         string[] namesProduct = { "Консерви", "Макарони", "Рис", "Цукор", "Сіль", "Кава", "Мед", "Борошно", "Спеції" };
-        string[] namesMeat = { "Ковбаски", "Філе", "Фарш", "Шашлик", "Сосіки", "Сардельки", "Рулет", "Стейки" };
+        string[] namesMeat = { "Ковбаски", "Філе", "Фарш", "Шашлик", "Сосіски", "Сардельки", "Рулет", "Стейки" };
         string[] namesDairy = { "Молоко", "Кефір", "Ряжанка", "Йогурт", "Сметана", "Закваска", "Вершки", "Сир" };
         for (int i = 0; i < amount; i++)
         {
@@ -46,4 +47,5 @@
             }
         }
     }
+    #endregion
 }

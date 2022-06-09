@@ -1,14 +1,19 @@
 ﻿using System.Text;
 class FileWorker
 {
+    #region Variables
     private string _path;
     private static string PathToLog = "..\\..\\..\\data\\logs.txt";
+    #endregion
 
+    #region Constructors
     public FileWorker(string path)
     {
         _path = path;
     }
+    #endregion
 
+    #region Methods
     public void CheckPath()
     {
         if(!File.Exists(_path))
@@ -16,7 +21,6 @@ class FileWorker
             throw new Exception("Файл не був найдений!");
         }
     }
-
     public void ReadDataFromFile()
     {
         using (StreamReader streamReader = new StreamReader(_path))
@@ -95,7 +99,6 @@ class FileWorker
             }
         }
     }
-
     public void WriteDataToFile()
     {
         using (StreamWriter streamWriter = new(_path))
@@ -142,4 +145,38 @@ class FileWorker
             }
         }
     }
+    public static List<string[]> ReadLog()
+    {
+        List<string[]> parametersList = new List<string[]>();
+        using (StreamReader streamReader = new StreamReader(PathToLog))
+        {
+            // Skip first three lines
+            streamReader.ReadLine();
+            streamReader.ReadLine();
+            streamReader.ReadLine();
+            while (!streamReader.EndOfStream)
+            {
+                string line = streamReader.ReadLine();
+                string[] lineSplit = line.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                string[] parameters;
+                if (!lineSplit[7].Contains('·'))
+                {
+                    parameters = new string[] { lineSplit[1].Trim(), lineSplit[3].Trim(), lineSplit[5].Trim(), lineSplit[7].Trim(), lineSplit[9].Trim(), lineSplit[13].Trim() };
+                    parametersList.Add(parameters);
+                }
+                else if (!lineSplit[11].Contains('·'))
+                {
+                    parameters = new string[] { lineSplit[1].Trim(), lineSplit[3].Trim(), lineSplit[5].Trim(), lineSplit[11].Trim(), lineSplit[13].Trim() };
+                    parametersList.Add(parameters);
+                }
+                else if (lineSplit[7].Contains('·') && lineSplit[11].Contains('·'))
+                {
+                    parameters = new string[] { lineSplit[1].Trim(), lineSplit[3].Trim(), lineSplit[5].Trim(), lineSplit[13].Trim() };
+                    parametersList.Add(parameters);
+                }
+            }
+        }
+        return parametersList;
+    }
+    #endregion
 }

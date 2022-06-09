@@ -1,9 +1,12 @@
 ﻿static class ErrorChecker
 {
+    #region Variables
     public const int MinCharactersInName = 2, MaxCharactersInName = 10;
     public const int MaxPrice = 10000, MinPrice = 0;
     public const int MaxWeight = 10000, MinWeight = 50;
+    #endregion
 
+    #region Methods
     public static void CheckName(string name, ref bool isCorrect)
     {
         if(name.Any(char.IsDigit) || name.Length <= MinCharactersInName || name.Length >= MaxCharactersInName)
@@ -66,13 +69,6 @@
         {
             isCorrect = false;
         }
-        else
-        {
-            DateTime dt = DateTime.Parse(date);
-            if(dt.Year != 2022)
-            {
-                isCorrect = false;
-            }
-        }
     }
+    #endregion
 }

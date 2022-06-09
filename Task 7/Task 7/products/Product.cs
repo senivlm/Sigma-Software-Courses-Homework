@@ -1,9 +1,11 @@
 ﻿class Product
 {
+    #region Variables
     private string _name;
-
     public decimal price, weight;
+    #endregion
 
+    #region Properties
     public string Name 
     { 
         get => _name;
@@ -22,7 +24,9 @@
             }
         }
     }
+    #endregion
 
+    #region Constructors
     public Product(string n, decimal p, decimal w)
     {
         Name = n;
@@ -30,8 +34,12 @@
         weight = w;
     }
     protected Product() { }
+    #endregion
+
+    #region Methods
     public virtual void ChangeValue(decimal percent)
     {
         price += price * (percent/100);
     }
+    #endregion
 }

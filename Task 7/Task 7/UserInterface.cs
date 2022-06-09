@@ -1,5 +1,6 @@
 ﻿static class UserInterface
 {
+    #region Methods
     public static void Menu()
     {
         Console.WriteLine("Перелік функцій.");
@@ -11,6 +12,7 @@
         Console.WriteLine("6. Змінити ціну для всіх товарів на заданий відсоток");
         Console.WriteLine("7. Переглянути або змінити дані товару за індексом");
         Console.WriteLine("8. Зберегти дані в основний файл");
+        Console.WriteLine("9. Виправити дані в журналі помилок");
         Console.Write("Виберіть функцію: ");
         int input = Convert.ToInt32(Console.ReadLine());
         Console.Clear();
@@ -24,9 +26,10 @@
             case 6: ChangeValueAllProducts(); break;
             case 7: ChangeProductField(); break;
             case 8: SaveStorageToFile(); break;
+            case 9: ImproveErrors(); break;
         }
     }
-
+    
     private static void FillStorageFromFile()
     {
         Console.WriteLine("1. Загрузити дані з основної бази");
@@ -80,8 +83,8 @@
         Console.WriteLine("Товари успішно додані!");
         GoToMenu();
     }
-
-    private static void GetProductInDialogue() // Adding a Product in the mode of communication with the user
+    
+    private static void GetProductInDialogue()
     {
         Console.Write("1 - Product \n2 - Meat \n3 - Dairy \nВиберіть тип продукту: ");
         int input = Convert.ToInt32(Console.ReadLine());
@@ -100,8 +103,7 @@
         Console.WriteLine("\nТовар успішно доданий!");
         GoToMenu();
     }
-
-    private static void GetMeatInDialogue(string name, int price, int weight) // If we wanna add Meat product
+    private static void GetMeatInDialogue(string name, int price, int weight)
     {
         Console.WriteLine("Виберіть сорт мяса: 1 - перший сорт, 2 - другий сорт");
         int inputType = Convert.ToInt32(Console.ReadLine());
@@ -123,7 +125,7 @@
         }
         Storage.Append(new Meat(name, price, weight, type, category));
     }
-    private static void GetDairyInDialogue(string name, int price, int weight) // If we wanna add Dairy
+    private static void GetDairyInDialogue(string name, int price, int weight)
     {
         Console.WriteLine("Введіть термін придатності.");
         Console.Write("Рік: ");
@@ -134,8 +136,8 @@
         int day = Convert.ToInt32(Console.ReadLine());
         Storage.Append(new Dairy(name, price, weight, new DateTime(year, month, day)));
     }
-
-    private static void AddRandomProducts() // Automatic generation of products
+    
+    private static void AddRandomProducts()
     {
         Console.Write("Введіть кількість товарів, яку хочете додати: ");
         int amount = Convert.ToInt32(Console.ReadLine());
@@ -144,7 +146,7 @@
         Console.WriteLine("Товари в кількості {0} були успішно сгенеровані!", amount);
         GoToMenu();
     }
-
+   
     private static void AllProductsOutput()
     {
         ConsoleWorker.AllProductsOutput();
@@ -156,8 +158,8 @@
         ConsoleWorker.AllMeatOutput();
         GoToMenu();
     }
-
-    private static void ChangeValueAllProducts() // Change value of every Product on {percent}
+    
+    private static void ChangeValueAllProducts()
     {
         Console.Write("Введіть на який відсоток змінити ціну: ");
         decimal percent = decimal.Parse(Console.ReadLine());
@@ -170,7 +172,7 @@
         GoToMenu();
     }
 
-    private static void ChangeProductField() // Change or check product data by index in list
+    private static void ChangeProductField()
     {
         Console.WriteLine("1. Відобразити дані про товар");
         Console.WriteLine("2. Змінити дані про товар");
@@ -264,6 +266,69 @@
         GoToMenu();
     }
 
+    private static void ImproveErrors()
+    {
+        List<string[]> parametersList = FileWorker.ReadLog();
+        ConsoleWorker.LogOutput(parametersList);
+        Console.Write("\nВведіть дату, пізніше якої хочете виправити всі дані: ");
+        string date = Console.ReadLine();
+        DateTime dateInput = DateTime.Parse(date);
+        Console.WriteLine(dateInput.ToString());
+        Console.Clear();
+
+        for (int i = 0; i < parametersList.Count; i++)
+        {
+            if (DateTime.Compare(dateInput, DateTime.Parse(parametersList[i][^1])) < 0)
+            {
+                Console.WriteLine($"Поточна назва: {parametersList[i][0]}");
+                Console.WriteLine("Назва не може утримувати цифри.");
+                Console.WriteLine($"Кількість символів в назві повинно бути більше {ErrorChecker.MinCharactersInName}, а також менше {ErrorChecker.MaxCharactersInName}.");
+                Console.Write("Введіть нову назву: ");
+                string name = Console.ReadLine();
+
+                Console.WriteLine($"Поточна ціна: {parametersList[i][1]}");
+                Console.WriteLine("Ціна не може утримувати букви.");
+                Console.WriteLine($"Ціна не може бути більшою за {ErrorChecker.MaxPrice}, а також меншою за {ErrorChecker.MinPrice}.");
+                Console.Write("Введіть нову ціну: ");
+                decimal price = Convert.ToDecimal(Console.ReadLine());
+
+                Console.WriteLine($"Поточна вага: {parametersList[i][2]}");
+                Console.WriteLine("Вага не може утримувати букви.");
+                Console.WriteLine($"Вага не може бути більшою за {ErrorChecker.MaxWeight}, а також меншою за {ErrorChecker.MinWeight}.");
+                Console.Write("Введіть нову вагу: ");
+                decimal weight = Convert.ToDecimal(Console.ReadLine());
+
+                if (parametersList[i].Length == 6)
+                {
+                    Console.WriteLine($"Поточний тип мяса: {parametersList[i][3]}");
+                    Console.WriteLine("Доступні типи мяса: 1-й, 2-й.");
+                    Console.Write("Введіть новий тип: ");
+                    string meatType = Console.ReadLine();
+
+                    Console.WriteLine($"Поточний вид мяса: {parametersList[i][4]}");
+                    Console.WriteLine("Доступні види мяса: Баранина, Телятина, Свинина, Курятина.");
+                    Console.Write("Введіть новий вид: ");
+                    string meatCategory = Console.ReadLine();
+                    Storage.Append(new Meat(name, price, weight, meatType, meatCategory));
+                }
+                else if (parametersList[i].Length == 5)
+                {
+                    Console.WriteLine($"Поточний термін придатності: {parametersList[i][3]}");
+                    Console.Write("Введіть нову дату: ");
+                    string dateD = Console.ReadLine();
+                    DateTime dtD = DateTime.Parse(dateD);
+                    Storage.Append(new Dairy(name, price, weight, dtD));
+                }
+                else
+                {
+                    Storage.Append(new Product(name, price, weight));
+                }
+            }
+        }
+        Console.WriteLine("Товари успішно додані!");
+        GoToMenu();
+    }
+    
     private static void SaveStorageToFile()
     {
 
@@ -280,4 +345,6 @@
         Console.Clear();
         Menu();
     }
+
+    #endregion
 }

@@ -1,12 +1,17 @@
-﻿enum MeatType { First, Second };
+﻿#region Enumerations
+enum MeatType { First, Second };
 enum Category { Mutton, Veal, Pork, Chicken };
+#endregion
 
 sealed class Meat : Product
 {
+    #region Variables
     public MeatType meatType;
     public Category meatCategory;
     private const decimal _FirstPercent = 15, _SecondPercent = 5; // Increase the cost of the product depending on its grade (firstPercent for MeatType.First, secondPercent for MeatType.second)
-   
+    #endregion
+
+    #region Constructors
     public Meat(string n, decimal p, decimal w, MeatType t, Category c)
     {
         Name = n;
@@ -54,7 +59,9 @@ sealed class Meat : Product
             price += price * (_SecondPercent/100);
         }
     }
-   
+    #endregion
+
+    #region Methods
     public void SetMeatType(int i)
     {
         switch (i)
@@ -99,4 +106,5 @@ sealed class Meat : Product
     {
         price += price * (percent/100);
     }
+    #endregion
 }

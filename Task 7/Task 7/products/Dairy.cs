@@ -1,8 +1,11 @@
 ﻿sealed class Dairy : Product
 {
+    #region Variables
     public DateTime expDate;
     private const decimal _Expired = 10, _NotExpired = 15; // Increase and decrease the cost of the product depending on its expiration date
-   
+    #endregion
+
+    #region Constructors
     public Dairy(string n, decimal p, decimal w, DateTime e)
     {
         Name = n;
@@ -20,7 +23,9 @@
             price -= price * (_Expired/100); // else it decreases on {expired} percent
         }
     }
-  
+    #endregion
+
+    #region Methods
     public void SetexpDate(int year, int month, int day)
     {
         expDate = new DateTime(year, month, day);
@@ -30,4 +35,5 @@
     {
         price += price * (percent/100);
     }
+    #endregion
 }
