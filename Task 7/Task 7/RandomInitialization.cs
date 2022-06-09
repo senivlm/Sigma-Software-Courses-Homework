@@ -39,8 +39,7 @@
                     }
                 case 2:
                     {
-                        DateTime dt = DateTime.Now;
-                        dt = dt.AddDays(random.Next(32)); // from 0 to 31
+                        DateTime dt = DateTime.Now.AddDays(random.Next(181)); // from 15 days to 6 month
                         Storage.Append(new Dairy(namesDairy[random.Next(namesDairy.Length)], random.Next(20, 100), random.Next(100, 2001), dt));
                         break;
                     }

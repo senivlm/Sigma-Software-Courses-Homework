@@ -3,24 +3,82 @@
     public static void Menu()
     {
         Console.WriteLine("Перелік функцій.");
-        Console.WriteLine("1. Наповнення інформацією даних у режимі діалогу з користувачем");
-        Console.WriteLine("2. Наповнення інформацією даних шляхом ініціалізації");
-        Console.WriteLine("3. Виведення повної інформації про всі товари");
-        Console.WriteLine("4. Виведення всіх мясних продуктів");
-        Console.WriteLine("5. Змінити ціну для всіх товарів на заданий відсоток");
-        Console.WriteLine("6. Переглянути або змінити дані товару за індексом");
+        Console.WriteLine("1. Загрузити дані з файлу");
+        Console.WriteLine("2. Наповнення інформацією даних у режимі діалогу з користувачем");
+        Console.WriteLine("3. Наповнення інформацією даних шляхом ініціалізації");
+        Console.WriteLine("4. Виведення повної інформації про всі товари");
+        Console.WriteLine("5. Виведення всіх мясних продуктів");
+        Console.WriteLine("6. Змінити ціну для всіх товарів на заданий відсоток");
+        Console.WriteLine("7. Переглянути або змінити дані товару за індексом");
+        Console.WriteLine("8. Зберегти дані в основний файл");
         Console.Write("Виберіть функцію: ");
         int input = Convert.ToInt32(Console.ReadLine());
         Console.Clear();
         switch (input)
         {
-            case 1: GetProductInDialogue(); break;
-            case 2: AddRandomProducts(); break;
-            case 3: AllProductsOutput(); break;
-            case 4: AllMeatOutput(); break;
-            case 5: ChangeValueAllProducts(); break;
-            case 6: ChangeProductField(); break;
+            case 1: FillStorageFromFile(); break;
+            case 2: GetProductInDialogue(); break;
+            case 3: AddRandomProducts(); break;
+            case 4: AllProductsOutput(); break;
+            case 5: AllMeatOutput(); break;
+            case 6: ChangeValueAllProducts(); break;
+            case 7: ChangeProductField(); break;
+            case 8: SaveStorageToFile(); break;
         }
+    }
+
+    private static void FillStorageFromFile()
+    {
+        Console.WriteLine("1. Загрузити дані з основної бази");
+        Console.WriteLine("2. Загрузити дані з свого файлу");
+        Console.Write("Виберіть: ");
+        int input = Convert.ToInt32(Console.ReadLine());
+        Console.Clear();
+        
+        switch (input)
+        {
+            case 1:
+                {
+                    FileWorker fileWorker = new("..\\..\\..\\data\\products.txt");
+                    fileWorker.CheckPath();
+                    fileWorker.ReadDataFromFile();
+                    break;
+                }
+            case 2:
+                {
+                    string path = "";
+                    while (true)
+                    {
+                        Console.WriteLine("Введіть шлях по прикладу: D:\\Visual Studio Projects\\Task 7\\Task 7\\data\\products.txt");
+                        path = Console.ReadLine();
+                        if (File.Exists(path))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Файл не існує!");
+                            Console.WriteLine("1. Попробувати знову");
+                            Console.WriteLine("2. Повернутися до меню");
+                            Console.Write("Виберіть: ");
+                            Console.Clear();
+                            int choice = Convert.ToInt32(Console.ReadLine());
+                            switch (choice)
+                            {
+                                case 1: { break; }
+                                case 2: { GoToMenu(); break; }
+                            }
+                        }
+                    }
+                    FileWorker fileWorker = new(path);
+                    fileWorker.ReadDataFromFile();
+                    break;
+                }
+        }
+
+
+        Console.WriteLine("Товари успішно додані!");
+        GoToMenu();
     }
 
     private static void GetProductInDialogue() // Adding a Product in the mode of communication with the user
@@ -89,42 +147,45 @@
 
     private static void AllProductsOutput() // Output all products list
     {
-        Console.WriteLine("------------------------------------------------------------------------------");
-        Console.WriteLine("| Назва      | Ціна  | Вага | Сорт мяса  | Вид мяса      | Термін придатності");
-        Console.WriteLine("------------------------------------------------------------------------------");
+        Console.WriteLine("----------------------------------------------------------------------------------");
+        Console.WriteLine(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-15} | {5,-18} |", "Назва", "Ціна", "Вага", "Сорт мяса", "Вид мяса", "Термін придатності"));
+        Console.WriteLine("----------------------------------------------------------------------------------");
         foreach (Product product in Storage.listProduct)
         {
-            Console.Write(string.Format("| {0,-10} | {1,-5:F1} | {2,-5}", product.name, product.price, product.weight));
             if (product is Meat)
             {
                 Meat p = product as Meat;
-                Console.Write(string.Format("| {0,-10} | {1,-10}", p.GetMeatType(), p.GetCategory()));
+                Console.Write(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-15} | {5,-18} |", p.Name, p.price, p.weight, p.GetMeatType(), p.GetCategory(), "··················"));
             }
-            if (product is Dairy)
+            else if (product is Dairy)
             {
                 Dairy p = product as Dairy;
-                Console.Write(string.Format("{0,50}", "| " + p.expdate));
+                Console.Write(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-15} | {5,-18} |", p.Name, p.price, p.weight, "··········", "···············", p.expDate.ToString("dd/MM/yyyy")));
+            }
+            else
+            {
+                Console.Write(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-15} | {5,-18} |", product.Name, product.price, product.weight, "··········", "···············", "··················"));
             }
             Console.WriteLine();
         }
-        Console.WriteLine("------------------------------------------------------------------------------");
+        Console.WriteLine("----------------------------------------------------------------------------------");
         GoToMenu();
     }
 
     private static void AllMeatOutput() // Output Meat list
     {
-        Console.WriteLine("----------------------------------------------------");
-        Console.WriteLine("| Назва      | Ціна  | Вага  | Сорт мяса  | Вид мяса");
-        Console.WriteLine("----------------------------------------------------");
+        Console.WriteLine("----------------------------------------------------------------------------------");
+        Console.WriteLine(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-15} | {5,-18} |", "Назва", "Ціна", "Вага", "Сорт мяса", "Вид мяса", "Термін придатності"));
+        Console.WriteLine("----------------------------------------------------------------------------------");
         foreach (Product product in Storage.listProduct)
         {
             if (product is Meat)
             {
                 Meat p = product as Meat;
-                Console.WriteLine(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-10}", p.name, p.price, p.weight, p.GetMeatType(), p.GetCategory()));
+                Console.WriteLine(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-15} | {5,-18} |", p.Name, p.price, p.weight, p.GetMeatType(), p.GetCategory(), "··················"));
             }
         }
-        Console.WriteLine("----------------------------------------------------");
+        Console.WriteLine("----------------------------------------------------------------------------------");
         GoToMenu();
     }
 
@@ -155,7 +216,7 @@
             case 1:
                 {
                     Console.Clear();
-                    Console.WriteLine($"Назва: {Storage.listProduct[index].name} \nЦіна: {Storage.listProduct[index].price}\nВага: {Storage.listProduct[index].weight}");
+                    Console.WriteLine($"Назва: {Storage.listProduct[index].Name} \nЦіна: {Storage.listProduct[index].price}\nВага: {Storage.listProduct[index].weight}");
                     if (Storage.listProduct[index] is Meat)
                     {
                         Meat p = Storage.listProduct[index] as Meat;
@@ -164,7 +225,7 @@
                     if (Storage.listProduct[index] is Dairy)
                     {
                         Dairy p = Storage.listProduct[index] as Dairy;
-                        Console.WriteLine($"Дата: {p.expdate}");
+                        Console.WriteLine($"Дата: {p.expDate}");
                     }
                     Console.Write("Нажміть будь-яку клавішу, щоб перейти в меню...");
                     Console.ReadKey();
@@ -193,7 +254,7 @@
                     {
                         case 1:
                             Console.WriteLine("Введіть нову назву: ");
-                            Storage.listProduct[index].name = Console.ReadLine(); break;
+                            Storage.listProduct[index].Name = Console.ReadLine(); break;
                         case 2:
                             Console.WriteLine("Введіть нову ціну: ");
                             Storage.listProduct[index].price = Convert.ToInt32(Console.ReadLine()); break;
@@ -219,7 +280,7 @@
                                 int month = Convert.ToInt32(Console.ReadLine());
                                 Console.Write("День: ");
                                 int day = Convert.ToInt32(Console.ReadLine());
-                                dairy.SetExpdate(year, month, day);
+                                dairy.SetexpDate(year, month, day);
                             }
                             break;
                         case 5:
@@ -232,6 +293,15 @@
                     break;
                 }
         }
+        GoToMenu();
+    }
+
+    private static void SaveStorageToFile()
+    {
+
+        FileWorker fileWorker = new("..\\..\\..\\data\\products.txt");
+        fileWorker.WriteDataToFile();
+        Console.WriteLine("Дані успішно збережено!");
         GoToMenu();
     }
 

@@ -9,11 +9,42 @@ sealed class Meat : Product
    
     public Meat(string n, decimal p, decimal w, MeatType t, Category c)
     {
-        name = n;
+        Name = n;
         price = p;
         weight = w;
         meatType = t;
         meatCategory = c;
+        if (meatType == MeatType.First)
+        {
+            price += price * (_FirstPercent/100);
+        }
+        else if (meatType == MeatType.Second)
+        {
+            price += price * (_SecondPercent/100);
+        }
+    }
+
+    public Meat(string n, decimal p, decimal w, string t, string c)
+    {
+        Name = n;
+        price = p;
+        weight = w;
+
+        switch (t) {
+            case "1-й": { meatType = MeatType.First; break; }
+            case "2-й": { meatType = MeatType.Second; break; }
+            default: { break; } // !
+        }
+
+        switch (c)
+        {
+            case "Баранина": { meatCategory = Category.Mutton; break; }
+            case "Телятина": { meatCategory = Category.Veal; break; }
+            case "Свинина": { meatCategory = Category.Pork; break; }
+            case "Курятина": { meatCategory = Category.Chicken; break; }
+            default: { break; } // !
+        }
+
         if (meatType == MeatType.First)
         {
             price += price * (_FirstPercent/100);

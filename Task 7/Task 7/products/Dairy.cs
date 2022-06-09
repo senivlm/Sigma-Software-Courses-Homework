@@ -1,19 +1,19 @@
 ﻿sealed class Dairy : Product
 {
-    public DateTime expdate;
-    private const decimal _Expired = 10, _Notexpired = 15; // Increase and decrease the cost of the product depending on its expiration date
+    public DateTime expDate;
+    private const decimal _Expired = 10, _NotExpired = 15; // Increase and decrease the cost of the product depending on its expiration date
    
     public Dairy(string n, decimal p, decimal w, DateTime e)
     {
-        name = n;
+        Name = n;
         price = p;
         weight = w;
-        expdate = e;
+        expDate = e;
 
-        if (DateTime.Compare(expdate, DateTime.Now) > 0) // If Dairly_products expiration date has not passed
+        if (DateTime.Compare(expDate, DateTime.Now) > 0) // If Dairy product expiration date has not passed
         {
             
-            price += price * (_Notexpired/100); // it price increases on {notexpired} percent
+            price += price * (_NotExpired/100); // it price increases on {notexpired} percent
         }
         else
         {
@@ -21,9 +21,9 @@
         }
     }
   
-    public void SetExpdate(int year, int month, int day)
+    public void SetexpDate(int year, int month, int day)
     {
-        expdate = new DateTime(year, month, day);
+        expDate = new DateTime(year, month, day);
     }
    
     public override void ChangeValue(decimal percent)
