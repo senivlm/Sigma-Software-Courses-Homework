@@ -38,7 +38,6 @@ sealed class Meat : Product
         switch (t) {
             case "1-й": { meatType = MeatType.First; break; }
             case "2-й": { meatType = MeatType.Second; break; }
-            default: { break; } // !
         }
 
         switch (c)
@@ -47,7 +46,6 @@ sealed class Meat : Product
             case "Телятина": { meatCategory = Category.Veal; break; }
             case "Свинина": { meatCategory = Category.Pork; break; }
             case "Курятина": { meatCategory = Category.Chicken; break; }
-            default: { break; } // !
         }
 
         if (meatType == MeatType.First)

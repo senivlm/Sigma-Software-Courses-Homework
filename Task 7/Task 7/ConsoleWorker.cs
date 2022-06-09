@@ -39,6 +39,25 @@
         Console.WriteLine("----------------------------------------------------------------------------------");
     }
 
+    public static void OutputProduct(int index)
+    {
+        OutputHeader();
+        if (Storage.listProduct[index] is Meat)
+        {
+            Meat p = Storage.listProduct[index] as Meat;
+            Console.WriteLine(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-15} | {5,-18} |", p.Name, p.price, p.weight, p.GetMeatType(), p.GetCategory(), "··················"));
+        }
+        else if (Storage.listProduct[index] is Dairy)
+        {
+            Dairy p = Storage.listProduct[index] as Dairy;
+            Console.WriteLine(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-15} | {5,-18} |", p.Name, p.price, p.weight, "··········", "···············", p.expDate.ToString("dd/MM/yyyy")));
+        }
+        else
+        {
+            Console.WriteLine(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-15} | {5,-18} |", Storage.listProduct[index].Name, Storage.listProduct[index].price, Storage.listProduct[index].weight, "··········", "···············", "··················"));
+        }
+    }
+
     public static void LogOutput(List<string[]> parametersList)
     {
         OutputHeaderLog();

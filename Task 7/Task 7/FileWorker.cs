@@ -3,7 +3,8 @@ class FileWorker
 {
     #region Variables
     private string _path;
-    private static string PathToLog = "..\\..\\..\\data\\logs.txt";
+    public const string PathToData = "..\\..\\..\\data\\products.txt";
+    public const string PathToLog = "..\\..\\..\\data\\logs.txt";
     #endregion
 
     #region Constructors
@@ -14,13 +15,6 @@ class FileWorker
     #endregion
 
     #region Methods
-    public void CheckPath()
-    {
-        if(!File.Exists(_path))
-        {
-            throw new Exception("Файл не був найдений!");
-        }
-    }
     public void ReadDataFromFile()
     {
         using (StreamReader streamReader = new StreamReader(_path))
