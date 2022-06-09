@@ -27,8 +27,8 @@
 
         using (StreamReader streamReader = new StreamReader(path + "Data.txt"))
         {
-            string surname = "";
-            int apartmentNumber = 0, indicator = 0, day = 0, month = 0, year = 0;
+            string surname = "", date = "";
+            int apartmentNumber = 0, indicator = 0;
             while (!streamReader.EndOfStream)
             {
                 string[] line = streamReader.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
@@ -45,25 +45,12 @@
                     }
                     if (line[i] == "показника:")
                     {
-                        string tempDate = line[i+1];
-                        string tempDay = Convert.ToString(tempDate[0]);
-                        tempDay += tempDate[1];
-                        day = Convert.ToInt32(tempDay);
-
-                        string tempMonth = Convert.ToString(tempDate[3]);
-                        tempMonth += tempDate[4];
-                        month = Convert.ToInt32(tempMonth);
-
-                        string tempYear = Convert.ToString(tempDate[6]);
-                        tempYear += tempDate[7];
-                        tempYear += tempDate[8];
-                        tempYear += tempDate[9];
-                        year = Convert.ToInt32(tempYear);
+                        date = line[i+1];
                     }
                     if (line[i] == "Показник:")
                     {
                         indicator = Convert.ToInt32(line[i+1]);
-                        DateTime dateTime = new DateTime(year, month, day);
+                        DateTime dateTime = DateTime.Parse(date);
                         consumers[apartmentNumber-1].AddMetering(new Metering(indicator, dateTime));
                     }
                 }
