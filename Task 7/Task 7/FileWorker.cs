@@ -2,6 +2,7 @@
 class FileWorker
 {
     private string _path;
+    private static string PathToLog = "..\\..\\..\\data\\logs.txt";
 
     public FileWorker(string path)
     {
@@ -29,36 +30,67 @@ class FileWorker
             {
                 string line = streamReader.ReadLine();
                 string[] lineSplit = line.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                bool isCorrect = true;
+
                 string name = lineSplit[1].Trim();
-                decimal price = Convert.ToDecimal(lineSplit[3].Trim());
-                decimal weight = Convert.ToDecimal(lineSplit[5].Trim());
+                ErrorChecker.CheckName(name, ref isCorrect);
+
+                ErrorChecker.CheckPrice(lineSplit[3].Trim(), ref isCorrect);
+                ErrorChecker.CheckWeight(lineSplit[5].Trim(), ref isCorrect);
+                decimal price = 0, weight = 0;
+                if (isCorrect)
+                {
+                    price = Convert.ToDecimal(lineSplit[3].Trim());
+                    weight = Convert.ToDecimal(lineSplit[5].Trim());
+                }
+                string[] parameters;
                 if (!lineSplit[7].Contains('·'))
                 {
+
+                    ErrorChecker.CheckMeatType(lineSplit[7].Trim(), ref isCorrect);
+                    ErrorChecker.CheckMeatCategory(lineSplit[9].Trim(), ref isCorrect);
                     string meatType = (lineSplit[7].Trim());
                     string meatCategory = (lineSplit[9].Trim());
-                    Storage.Append(new Meat(name, price, weight, meatType, meatCategory));
+                    if (isCorrect)
+                    {
+                        Storage.Append(new Meat(name, price, weight, meatType, meatCategory));
+                    }
+                    else
+                    {
+                        parameters = new string[] { lineSplit[1].Trim(), lineSplit[3].Trim(), lineSplit[5].Trim(), lineSplit[7].Trim(), lineSplit[9].Trim() };
+                        WriteLog(parameters);
+                    }
+
                 }
                 else if (!lineSplit[11].Contains('·'))
                 {
                     string date = lineSplit[11].Trim();
-                    string tempDay = Convert.ToString(date[0]);
-                    tempDay += date[1];
-                    int day = Convert.ToInt32(tempDay);
+                    ErrorChecker.CheckDate(date, ref isCorrect);
 
-                    string tempMonth = Convert.ToString(date[3]);
-                    tempMonth += date[4];
-                    int month = Convert.ToInt32(tempMonth);
+                    if (isCorrect)
+                    {
+                        DateTime dt = DateTime.Parse(date);
+                        Storage.Append(new Dairy(name, price, weight, dt));
+                    }
+                    else
+                    {
+                        parameters = new string[] { lineSplit[1].Trim(), lineSplit[3].Trim(), lineSplit[5].Trim(), lineSplit[11].Trim() };
+                        WriteLog(parameters);
+                    }
 
-                    string tempYear = Convert.ToString(date[6]);
-                    tempYear += date[7];
-                    tempYear += date[8];
-                    tempYear += date[9];
-                    int year = Convert.ToInt32(tempYear);
-                    Storage.Append(new Dairy(name, price, weight, new DateTime(year, month, day)));
                 }
                 else if (lineSplit[7].Contains('·') && lineSplit[11].Contains('·'))
                 {
-                    Storage.Append(new Product(name, price, weight));
+
+                    if (isCorrect)
+                    {
+                        Storage.Append(new Product(name, price, weight));
+                    }
+                    else
+                    {
+                        parameters = new string[] { lineSplit[1].Trim(), lineSplit[3].Trim(), lineSplit[5].Trim() };
+                        WriteLog(parameters);
+                    }
                 }
             }
         }
@@ -88,6 +120,25 @@ class FileWorker
                     streamWriter.Write(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-15} | {5,-18} |", product.Name, product.price, product.weight, "··········", "···············", "··················"));
                 }
                 streamWriter.WriteLine();
+            }
+        }
+    }
+
+    private static void WriteLog(string[] parameters)
+    {
+        using (StreamWriter streamWriter = new(PathToLog, true))
+        {
+            if (parameters.Length == 3)
+            {
+                streamWriter.WriteLine(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-15} | {5,-18} | {6,-18} | ", parameters[0], parameters[1], parameters[2], "··········", "···············", "··················", DateTime.Now));
+            }
+            else if (parameters.Length == 4)
+            {
+                streamWriter.WriteLine(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-15} | {5,-18} | {6,-18} |", parameters[0], parameters[1], parameters[2], "··········", "···············", parameters[3], DateTime.Now));
+            }
+            else if (parameters.Length == 5)
+            {
+                streamWriter.WriteLine(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-15} | {5,-18} | {6,-18} |", parameters[0], parameters[1], parameters[2], parameters[3], parameters[4], "··················", DateTime.Now));
             }
         }
     }
