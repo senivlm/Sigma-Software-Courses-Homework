@@ -8,9 +8,9 @@ using System.Text;
 // 5. Знайти споживача, який не використовував електроенергію. (class Consumer, method FindExempt)
 // 6. Видрукувати інформацію про те, скільки днів пройшло з моменту останнього зняття показу лічильника до поточної дати. (class FileWorker, method OutputInFileDifferenceInDates)
 class Program
-{
+{// У main створювати колекцію і т.д. поганий тон. Треба думати повністю в стилі ООП
     static void Main()
-    {
+    {//try-блоки мають стати звичкою, як чищення зубів)
         Console.OutputEncoding = UTF8Encoding.UTF8;
 
         int number = UserInterface.GetNumberOfConsumers();
