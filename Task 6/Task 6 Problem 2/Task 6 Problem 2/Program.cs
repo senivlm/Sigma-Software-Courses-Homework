@@ -7,6 +7,7 @@ class Program
         TextWorker fileWorker = new TextWorker("..\\..\\..\\data\\");
         fileWorker.ReadFromFile();
         fileWorker.SplitText();
+        //Ім'я файлу краще передавати як параметр
         fileWorker.WritoToFile();
         fileWorker.FindWords();
     }
