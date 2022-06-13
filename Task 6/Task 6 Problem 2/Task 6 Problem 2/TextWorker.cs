@@ -11,7 +11,7 @@
         get { return _path; }
         set { _path = value; }
     }
-
+// за умовою задачі зливати все в одну стрічку не можна
     private string Text
     {
         get { return _text; }
@@ -73,7 +73,7 @@
         Text = res;
     }
     public void FindWords() // rework
-    {
+    {// слова будуть зі знаками пунктуації
         string[] textSplit = Text.Split();
         string longest = "", shortest = "Pneumonoultramicroscopicsilicovolcanoconiosis";
         bool output = false;
@@ -83,6 +83,7 @@
             textSplit[i] = new string (textSplit[i].Where(c => !char.IsPunctuation(c)).ToArray());
             if (textSplit[i].Length > longest.Length) { longest = textSplit[i]; }
             if (textSplit[i].Length < shortest.Length) { shortest = textSplit[i]; }
+            //використовуйте if (output ) 
             if (output == true) 
             { 
                 Console.WriteLine($"Найдовше слово: {longest} | Найкоротше слово: {shortest}");
