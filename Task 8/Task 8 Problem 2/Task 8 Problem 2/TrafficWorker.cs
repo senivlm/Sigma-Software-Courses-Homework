@@ -92,7 +92,7 @@
                     }
                 }
                 KeyValuePair<TimeOnly, TimeOnly> kvpTT = new(hour[indexStart], hour[indexEnd]);
-                KeyValuePair<KeyValuePair<TimeOnly, TimeOnly>, int> kvpTI = new(kvpTT, max);
+                KeyValuePair<KeyValuePair<TimeOnly, TimeOnly>, int> kvpTI = new(kvpTT, ++max);
                 visitors.Add(_visitRecords[i].IP, kvpTI);
             }
         }

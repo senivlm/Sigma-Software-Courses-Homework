@@ -6,6 +6,7 @@
 // найбільш популярний відрізок часу довжиною в одну годину. (class TrafficWorker, method GetMostPopularHourVisitor)
 // 2. Знайдіть також найбільш популярний відрізок часу в добі довжиною одну годину в цілому для сайту. (class TrafficWorker, method GetMostPopularHour)
 // 3. Продумайте, як оптимально здійснити повторювану дію для різних даних.
+// Output in data folder
 public static class Program
 {
     public static void Main()
@@ -21,7 +22,10 @@ public static class Program
         var MostPopularDayVisitor = trafficWorker.GetMostPopularDayVisitor();
         FileWorker.WriteMostPopularDayVisitor(MostPopularDayVisitor, path, "MostPopularDayVisitor.txt");
 
-        var GetMostPopularHourVisitor = trafficWorker.GetMostPopularHourVisitor();
-        FileWorker.GetMostPopularHourVisitor(GetMostPopularHourVisitor, path, "MostPopularHourVisitor.txt");
+        var MostPopularHourVisitor = trafficWorker.GetMostPopularHourVisitor();
+        FileWorker.WriteMostPopularHourVisitor(MostPopularHourVisitor, path, "MostPopularHourVisitor.txt");
+
+        var MostPopularHour = trafficWorker.GetMostPopularHour();
+        FileWorker.WriteMostPopularHour(MostPopularHour, path, "MostPopularhour.txt");
     }
 }

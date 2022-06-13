@@ -28,7 +28,7 @@
         using (StreamReader streamReader = new StreamReader(path + filename))
         {
             string surname = "", date = "";
-            int apartmentNumber = 0, indicator = 0;
+            int apartmentNumber = 0, indicator = 0, num = 0;
             while (!streamReader.EndOfStream)
             {
                 string[] line = streamReader.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
@@ -42,6 +42,7 @@
                     {
                         apartmentNumber = Convert.ToInt32(line[i+1]);
                         consumers.Add(new Consumer(surname, apartmentNumber));
+                        num++;
                     }
                     if (line[i] == "показника:")
                     {
@@ -51,7 +52,7 @@
                     {
                         indicator = Convert.ToInt32(line[i+1]);
                         DateTime dateTime = DateTime.Parse(date);
-                        consumers[apartmentNumber-1].AddMetering(new Metering(indicator, dateTime));
+                        consumers[num-1].AddMetering(new Metering(indicator, dateTime));
                     }
                 }
             }
