@@ -8,7 +8,7 @@ using System.Text;
 // 5. Знайти споживача, який не використовував електроенергію. (class Consumer, method FindExempt)
 // 6. Видрукувати інформацію про те, скільки днів пройшло з моменту останнього зняття показу лічильника до поточної дати. (class FileWorker, method OutputInFileDifferenceInDates)
 class Program
-{
+{//У результуючому файлі немає дат замірів. але таблиця зроблена добротно
     static void Main()
     {
         Console.OutputEncoding = UTF8Encoding.UTF8;
