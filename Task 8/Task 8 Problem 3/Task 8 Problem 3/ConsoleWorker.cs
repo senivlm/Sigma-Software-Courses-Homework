@@ -1,10 +1,10 @@
 ﻿static class ConsoleWorker
 {
     #region Methods
-    public static void AllProductsOutput()
+    public static void AllProductsOutput(List<Product> listProduct)
     {
         OutputHeader();
-        foreach (Product product in Storage.listProduct)
+        foreach (Product product in listProduct)
         {
             if (product is Meat)
             {
@@ -25,10 +25,10 @@
         Console.WriteLine("----------------------------------------------------------------------------------");
     }
 
-    public static void AllMeatOutput()
+    public static void AllMeatOutput(List<Product> listProduct)
     {
         OutputHeader();
-        foreach (Product product in Storage.listProduct)
+        foreach (Product product in listProduct)
         {
             if (product is Meat)
             {
@@ -39,23 +39,37 @@
         Console.WriteLine("----------------------------------------------------------------------------------");
     }
 
-    public static void OutputProduct(int index)
+    public static void OutputProduct(List<Product> listProduct, int index) // need to optimize
     {
         OutputHeader();
-        if (Storage.listProduct[index] is Meat)
+        if (listProduct[index] is Meat)
         {
-            Meat p = Storage.listProduct[index] as Meat;
+            Meat p = listProduct[index] as Meat;
             Console.WriteLine(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-15} | {5,-18} |", p.Name, p.price, p.weight, p.GetMeatType(), p.GetCategory(), "··················"));
         }
-        else if (Storage.listProduct[index] is Dairy)
+        else if (listProduct[index] is Dairy)
         {
-            Dairy p = Storage.listProduct[index] as Dairy;
+            Dairy p = listProduct[index] as Dairy;
             Console.WriteLine(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-15} | {5,-18} |", p.Name, p.price, p.weight, "··········", "···············", p.expDate.ToString("dd/MM/yyyy")));
         }
         else
         {
-            Console.WriteLine(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-15} | {5,-18} |", Storage.listProduct[index].Name, Storage.listProduct[index].price, Storage.listProduct[index].weight, "··········", "···············", "··················"));
+            Console.WriteLine(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-15} | {5,-18} |", listProduct[index].Name, listProduct[index].price, listProduct[index].weight, "··········", "···············", "··················"));
         }
+    }
+
+    public static void ListsOutput()
+    {
+        Console.WriteLine("-------------------------");
+        Console.WriteLine(string.Format("| {0,-15} | {1,-3} |", "Назва", "#"));
+        Console.WriteLine("-------------------------");
+        var dictionary = Storage.GetDictionary();
+
+        foreach(var kvp in dictionary)
+        {
+            Console.WriteLine(String.Format("| {0,-15} | {1,-3} |", kvp.Key, kvp.Value.Count));
+        }
+        Console.WriteLine("-------------------------");
     }
 
     public static void LogOutput(List<string[]> parametersList)

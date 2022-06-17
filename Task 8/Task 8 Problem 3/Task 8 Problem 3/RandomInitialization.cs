@@ -1,7 +1,7 @@
 ﻿static class RandomInitialization
 {
     #region Methods
-    public static void RandomProducts(int amount)
+    public static void RandomProducts(string listName, int amount)
     {
         Random random = new Random();
         string[] namesProduct = { "Консерви", "Макарони", "Рис", "Цукор", "Сіль", "Кава", "Мед", "Борошно", "Спеції" };
@@ -14,7 +14,7 @@
             {
                 case 0:
                     {
-                        Storage.Append(new Product(namesProduct[random.Next(namesProduct.Length)], random.Next(20, 100), random.Next(100, 2001)));
+                        Storage.Append(listName, new Product(namesProduct[random.Next(namesProduct.Length)], random.Next(20, 100), random.Next(100, 2001)));
                         break;
                     }
                 case 1:
@@ -35,13 +35,13 @@
                             case 2: ct = Category.Pork; break;
                             case 3: ct = Category.Chicken; break;
                         }
-                        Storage.Append(new Meat(namesMeat[random.Next(namesMeat.Length)], random.Next(20, 100), random.Next(100, 2001), mt, ct));
+                        Storage.Append(listName, new Meat(namesMeat[random.Next(namesMeat.Length)], random.Next(20, 100), random.Next(100, 2001), mt, ct));
                         break;
                     }
                 case 2:
                     {
                         DateTime dt = DateTime.Now.AddDays(random.Next(181)); // from 15 days to 6 month
-                        Storage.Append(new Dairy(namesDairy[random.Next(namesDairy.Length)], random.Next(20, 100), random.Next(100, 2001), dt));
+                        Storage.Append(listName, new Dairy(namesDairy[random.Next(namesDairy.Length)], random.Next(20, 100), random.Next(100, 2001), dt));
                         break;
                     }
             }

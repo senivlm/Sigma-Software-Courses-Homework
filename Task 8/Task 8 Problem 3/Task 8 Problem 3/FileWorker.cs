@@ -3,7 +3,7 @@ class FileWorker
 {
     #region Variables
     private string _path;
-    public const string PathToData = "..\\..\\..\\data\\products.txt";
+    public const string Path = "..\\..\\..\\data\\product lists\\";
     public const string PathToLog = "..\\..\\..\\data\\logs.txt";
     #endregion
 
@@ -15,8 +15,14 @@ class FileWorker
     #endregion
 
     #region Methods
-    public void ReadDataFromFile()
+    public void ReadDataFromFile(string listName)
     {
+        if (!File.Exists(_path))
+        {
+            var file = File.Create(_path);
+            file.Close();
+        }
+
         using (StreamReader streamReader = new StreamReader(_path))
         {
             // Skip first three lines
@@ -51,7 +57,7 @@ class FileWorker
                     string meatCategory = (lineSplit[9].Trim());
                     if (isCorrect)
                     {
-                        Storage.Append(new Meat(name, price, weight, meatType, meatCategory));
+                        Storage.Append(listName, new Meat(name, price, weight, meatType, meatCategory));
                     }
                     else
                     {
@@ -68,7 +74,7 @@ class FileWorker
                     if (isCorrect)
                     {
                         DateTime dt = DateTime.Parse(date);
-                        Storage.Append(new Dairy(name, price, weight, dt));
+                        Storage.Append(listName, new Dairy(name, price, weight, dt));
                     }
                     else
                     {
@@ -82,7 +88,7 @@ class FileWorker
 
                     if (isCorrect)
                     {
-                        Storage.Append(new Product(name, price, weight));
+                        Storage.Append(listName, new Product(name, price, weight));
                     }
                     else
                     {
@@ -93,14 +99,14 @@ class FileWorker
             }
         }
     }
-    public void WriteDataToFile()
+    public void WriteDataToFile(List<Product> listProduct)
     {
         using (StreamWriter streamWriter = new(_path))
         {
             streamWriter.WriteLine("----------------------------------------------------------------------------------");
             streamWriter.WriteLine(string.Format("| {0,-10} | {1,-5:F1} | {2,-5} | {3,-10} | {4,-15} | {5,-18} |", "Назва", "Ціна", "Вага", "Сорт мяса", "Вид мяса", "Термін придатності"));
             streamWriter.WriteLine("----------------------------------------------------------------------------------");
-            foreach (Product product in Storage.listProduct)
+            foreach (Product product in listProduct)
             {
                 if (product is Meat)
                 {

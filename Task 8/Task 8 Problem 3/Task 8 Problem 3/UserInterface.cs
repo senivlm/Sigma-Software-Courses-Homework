@@ -1,20 +1,63 @@
 ﻿static class UserInterface
 {
+    private static string name = "Основний"; // working list name
+    
     #region Methods
-    public static void Menu()
+    public static void MainMenu()
     {
-        Console.WriteLine("Перелік функцій.");
+        Console.WriteLine("Робота з списками продуктів.");
+        Console.WriteLine("1. Створити новий список продуктів");
+        Console.WriteLine("2. Вивести створені списки товарів");
+        Console.WriteLine("3. Порівняти списки товарів");
+        Console.WriteLine("4. Перейти до роботи з списком");
+        
+        Console.Write("\nВиберіть функцію: ");
+        int input = Convert.ToInt32(Console.ReadLine());
+        Console.Clear();
+        switch (input)
+        {
+            case 1: AddListProducts(); break;
+            case 2: ListsOutput(); break;
+            case 3: break;
+            case 4: WorkWithList(); break;
+        }
+    }
+    private static void ListsOutput()
+    {
+        ConsoleWorker.ListsOutput();
+        BackToMainMenu();
+    }
+    private static void AddListProducts()
+    {
+        Console.Write("Введіть назву списку: ");
+        string name = Console.ReadLine();
+        Storage.AddListProducts(name);
+        BackToMainMenu();
+    }
+
+    private static void WorkWithList() //!
+    {
+        Console.Write("Введіть назву списку: ");
+        name = Console.ReadLine();
+        Console.Clear();
+        ListMenu();
+    }
+
+    private static void ListMenu()
+    {
+        Console.WriteLine($"Перелік функцій для листу \"{name}\":");
         Console.WriteLine("Робота з файлами.");
         Console.WriteLine("1. Загрузити дані з файлу");
         Console.WriteLine("2. Зберегти дані в основний файл");
         Console.WriteLine("3. Виправити дані в журналі помилок");
-        Console.WriteLine("\nРобота із завантаженими даними.");
+        Console.WriteLine($"Робота із завантаженими даними в листі.");
         Console.WriteLine("4. Наповнення інформацією даних у режимі діалогу з користувачем");
         Console.WriteLine("5. Наповнення інформацією даних шляхом ініціалізації");
         Console.WriteLine("6. Виведення повної інформації про всі товари");
         Console.WriteLine("7. Виведення всіх мясних продуктів");
         Console.WriteLine("8. Змінити ціну для всіх товарів на заданий відсоток");
         Console.WriteLine("9. Переглянути або змінити дані товару за індексом");
+        Console.WriteLine("10. Повернутися до головного меню");
 
         Console.Write("\nВиберіть функцію: ");
         int input = Convert.ToInt32(Console.ReadLine());
@@ -30,13 +73,13 @@
             case 7: AllMeatOutput(); break;
             case 8: ChangeValueAllProducts(); break;
             case 9: ChangeProductField(); break;
-
+            case 10: MainMenu(); break;
         }
     }
     
     private static void FillStorageFromFile()
     {
-        Console.WriteLine("1. Загрузити дані з основного файлу");
+        Console.WriteLine($"1. Загрузити дані з основного файлу");
         Console.WriteLine("2. Загрузити дані з свого файлу");
         Console.Write("Виберіть: ");
         int input = Convert.ToInt32(Console.ReadLine());
@@ -49,10 +92,10 @@
         Console.WriteLine("Товари успішно додані!");
         BackToMenu();
     }
-    private static void FillFromMainFile()
+    private static void FillFromMainFile() // створювати файл, пустий
     {
-        FileWorker fileWorker = new(FileWorker.PathToData);
-        fileWorker.ReadDataFromFile();
+        FileWorker fileWorker = new(FileWorker.Path + name + ".txt");
+        fileWorker.ReadDataFromFile(name);
     }
     private static void FillFromCustomFile()
     {
@@ -81,14 +124,13 @@
             }
         }
         FileWorker fileWorker = new(path);
-        fileWorker.ReadDataFromFile();
+        fileWorker.ReadDataFromFile(name);
     }
 
     private static void SaveStorageToFile()
     {
-
-        FileWorker fileWorker = new("..\\..\\..\\data\\products.txt");
-        fileWorker.WriteDataToFile();
+        FileWorker fileWorker = new(FileWorker.Path + name + ".txt");
+        fileWorker.WriteDataToFile(Storage.GetListProducts(name));
         Console.WriteLine("Дані успішно збережено!");
         BackToMenu();
     }
@@ -136,7 +178,7 @@
                     Console.WriteLine("Доступні види мяса: Баранина, Телятина, Свинина, Курятина.");
                     Console.Write("Введіть новий вид: ");
                     string meatCategory = Console.ReadLine();
-                    Storage.Append(new Meat(name, price, weight, meatType, meatCategory));
+                    Storage.Append(name, new Meat(name, price, weight, meatType, meatCategory));
                 }
                 else if (parametersList[i].Length == 5)
                 {
@@ -144,11 +186,11 @@
                     Console.Write("Введіть нову дату: ");
                     string dateD = Console.ReadLine();
                     DateTime dtD = DateTime.Parse(dateD);
-                    Storage.Append(new Dairy(name, price, weight, dtD));
+                    Storage.Append(name, new Dairy(name, price, weight, dtD));
                 }
                 else
                 {
-                    Storage.Append(new Product(name, price, weight));
+                    Storage.Append(name, new Product(name, price, weight));
                 }
             }
         }
@@ -168,7 +210,7 @@
         int weight = Convert.ToInt32(Console.ReadLine());
         switch (input)
         {
-            case 1: Storage.Append(new Product(name, price, weight)); break;
+            case 1: Storage.Append(name, new Product(name, price, weight)); break;
             case 2: GetMeatInDialogue(name, price, weight); break;
             case 3: GetDairyInDialogue(name, price, weight); break;
         }
@@ -195,21 +237,21 @@
             case 3: category = Category.Pork; break;
             case 4: category = Category.Chicken; break;
         }
-        Storage.Append(new Meat(name, price, weight, type, category));
+        Storage.Append(name, new Meat(name, price, weight, type, category));
     }
     private static void GetDairyInDialogue(string name, int price, int weight)
     {
         Console.WriteLine("Введіть термін придатності.");
         string date = Console.ReadLine();
         DateTime dt = DateTime.Parse(date);
-        Storage.Append(new Dairy(name, price, weight, dt));
+        Storage.Append(name, new Dairy(name, price, weight, dt));
     }
     
     private static void AddRandomProducts()
     {
         Console.Write("Введіть кількість товарів, яку хочете додати: ");
         int amount = Convert.ToInt32(Console.ReadLine());
-        RandomInitialization.RandomProducts(amount);
+        RandomInitialization.RandomProducts(name, amount);
         Console.Clear();
         Console.WriteLine("Товари в кількості {0} були успішно сгенеровані!", amount);
         BackToMenu();
@@ -217,24 +259,26 @@
    
     private static void AllProductsOutput()
     {
-        ConsoleWorker.AllProductsOutput();
+        ConsoleWorker.AllProductsOutput(Storage.GetListProducts(name));
         BackToMenu();
     }
 
     private static void AllMeatOutput()
     {
-        ConsoleWorker.AllMeatOutput();
+        ConsoleWorker.AllProductsOutput(Storage.GetListProducts(name));
         BackToMenu();
     }
     
     private static void ChangeValueAllProducts()
     {
+        var listProduct = Storage.GetListProducts(name);
         Console.Write("Введіть на який відсоток змінити ціну: ");
         decimal percent = decimal.Parse(Console.ReadLine());
-        for (int i = 0; i < Storage.listProduct.Count; i++)
+        for (int i = 0; i < listProduct.Count; i++)
         {
-            Storage.listProduct[i].ChangeValue(percent);
+            listProduct[i].ChangeValue(percent);
         }
+        Storage.SetListProducts(name, listProduct);
         Console.Clear();
         Console.WriteLine("Ціни всіх продуктів успішно змінені на {0}%!", percent);
         BackToMenu();
@@ -248,13 +292,13 @@
         int choose = Convert.ToInt32(Console.ReadLine());
         Console.Write("Введіть індекс товару: ");
         int index = Convert.ToInt32(Console.ReadLine());
-
+        List<Product> listProduct = Storage.GetListProducts(name);
         switch (choose)
         {
             case 1:
                 {
                     Console.Clear();
-                    ConsoleWorker.OutputProduct(index);
+                    ConsoleWorker.OutputProduct(listProduct, index);
                     BackToMenu();
                     break;
                 }
@@ -264,12 +308,12 @@
                     Console.WriteLine("1. Змінити назву товару");
                     Console.WriteLine("2. Змінити ціну товару");
                     Console.WriteLine("3. Змінити вагу товару");
-                    if (Storage.listProduct[index] is Meat)
+                    if (listProduct[index] is Meat)
                     {
                         Console.WriteLine("4. Змінити сорт мяса");
                         Console.WriteLine("5. Змінити вид мяса");
                     }
-                    else if (Storage.listProduct[index] is Dairy)
+                    else if (listProduct[index] is Dairy)
                     {
                         Console.WriteLine("4. Змінити термін придатності");
                     }
@@ -279,25 +323,25 @@
                     {
                         case 1:
                             Console.WriteLine("Введіть нову назву: ");
-                            Storage.listProduct[index].Name = Console.ReadLine(); break;
+                            listProduct[index].Name = Console.ReadLine(); break;
                         case 2:
                             Console.WriteLine("Введіть нову ціну: ");
-                            Storage.listProduct[index].price = Convert.ToInt32(Console.ReadLine()); break;
+                            listProduct[index].price = Convert.ToInt32(Console.ReadLine()); break;
                         case 3:
                             Console.WriteLine("Введіть нову вагу: ");
-                            Storage.listProduct[index].weight = Convert.ToInt32(Console.ReadLine()); break;
+                            listProduct[index].weight = Convert.ToInt32(Console.ReadLine()); break;
                         case 4:
-                            if (Storage.listProduct[index] is Meat)
+                            if (listProduct[index] is Meat)
                             {
-                                Meat meatT = Storage.listProduct[index] as Meat;
+                                Meat meatT = listProduct[index] as Meat;
                                 Console.Write("Виберіть сорт мяса (1 - перший сорт, 2 - другий сорт): ");
                                 int choiceMeatType = Convert.ToInt32(Console.ReadLine());
                                 meatT.SetMeatType(choiceMeatType);
                                 break;
                             }
-                            else if (Storage.listProduct[index] is Dairy)
+                            else if (listProduct[index] is Dairy)
                             {
-                                Dairy dairy = Storage.listProduct[index] as Dairy;
+                                Dairy dairy = listProduct[index] as Dairy;
                                 Console.WriteLine("Введіть термін придатності.");
                                 Console.Write("Рік: ");
                                 int year = Convert.ToInt32(Console.ReadLine());
@@ -309,12 +353,13 @@
                             }
                             break;
                         case 5:
-                            Meat meatC = Storage.listProduct[index] as Meat;
+                            Meat meatC = listProduct[index] as Meat;
                             Console.Write("Виберіть тип мяса (1 - баранина, 2 - телятина, 3 - свинина, 4 - курятина): ");
                             int choiceCategory = Convert.ToInt32(Console.ReadLine());
                             meatC.SetCategory(choiceCategory);
                             break;
                     }
+                    Storage.SetListProducts(name, listProduct);
                     break;
                 }
         }
@@ -326,7 +371,15 @@
         Console.Write("Нажміть будь-яку клавішу, щоб перейти в меню...");
         Console.ReadKey();
         Console.Clear();
-        Menu();
+        ListMenu();
+    }
+
+    private static void BackToMainMenu()
+    {
+        Console.Write("Нажміть будь-яку клавішу, щоб перейти в меню...");
+        Console.ReadKey();
+        Console.Clear();
+        MainMenu();
     }
 
     #endregion
