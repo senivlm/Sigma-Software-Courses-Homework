@@ -3,7 +3,8 @@ class FileWorker
 {
     #region Variables
     private string _path;
-    public const string Path = "..\\..\\..\\data\\product lists\\";
+    public const string PathToData = "..\\..\\..\\data\\";
+    public const string PathToListFolder = "..\\..\\..\\data\\product lists\\";
     public const string PathToLog = "..\\..\\..\\data\\logs.txt";
     #endregion
 
@@ -101,6 +102,12 @@ class FileWorker
     }
     public void WriteDataToFile(List<Product> listProduct)
     {
+        if (!File.Exists(_path))
+        {
+            var file = File.Create(_path);
+            file.Close();
+        }
+
         using (StreamWriter streamWriter = new(_path))
         {
             streamWriter.WriteLine("----------------------------------------------------------------------------------");

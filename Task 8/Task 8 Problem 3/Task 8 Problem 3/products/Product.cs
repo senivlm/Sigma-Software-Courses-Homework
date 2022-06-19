@@ -41,5 +41,10 @@
     {
         price += price * (percent/100);
     }
+
+    public virtual int GetHashCode()
+    {
+        return Name.GetHashCode()^price.GetHashCode()^weight.GetHashCode();
+    }
     #endregion
 }

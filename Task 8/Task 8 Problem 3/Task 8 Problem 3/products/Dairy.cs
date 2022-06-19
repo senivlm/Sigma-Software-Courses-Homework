@@ -35,5 +35,10 @@
     {
         price += price * (percent/100);
     }
+
+    public override int GetHashCode()
+    {
+        return Name.GetHashCode()^price.GetHashCode()^weight.GetHashCode()^expDate.GetHashCode();
+    }
     #endregion
 }

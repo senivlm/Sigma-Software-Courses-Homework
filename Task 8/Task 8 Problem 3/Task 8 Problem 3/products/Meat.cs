@@ -104,5 +104,9 @@ sealed class Meat : Product
     {
         price += price * (percent/100);
     }
+    public override int GetHashCode()
+    {
+        return Name.GetHashCode()^price.GetHashCode()^weight.GetHashCode()^meatType.GetHashCode()^meatCategory.GetHashCode();
+    }
     #endregion
 }

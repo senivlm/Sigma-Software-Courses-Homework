@@ -8,8 +8,10 @@
         Console.WriteLine("Робота з списками продуктів.");
         Console.WriteLine("1. Створити новий список продуктів");
         Console.WriteLine("2. Вивести створені списки товарів");
-        Console.WriteLine("3. Порівняти списки товарів");
-        Console.WriteLine("4. Перейти до роботи з списком");
+        Console.WriteLine("3. Товари є в першому складі і немає в другому.");
+        Console.WriteLine("4. Товари, які є спільними в обох складах.");
+        Console.WriteLine("5. Спільний список товарів, які є на обох складах, без повторів елементів.");
+        Console.WriteLine("6. Перейти до роботи з списком");
         
         Console.Write("\nВиберіть функцію: ");
         int input = Convert.ToInt32(Console.ReadLine());
@@ -18,9 +20,49 @@
         {
             case 1: AddListProducts(); break;
             case 2: ListsOutput(); break;
-            case 3: break;
-            case 4: WorkWithList(); break;
+            case 3: GetExclusive(); break;
+            case 4: GetCommon(); break;
+            case 5: GetMerged(); break;
+            case 6: WorkWithList(); break;
         }
+    }
+    
+    private static void GetExclusive()
+    {
+        Console.Write("Введіть назву першого списку: ");
+        string name1 = Console.ReadLine();
+
+        Console.Write("Введіть назву другого списку: ");
+        string name2 = Console.ReadLine();
+
+        FileWorker fileWorker = new(FileWorker.PathToData + "Exclusive Output.txt");
+        fileWorker.WriteDataToFile(Storage.GetExclusive(name1, name2));
+        BackToMainMenu();
+    }
+
+    private static void GetCommon()
+    {
+        Console.Write("Введіть назву першого списку: ");
+        string name1 = Console.ReadLine();
+
+        Console.Write("Введіть назву другого списку: ");
+        string name2 = Console.ReadLine();
+
+        FileWorker fileWorker = new(FileWorker.PathToData + "Common Output.txt");
+        fileWorker.WriteDataToFile(Storage.GetCommon(name1, name2));
+        BackToMainMenu();
+    }
+    private static void GetMerged()
+    {
+        Console.Write("Введіть назву першого списку: ");
+        string name1 = Console.ReadLine();
+
+        Console.Write("Введіть назву другого списку: ");
+        string name2 = Console.ReadLine();
+
+        FileWorker fileWorker = new(FileWorker.PathToData + "Merged Output.txt");
+        fileWorker.WriteDataToFile(Storage.GetMerged(name1, name2));
+        BackToMainMenu();
     }
     private static void ListsOutput()
     {
@@ -94,7 +136,7 @@
     }
     private static void FillFromMainFile() // створювати файл, пустий
     {
-        FileWorker fileWorker = new(FileWorker.Path + name + ".txt");
+        FileWorker fileWorker = new(FileWorker.PathToListFolder + name + ".txt");
         fileWorker.ReadDataFromFile(name);
     }
     private static void FillFromCustomFile()
@@ -129,7 +171,7 @@
 
     private static void SaveStorageToFile()
     {
-        FileWorker fileWorker = new(FileWorker.Path + name + ".txt");
+        FileWorker fileWorker = new(FileWorker.PathToListFolder + name + ".txt");
         fileWorker.WriteDataToFile(Storage.GetListProducts(name));
         Console.WriteLine("Дані успішно збережено!");
         BackToMenu();
