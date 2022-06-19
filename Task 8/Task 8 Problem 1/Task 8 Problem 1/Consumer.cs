@@ -84,6 +84,11 @@
         }
         return exempts;
     }
+
+    public int GetHashCode()
+    {
+        return _surname.GetHashCode()^_apartmentNumber.GetHashCode();
+    }
     #endregion
 }
 class ConsumerList<Consumer> : List<Consumer>
@@ -92,7 +97,7 @@ class ConsumerList<Consumer> : List<Consumer>
     {
         for (int i = 0; i < b.Count; i++)
         {
-            if (!a.Contains(b[i]))
+            if (a.GetHashCode() != b.GetHashCode())
             {
                 a.Add(b[i]);
             }
@@ -102,11 +107,14 @@ class ConsumerList<Consumer> : List<Consumer>
 
     public static ConsumerList<Consumer> operator -(ConsumerList<Consumer> a, ConsumerList<Consumer> b)
     {
-        for (int i = 0; i < b.Count; i++)
+        foreach (Consumer consumer1 in a.ToList())
         {
-            if (a.Contains(b[i]))
+            foreach (Consumer consumer2 in b.ToList())
             {
-                a.Remove(b[i]);
+                if (consumer1.GetHashCode() == consumer2.GetHashCode())
+                {
+                    a.Remove(consumer1);
+                }
             }
         }
         return a;
