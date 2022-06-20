@@ -26,7 +26,10 @@
             FileWorker fileWorker = new(FileWorker.PathToPrices);
             fileWorker.WriteNewProductPrice(name);
         }
-        throw new Exception($"Для продукту \"{name}\" вказана некоректна ціна!");
+        else
+        {
+            throw new Exception($"Для продукту \"{name}\" вказана некоректна ціна!");
+        }
     }
     public static Dictionary<string, List<Product>> TotalProducts()
     {
