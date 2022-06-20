@@ -14,7 +14,7 @@ public static class Program
         Console.OutputEncoding = Encoding.UTF8; // Ukrainian symbols in console   
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance); // Ukrainian symbols in input from file
 
-        try
+        try // this code can be split into methods and moved to new classes
         {
             FileWorker pricesFile = new FileWorker(FileWorker.PathToPrices);
             pricesFile.LoadPricesForProducts();
@@ -33,17 +33,18 @@ public static class Program
             {
                 FileWorker result = new FileWorker("..\\..\\..\\data\\result.txt");
                 result.WriteTotalProducts(Storage.TotalProducts(), courseCode);
+                Console.Write("Програму виконано успішно, результат у файлі \"result.txt\"!");
             }
             else
             {
-                throw new Exception("The course code is invalid!");
+                throw new Exception($"Даного кода валюти в базі даних немає! ({courseCode})");
             }
-
-            Console.Write("Програму виконано успішно, результат у файлі \"result.txt\"!");
         }
         catch (Exception ex)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(ex.Message);
+            Console.ResetColor();
         }
     }
 }

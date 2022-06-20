@@ -11,10 +11,7 @@
         {
             return productsPrices[name];
         }
-        else
-        {
-            return null;
-        }
+        return null;
     }
 
     public static void GetProductPriceInDialog(string name) // this method can be moved to another class

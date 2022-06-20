@@ -1,2 +1,3 @@
-﻿1 USD - 29,6 UAH
-1 EUR - 31,08 UAH
+﻿1 EUR - 31,08 UAH
+
+1 USD - 29,6 UAH

@@ -2,6 +2,7 @@
 {
     private string _name;
     public List<Product> _ingredients;
+
     public string Name
     {
         get => _name;

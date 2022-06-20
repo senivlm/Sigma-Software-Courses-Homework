@@ -18,26 +18,30 @@
         }
         catch
         {
-            throw new Exception($"Деякі проблеми з шляхом до файлу! ({path})");
+            throw new Exception($"Деякі проблеми з шляхом до файлу! [{path}]");
         }
     }
     public void LoadPricesForProducts()
     {
         using (StreamReader pricesFile = new StreamReader(_path))
         {
-            while (!pricesFile.EndOfStream)
+            try
             {
-                try
+                while (!pricesFile.EndOfStream)
                 {
-                    string[] line = pricesFile.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                    string[] line;
+                    do
+                    {
+                        line = pricesFile.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                    } while (line.Count() == 0);
                     string name = line[0];
                     decimal price = decimal.Parse(line[2]);
                     Storage.productsPrices.Add(name, price);
                 }
-                catch (FormatException)
-                {
-                    throw new Exception($"Деякі проблеми з зчитуванням цін товарів!");
-                }
+            }
+            catch (FormatException)
+            {
+                throw new Exception($"Деякі проблеми зі зчитуванням цін товарів! [{_path}]");
             }
         }
     }
@@ -46,25 +50,37 @@
     {
         using (StreamReader dishesFile = new StreamReader(_path))
         {
-            while (!dishesFile.EndOfStream)
+            try
             {
-                string dishName = dishesFile.ReadLine();
-                List<Product> listProducts = new();
-                while (true && !dishesFile.EndOfStream)
+                while (!dishesFile.EndOfStream)
                 {
-                    string[] line = dishesFile.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
-                    if (line.Length == 0) { break; }
-                    listProducts.Add(new Product(line[0].Replace(",", ""), int.Parse(line[1].Replace("г", "").Replace("мл", ""))));
-                }
+                    string dishName;
+                    do
+                    {
+                        dishName = dishesFile.ReadLine();
+                    } while (dishName == "");
 
-                if (listProducts.Count() != 0)
-                {
-                    Storage.menu.Add(new Dish(dishName, listProducts));
+                    List<Product> listProducts = new();
+                    while (true && !dishesFile.EndOfStream)
+                    {
+                        string[] line = dishesFile.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                        if (line.Length == 0) { break; }
+                        listProducts.Add(new Product(line[0].Replace(",", ""), int.Parse(line[1].Replace("г", "").Replace("мл", ""))));
+                    }
+
+                    if (listProducts.Count() != 0)
+                    {
+                        Storage.menu.Add(new Dish(dishName, listProducts));
+                    }
+                    else
+                    {
+                        throw new Exception($"Інгредієнтів для блюда \"{dishName}\" не знайдено!");
+                    }
                 }
-                else
-                {
-                    throw new Exception($"Блюдо \"{dishName}\" не може містити 0 інгредієнтів!");
-                }
+            }
+            catch (FormatException)
+            {
+                throw new Exception($"Деякі проблеми зі зчитуванням блюд! [{_path}]");
             }
         }
     }
@@ -73,31 +89,35 @@
     {
         using (StreamReader pricesFile = new StreamReader(_path))
         {
-            while (!pricesFile.EndOfStream)
+            try
             {
-                try
+                while (!pricesFile.EndOfStream)
                 {
-                    string[] line = pricesFile.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                    string[] line;
+                    do
+                    {
+                        line = pricesFile.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                    } while (line.Count() == 0);
                     string name = line[1];
                     decimal price = decimal.Parse(line[3]);
                     Storage.courses.Add(name, price);
                 }
-                catch (FormatException)
-                {
-                    throw new Exception($"Деякі проблеми зі зчитуванням біжучого курсу валют!");
-                }
+            }
+            catch (FormatException)
+            {
+                throw new Exception($"Деякі проблеми зі зчитуванням біжучого курсу валют! [{_path}]");
             }
         }
     }
 
-    public void WriteTotalProducts(Dictionary<string, List<Product>> productsTotal, string courseCode)
+    public void WriteTotalProducts(Dictionary<string, List<Product>> productsTotal, string courseCode) // the calculation of parameters for the TOTAL can be made in the methods of the class Storage
     {
         using (StreamWriter streamWriter = new StreamWriter(_path))
         {
             int totalProductsNumber = 0, totalProductsWeight = 0;
             decimal totalProductsPrice = 0;
             streamWriter.WriteLine("----------------------------------------------------------------");
-            streamWriter.WriteLine(String.Format("| {0,-15} | {1,-3} | {2,-10} | {3,-23} |", "Назва продукту", " # ", "Вага/Об`єм", "Ціна"));
+            streamWriter.WriteLine(String.Format("| {0,-15} | {1,-3} | {2,-10} | {3,-23} |", "Назва продукту", "#", "Вага/Об`єм", "Ціна"));
             streamWriter.WriteLine("----------------------------------------------------------------");
             streamWriter.WriteLine(String.Format("| {0,-15} | {1,-3} | {2,-10} | {3,-10} | {4,-10} |", "", "", "г/мл", "UAH", courseCode));
             streamWriter.WriteLine("----------------------------------------------------------------");
