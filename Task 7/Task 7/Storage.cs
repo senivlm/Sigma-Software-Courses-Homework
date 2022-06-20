@@ -5,6 +5,7 @@
     #endregion
 
     #region Methods
+      // А де поділись всі методи?
     public static void Append(Product product)
     {
         listProduct.Add(product);
