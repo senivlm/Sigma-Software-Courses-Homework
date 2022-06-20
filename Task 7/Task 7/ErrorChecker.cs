@@ -14,9 +14,9 @@
             isCorrect = false;
         }
     }
-
+// мені виглядає зручнішим метод, який повертає bool. можна будувати логічні вирази.
     public static void CheckPrice(string price, ref bool isCorrect)
-    {
+    {//покажіть використання в групі!
         if (!decimal.TryParse(price, out _))
         {
             isCorrect = false;
