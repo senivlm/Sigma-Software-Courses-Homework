@@ -63,7 +63,7 @@
                     do
                     {
                         dishName = dishesFile.ReadLine();
-                    } while (dishName == "");
+                    } while (dishName.Count() == 0);
 
                     List<Product> listProducts = new();
                     while (true && !dishesFile.EndOfStream)
