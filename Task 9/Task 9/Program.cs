@@ -38,6 +38,8 @@ public static class Program
             {
                 throw new Exception("The course code is invalid!");
             }
+
+            Console.Write("Програму виконано успішно, результат у файлі \"result.txt\"!");
         }
         catch (Exception ex)
         {

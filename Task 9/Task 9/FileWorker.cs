@@ -18,7 +18,7 @@
         }
         catch
         {
-            throw new Exception($"Some problems with file path! ({path})");
+            throw new Exception($"Деякі проблеми з шляхом до файлу! ({path})");
         }
     }
     public void LoadPricesForProducts()
@@ -27,10 +27,17 @@
         {
             while (!pricesFile.EndOfStream)
             {
-                string[] line = pricesFile.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
-                string name = line[0];
-                decimal price = decimal.Parse(line[2]);
-                Storage.productsPrices.Add(name, price);
+                try
+                {
+                    string[] line = pricesFile.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                    string name = line[0];
+                    decimal price = decimal.Parse(line[2]);
+                    Storage.productsPrices.Add(name, price);
+                }
+                catch (FormatException)
+                {
+                    throw new Exception($"Деякі проблеми з зчитуванням цін товарів!");
+                }
             }
         }
     }
@@ -49,21 +56,36 @@
                     if (line.Length == 0) { break; }
                     listProducts.Add(new Product(line[0].Replace(",", ""), int.Parse(line[1].Replace("г", "").Replace("мл", ""))));
                 }
-                Storage.menu.Add(new Dish(dishName, listProducts));
+
+                if (listProducts.Count() != 0)
+                {
+                    Storage.menu.Add(new Dish(dishName, listProducts));
+                }
+                else
+                {
+                    throw new Exception($"Блюдо \"{dishName}\" не може містити 0 інгредієнтів!");
+                }
             }
         }
     }
-    
+
     public void LoadCourses()
     {
         using (StreamReader pricesFile = new StreamReader(_path))
         {
             while (!pricesFile.EndOfStream)
             {
-                string[] line = pricesFile.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
-                string name = line[1];
-                decimal price = decimal.Parse(line[3]);
-                Storage.courses.Add(name, price);
+                try
+                {
+                    string[] line = pricesFile.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                    string name = line[1];
+                    decimal price = decimal.Parse(line[3]);
+                    Storage.courses.Add(name, price);
+                }
+                catch (FormatException)
+                {
+                    throw new Exception($"Деякі проблеми зі зчитуванням біжучого курсу валют!");
+                }
             }
         }
     }

@@ -19,7 +19,8 @@
 
     public static void GetProductPriceInDialog(string name) // this method can be moved to another class
     {
-        Console.Write($"Введіть ціну для продукту \"{name}\": ");
+        Console.WriteLine($"Ціна для продукту \"{name}\" не була знайдена!");
+        Console.Write($"Введіть ціну за кілограм: ");
         if (decimal.TryParse(Console.ReadLine(), out decimal price))
         {
             productsPrices.Add(name, price);

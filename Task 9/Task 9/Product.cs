@@ -19,8 +19,36 @@
             }
         }
     }
-    public decimal Price { get; set; }
-    public int Weight { get; set; }
+    public decimal Price
+    {
+        get => _price;
+        set
+        {
+            if (value > 0)
+            {
+                _price = value;
+            }
+            else
+            {
+                throw new Exception($"Ціна продукту не може бути меншою або рівною нулю! ({_name} != {value}грн)");
+            }
+        }
+    }
+    public int Weight
+    {
+        get => _weight;
+        set
+        {
+            if (value > 0)
+            {
+                _weight = value;
+            }
+            else
+            {
+                throw new Exception($"Вага продукту не може бути меншою або рівною нулю! ({_name} != {value}г)");
+            }
+        }
+    }
 
     public Product(string name, int weight)
     {
