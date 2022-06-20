@@ -2,10 +2,10 @@
 {
     #region Methods
     public static void Menu()
-    {
+    {//Клас Console має  можливість задавати колір тексту та основи. Можна для краси використати.
         Console.WriteLine("Перелік функцій.");
         Console.WriteLine("Робота з файлами.");
-        Console.WriteLine("1. Загрузити дані з файлу");
+        Console.WriteLine("1. Загрузити дані з файлу");//по укр. завантажити
         Console.WriteLine("2. Зберегти дані в основний файл");
         Console.WriteLine("3. Виправити дані в журналі помилок");
         Console.WriteLine("\nРобота із завантаженими даними.");
@@ -30,7 +30,7 @@
             case 7: AllMeatOutput(); break;
             case 8: ChangeValueAllProducts(); break;
             case 9: ChangeProductField(); break;
-
+//реалізовуйте вітку default!
         }
     }
     
@@ -58,7 +58,7 @@
     {
         string path;
         while (true)
-        {
+        {//Користувач має вводити не екранований шлях
             Console.WriteLine("Введіть шлях по прикладу: D:\\Visual Studio Projects\\Task 7\\Task 7\\data\\products.txt");
             path = Console.ReadLine();
             if (File.Exists(path))
