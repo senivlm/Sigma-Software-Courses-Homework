@@ -75,6 +75,8 @@
     public static List<int> FindExempt(List<Consumer> consumers)
     {
         List<int> exempts = new List<int>();
+        
+        //Можна використовувати AddRange()
         for (int i = 0; i < consumers.Count; i++)
         {
             if (Consumer.GetDebt(consumers[i]) == 0)
@@ -96,7 +98,7 @@ class ConsumerList<Consumer> : List<Consumer>
     public static ConsumerList<Consumer> operator +(ConsumerList<Consumer> a, ConsumerList<Consumer> b)
     {
         for (int i = 0; i < b.Count; i++)
-        {
+        {// 
             if (a.GetHashCode() != b.GetHashCode())
             {
                 a.Add(b[i]);
@@ -106,7 +108,7 @@ class ConsumerList<Consumer> : List<Consumer>
     }
 
     public static ConsumerList<Consumer> operator -(ConsumerList<Consumer> a, ConsumerList<Consumer> b)
-    {
+    {//множини б краще підійшли
         foreach (Consumer consumer1 in a.ToList())
         {
             foreach (Consumer consumer2 in b.ToList())
