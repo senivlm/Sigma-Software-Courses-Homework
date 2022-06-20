@@ -1,10 +1,13 @@
 ﻿class FileWorker
 {
+    #region Variables
     private string _path;
     public const string PathToPrices = "..\\..\\..\\data\\Prices.txt";
     public const string PathToMenu = "..\\..\\..\\data\\Menu.txt";
     public const string PathToCourse = "..\\..\\..\\data\\Course.txt";
+    #endregion
 
+    #region Constructors
     public FileWorker(string path)
     {
         try
@@ -21,6 +24,9 @@
             throw new Exception($"Деякі проблеми з шляхом до файлу! [{path}]");
         }
     }
+    #endregion
+
+    #region Methods
     public void LoadPricesForProducts()
     {
         using (StreamReader pricesFile = new StreamReader(_path))
@@ -33,7 +39,7 @@
                     do
                     {
                         line = pricesFile.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
-                    } while (line.Count() == 0);
+                    } while (line.Length == 0);
                     string name = line[0];
                     decimal price = decimal.Parse(line[2]);
                     Storage.productsPrices.Add(name, price);
@@ -45,7 +51,6 @@
             }
         }
     }
-
     public void LoadDishesToMenu()
     {
         using (StreamReader dishesFile = new StreamReader(_path))
@@ -68,14 +73,11 @@
                         listProducts.Add(new Product(line[0].Replace(",", ""), int.Parse(line[1].Replace("г", "").Replace("мл", ""))));
                     }
 
-                    if (listProducts.Count() != 0)
-                    {
-                        Storage.menu.Add(new Dish(dishName, listProducts));
-                    }
-                    else
+                    if (listProducts.Count == 0)
                     {
                         throw new Exception($"Інгредієнтів для блюда \"{dishName}\" не знайдено!");
                     }
+                    Storage.menu.Add(new Dish(dishName, listProducts));
                 }
             }
             catch (FormatException)
@@ -84,7 +86,6 @@
             }
         }
     }
-
     public void LoadCourses()
     {
         using (StreamReader pricesFile = new StreamReader(_path))
@@ -97,7 +98,7 @@
                     do
                     {
                         line = pricesFile.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
-                    } while (line.Count() == 0);
+                    } while (line.Length == 0);
                     string name = line[1];
                     decimal price = decimal.Parse(line[3]);
                     Storage.courses.Add(name, price);
@@ -110,6 +111,13 @@
         }
     }
 
+    public void WriteNewProductPrice(string name)
+    {
+        using (StreamWriter streamWriter = new StreamWriter(_path, true))
+        {
+            streamWriter.WriteLine($"{name} - {Storage.productsPrices[name]} UAH");
+        }
+    }
     public void WriteTotalProducts(Dictionary<string, List<Product>> productsTotal, string courseCode) // the calculation of parameters for the TOTAL can be made in the methods of the class Storage
     {
         using (StreamWriter streamWriter = new StreamWriter(_path))
@@ -140,12 +148,5 @@
             streamWriter.WriteLine("----------------------------------------------------------------");
         }
     }
-
-    public void WriteNewProductPrice(string name)
-    {
-        using (StreamWriter streamWriter = new StreamWriter(_path, true))
-        {
-            streamWriter.WriteLine($"{name} - {Storage.productsPrices[name]} UAH");
-        }
-    }
+    #endregion
 }

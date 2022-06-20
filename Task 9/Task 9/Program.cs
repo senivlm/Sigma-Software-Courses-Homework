@@ -16,29 +16,27 @@ public static class Program
 
         try // this code can be split into methods and moved to new classes
         {
-            FileWorker pricesFile = new FileWorker(FileWorker.PathToPrices);
+            FileWorker pricesFile = new(FileWorker.PathToPrices);
             pricesFile.LoadPricesForProducts();
 
-            FileWorker dishesFile = new FileWorker(FileWorker.PathToMenu);
+            FileWorker dishesFile = new(FileWorker.PathToMenu);
             dishesFile.LoadDishesToMenu();
 
-            FileWorker courses = new FileWorker(FileWorker.PathToCourse);
+            FileWorker courses = new(FileWorker.PathToCourse);
             courses.LoadCourses();
 
             Console.Clear();
             Console.Write($"Виберіть валюту (USD, EUR): ");
             string courseCode = Console.ReadLine();
 
-            if (Storage.courses.ContainsKey(courseCode))
+            if (!Storage.courses.ContainsKey(courseCode))
             {
-                FileWorker result = new FileWorker("..\\..\\..\\data\\result.txt");
-                result.WriteTotalProducts(Storage.TotalProducts(), courseCode);
-                Console.Write("Програму виконано успішно, результат у файлі \"result.txt\"!");
+                throw new Exception($"Даного коду валюти в базі даних немає! ({courseCode})");
             }
-            else
-            {
-                throw new Exception($"Даного кода валюти в базі даних немає! ({courseCode})");
-            }
+
+            FileWorker result = new("..\\..\\..\\data\\result.txt");
+            result.WriteTotalProducts(Storage.TotalProducts(), courseCode);
+            Console.Write("Програму виконано успішно, результат у файлі \"result.txt\"!");
         }
         catch (Exception ex)
         {
