@@ -1,5 +1,6 @@
 ﻿class Buy
 {
+    public List<Product> listStorage, listPurchase;
     public int PurchaseAmount { 
         get 
         {
@@ -13,7 +14,7 @@
             decimal purchasePrice = 0;
             foreach (Product product in listPurchase)
             {
-                purchasePrice += product.price;
+                purchasePrice += product.Price;
             }
             return purchasePrice;
         }
@@ -25,13 +26,11 @@
             decimal purchaseWeight = 0;
             foreach (Product product in listPurchase)
             {
-                purchaseWeight += product.weight;
+                purchaseWeight += product.Weight;
             }
             return purchaseWeight;
         }
     }
-
-    public List<Product>? listStorage, listPurchase;
 
     public Buy()
     {
@@ -51,25 +50,28 @@
 
     public void StorageOutput()
     {
-        Console.WriteLine("-------------------------------");
-        Console.WriteLine(String.Format("| {0,0} | {1,-10} | {2,-5} | {3,-5}", "#", "Назва", "Ціна", "Вага"));
-        Console.WriteLine("-------------------------------");
+        HeaderOutput();
         for (int i = 0; i < listStorage.Count; i++)
         {
-            Console.WriteLine("| {0,0} | {1,-10} | {2,-5} | {3,-5}", i, listStorage[i].name, listStorage[i].price, listStorage[i].weight);
+            Console.WriteLine("| {0,0} | {1,-10} | {2,-5} | {3,-5} |", i, listStorage[i].Name, listStorage[i].Price, listStorage[i].Weight);
         }
-        Console.WriteLine("-------------------------------");
+        Console.WriteLine("----------------------------------");
     }
 
     public void PuchaseOutput()
     {
-        Console.WriteLine("-------------------------------");
-        Console.WriteLine(String.Format("| {0,0} | {1,-10} | {2,-5} | {3,-5}", "#", "Назва", "Ціна", "Вага"));
-        Console.WriteLine("-------------------------------");
+        HeaderOutput();
         for (int i = 0; i < listPurchase.Count; i++)
         {
-            Console.WriteLine("| {0,0} | {1,-10} | {2,-5} | {3,-5}", i, listPurchase[i].name, listPurchase[i].price, listPurchase[i].weight);
+            Console.WriteLine("| {0,0} | {1,-10} | {2,-5} | {3,-5} |", i, listPurchase[i].Name, listPurchase[i].Price, listPurchase[i].Weight);
         }
-        Console.WriteLine("-------------------------------");
+        Console.WriteLine("----------------------------------");
+    }
+
+    public static void HeaderOutput()
+    {
+        Console.WriteLine("----------------------------------");
+        Console.WriteLine(String.Format("| {0,0} | {1,-10} | {2,-5} | {3,-5} |", "#", "Назва", "Ціна", "Вага"));
+        Console.WriteLine("----------------------------------");
     }
 }

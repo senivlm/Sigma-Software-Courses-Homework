@@ -1,4 +1,4 @@
-﻿class Check
+﻿static class Check
 {
     public static void Purchase(Buy buy)
     {
