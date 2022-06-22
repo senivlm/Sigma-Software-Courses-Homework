@@ -85,7 +85,7 @@ class Matrix
         for (int i = 0; i < Rows - 1; i++)
         {
             for (int j = 0; j < Columns - 1; j++)
-                if ((_matrix[i, j] == _matrix[i, j + 1]) && (_matrix[i + 1, j] == _matrix[i + 1, j + 1]) && (_matrix[i, j] == _matrix[i + 1, j]) && (i + 1 < _matrix.Length) && (j + 1 < _matrix.Length))
+                if ((_matrix[i, j] == _matrix[i, j + 1]) && (_matrix[i + 1, j] == _matrix[i + 1, j + 1]) && (_matrix[i, j] == _matrix[i + 1, j]) && (i + 1 < Rows) && (j + 1 < Columns))
                 {
                     if (countTemp == 0)
                     {
