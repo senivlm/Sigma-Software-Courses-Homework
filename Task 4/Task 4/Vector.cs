@@ -2,7 +2,7 @@
 class Vector
 {
     #region Variables
-    public int[] arr;
+    private int[] _arr;
     #endregion
 
     #region Properties
@@ -10,9 +10,9 @@ class Vector
     {
         get
         {
-            if (index >= 0 && index < arr.Length)
+            if (index >= 0 && index < _arr.Length)
             {
-                return arr[index];
+                return _arr[index];
             }
             else
             {
@@ -21,7 +21,7 @@ class Vector
         }
         set
         {
-            arr[index] = value;
+            _arr[index] = value;
         }
     }
     #endregion
@@ -29,41 +29,45 @@ class Vector
     #region Constructors
     public Vector(int n)
     {
-        arr = new int[n];
+        if (n <= 0)
+        {
+            throw new Exception("Розмір матриці повинен бути більшим за нуль!");
+        }
+        _arr = new int[n];
     }
     #endregion
 
     #region Methods
     public void RandomInitialization(int a, int b)
     {
-        Random random = new Random();
-        for (int i = 0; i < arr.Length; i++)
+        Random random = new();
+        for (int i = 0; i < _arr.Length; i++)
         {
-            arr[i] = random.Next(a, b);
+            _arr[i] = random.Next(a, b);
         }
     }
 
-    public void InitShufle()
+    public void ShufleInitialization()
     {
-        for (int i = 0; i < arr.Length; i++)
+        for (int i = 0; i < _arr.Length; i++)
         {
-            arr[i] = i + 1;
+            _arr[i] = i + 1;
         }
-        Random random = new Random();
-        for (int i = 0; i < random.Next(arr.Length/2, arr.Length); i++)
+        Random random = new();
+        for (int i = 0; i < random.Next(_arr.Length/2, _arr.Length); i++)
         {
-            int random1 = random.Next(0, arr.Length);
-            int random2 = random.Next(0, arr.Length);
-            (arr[random1], arr[random2]) = (arr[random2], arr[random1]);
+            int random1 = random.Next(0, _arr.Length);
+            int random2 = random.Next(0, _arr.Length);
+            (_arr[random1], _arr[random2]) = (_arr[random2], _arr[random1]);
         }
     }
     
     public override string ToString()
     {
         string str = "";
-        for (int i = 0; i < arr.Length; i++)
+        for (int i = 0; i < _arr.Length; i++)
         {
-            str += arr[i] + " ";
+            str += _arr[i] + " ";
         }
         return str;
     }
@@ -73,7 +77,7 @@ class Vector
         bool palidrome = true;
         for (; (i != j) && (i < j); ++i, --j)
         {
-            if (arr[i] != arr[j])
+            if (_arr[i] != _arr[j])
             {
                 palidrome = false;
                 break;
@@ -84,18 +88,18 @@ class Vector
 
     public void ArrayReverse()
     {
-        for (int i = 0, j = (arr.Length - 1); (i != j) && (i < j); i++, j--)
+        for (int i = 0, j = (_arr.Length - 1); (i != j) && (i < j); i++, j--)
         {
-            (arr[j], arr[i]) = (arr[i], arr[j]);
+            (_arr[j], _arr[i]) = (_arr[i], _arr[j]);
         }
     }
 
     public int Sequence()
     {
         int count = 0, countTemp = 0, firstIndex = 0, firstIndexTemp = 0;
-        for (int i = 0; i < (arr.Length - 1); i++)
+        for (int i = 0; i < (_arr.Length - 1); i++)
         {
-            if (arr[i] == arr[i+1])
+            if ((_arr[i] == _arr[i + 1]) && (_arr[i + 1] < _arr.Length))
             {
                 if (countTemp == 0)
                 {
@@ -124,24 +128,24 @@ class Vector
 
         switch (pos)
         {
-            case IndexPos.First: pivot = arr[leftIndex]; break;                 // First element like pivot
-            case IndexPos.Last: pivot = arr[rightIndex]; break;                 // Last element like pivot
-            case IndexPos.Middle: pivot = arr[(leftIndex+rightIndex)/2]; break; // Middle element like pivot
+            case IndexPos.First: pivot = _arr[leftIndex]; break;                 // First element like pivot
+            case IndexPos.Last: pivot = _arr[rightIndex]; break;                 // Last element like pivot
+            case IndexPos.Middle: pivot = _arr[(leftIndex+rightIndex)/2]; break; // Middle element like pivot
         }
 
         while (i <= j)
         {
-            while (arr[i] < pivot)
+            while (_arr[i] < pivot)
             {
                 i++;
             }
-            while (arr[j] > pivot)
+            while (_arr[j] > pivot)
             {
                 j--;
             }
             if (i <= j)
             {
-                (arr[j], arr[i]) = (arr[i], arr[j]);
+                (_arr[j], _arr[i]) = (_arr[i], _arr[j]);
                 i++;
                 j--;
             }
