@@ -3,7 +3,7 @@
     #region Variables
     private string _surname;
     private int _apartmentNumber;
-    public const decimal price = 1.5m;
+    public const decimal Price = 1.5m;
     public List<Metering> meterings;
     #endregion
 
@@ -52,7 +52,7 @@
 
     public static decimal GetDebt(Consumer consumer)
     {
-        decimal debt = (consumer.GetMeteringIndicator(2) - consumer.GetMeteringIndicator(0)) * price;
+        decimal debt = (consumer.GetMeteringIndicator(2) - consumer.GetMeteringIndicator(0)) * Price;
         return debt;
     }
 

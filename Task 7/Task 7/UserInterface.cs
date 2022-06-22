@@ -5,7 +5,7 @@
     {
         Console.WriteLine("Перелік функцій.");
         Console.WriteLine("Робота з файлами.");
-        Console.WriteLine("1. Загрузити дані з файлу");
+        Console.WriteLine("1. Завантажити дані з файлу");
         Console.WriteLine("2. Зберегти дані в основний файл");
         Console.WriteLine("3. Виправити дані в журналі помилок");
         Console.WriteLine("\nРобота із завантаженими даними.");
@@ -30,14 +30,14 @@
             case 7: AllMeatOutput(); break;
             case 8: ChangeValueAllProducts(); break;
             case 9: ChangeProductField(); break;
-
+            default: throw new Exception("Індекс не відповідає ні одній з функцій!");
         }
     }
     
     private static void FillStorageFromFile()
     {
-        Console.WriteLine("1. Загрузити дані з основного файлу");
-        Console.WriteLine("2. Загрузити дані з свого файлу");
+        Console.WriteLine("1. Завантажити дані з основного файлу");
+        Console.WriteLine("2. Завантажити дані з свого файлу");
         Console.Write("Виберіть: ");
         int input = Convert.ToInt32(Console.ReadLine());
         Console.Clear();
