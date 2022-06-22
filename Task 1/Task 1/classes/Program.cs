@@ -13,7 +13,7 @@ namespace Task_1
         public static void Main()
         {
             Console.OutputEncoding = Encoding.UTF8;
-            Interface userInterface = new();
+            UserInterface userInterface = new();
             userInterface.StartUp();
         }
     }

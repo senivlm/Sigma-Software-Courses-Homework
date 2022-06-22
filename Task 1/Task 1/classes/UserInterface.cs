@@ -1,4 +1,4 @@
-﻿class Interface
+﻿class UserInterface
 {
     private Buy buy;
     public void StartUp()
