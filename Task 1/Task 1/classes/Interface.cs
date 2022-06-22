@@ -1,11 +1,13 @@
 ﻿class Interface
 {
+    private Buy buy;
     public void StartUp()
     {
         Buy.AddStorage(new Product("Цукор", 28, 1000));
         Buy.AddStorage(new Product("Хліб", 22, 350));
         Buy.AddStorage(new Product("Макарони", 97, 500));
         Buy.AddStorage(new Product("Сіль", 20, 350));
+        buy = new Buy();
         Menu();
     }
 
@@ -13,9 +15,10 @@
     {
         Console.WriteLine("Функції:");
         Console.WriteLine("1. Переглянути список товарів");
-        Console.WriteLine("2. Додати товар у кошик");
-        Console.WriteLine("3. Переглянути список покупок");
-        Console.WriteLine("4. Вивести чек");
+        Console.WriteLine("2. Переглянути список покупок");
+        Console.WriteLine("3. Додати товар у кошик");
+        Console.WriteLine("4. Видалити товар з кошику");
+        Console.WriteLine("5. Вивести чек");
         Console.Write("Виберіть функцію: ");
         try
         {
@@ -24,9 +27,10 @@
             switch (input)
             {
                 case 1: StorageOutput(); break;
-                case 2: AddProductToPurchases(); break;
-                case 3: PurchaseOutput(); break;
-                case 4: CheckOutput(); break;
+                case 2: PurchaseOutput(); break;
+                case 3: AddProductToPurchases(); break;
+                case 4: RemoveProductToPurchases(); break;
+                case 5: CheckOutput(); break;
                 default: throw new Exception("Введене число не відповідає номеру ні одній із функцій!");
             }
         }
@@ -49,25 +53,39 @@
         Buy.StorageOutput();
         Console.Write("Введіть індекс товару, який бажаєте додати у кошик: ");
         int index = Convert.ToInt32(Console.ReadLine());
-        if (Buy.listStorage.ElementAtOrDefault(index) == null)
+        if (Buy.ProductInStorage(index) == null)
         {
             throw new Exception("Введене число не відповідає індексу ні одного з продуктів!");
         }
-        Buy.AddPurchase(Buy.listStorage[index]);
+        buy.AddPurchase(Buy.GetProductFromStorage(index));
         Console.WriteLine("Товар успішно додано!");
+        BackToMenu();
+    }
+
+    private void RemoveProductToPurchases()
+    {
+        buy.PuchaseOutput();
+        Console.Write("Введіть індекс товару, який бажаєте видалити із кошика: ");
+        int index = Convert.ToInt32(Console.ReadLine());
+        if (buy.ProductInPurchase(index) == null)
+        {
+            throw new Exception("Введене число не відповідає індексу ні одного з продуктів!");
+        }
+        buy.RemovePurchase(buy.GetProductFromPurchase(index));
+        Console.WriteLine("Товар успішно видалено!");
         BackToMenu();
     }
 
     private void PurchaseOutput()
     {
-        Buy.PuchaseOutput();
+        buy.PuchaseOutput();
         BackToMenu();
     }
 
     private void CheckOutput()
     {
-        Buy.PuchaseOutput();
-        Check.Purchase();
+        buy.PuchaseOutput();
+        Check.Purchase(buy);
         BackToMenu();
     }
 

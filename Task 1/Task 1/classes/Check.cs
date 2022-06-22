@@ -1,7 +1,7 @@
 ﻿static class Check
 {
-    public static void Purchase()
+    public static void Purchase(Buy buy)
     {
-        Console.WriteLine($"Кількість товарів: {Buy.PurchaseAmount} | Ціна за весь товар: {Buy.PurchasePrice} | Вага всього товару: {Buy.PurchaseWeight}");
+        Console.WriteLine($"Кількість товарів: {buy.PurchaseAmount} | Ціна за весь товар: {buy.PurchasePrice} | Вага всього товару: {buy.PurchaseWeight}");
     }
 }
