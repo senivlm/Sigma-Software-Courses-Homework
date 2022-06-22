@@ -1,35 +1,57 @@
 ﻿using System;
 using System.Text;
-public static class Program
+
+namespace Task_2_Problem_2
 {
-    static void Main()
+    public static class Program
     {
-        Console.OutputEncoding = UTF8Encoding.UTF8;
-        Console.Write("Введіть кількість стовпців матриці: ");
-        int n = Convert.ToInt32(Console.ReadLine());
-        Console.Write("Введіть кількість рядків матриці: ");
-        int m = Convert.ToInt32(Console.ReadLine());
-        Console.WriteLine("Типи матриць");
-        Console.WriteLine("1. Вертикальна змійка");
-        Console.WriteLine("2. Спіральна змійка");
-        Console.WriteLine("3. Діагональна змійка");
-        Console.Write("Виберіть тип матриці: ");
-        int type = Convert.ToInt32(Console.ReadLine());
-        Console.Clear();
+        // 1. Створити клас для роботи з прямокутними матрицями.
+        // 2. Заповнення матриці має здійснюватися в межах класу та може відбуватись за різними законами.
+        // 3. Заповнення матриці у вигляді вертикальної змійки.
+        // 4. Заповнення матриці у вигляді діагональної змійки для квадратної матриці.
+        // 5. Заповнення матриці у вигляді спіральної змійки.
 
-        if ((type == 2) && (n != m))
+        static void Main()
         {
-            Console.Write("Помилка! Даний тип матриці доступний тільки для квадратної матриці.");
-            return;
-        }
+            Console.OutputEncoding = Encoding.UTF8;
 
-        int[,] array = new int[n,m];
-        switch (type)
-        {
-            case 1: array = Array.ArrayVerticalSnake(n, m); break;
-            case 2: array = Array.ArraySpiralSnake(n, m); break;
-            case 3: array = Array.ArrayDiagonalSnake(n, m); break;
+            try
+            {
+                Console.Write("Введіть кількість стовпців матриці: ");
+                int n = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Введіть кількість рядків матриці: ");
+                int m = Convert.ToInt32(Console.ReadLine());
+                Array array = new(n, m);
+                Console.Clear();
+
+                Console.WriteLine($"Типи матриць (C:{n}, R:{m}).");
+                Console.WriteLine("1. Вертикальна змійка");
+                Console.WriteLine("2. Діагональна змійка");
+                Console.WriteLine("3. Спіральна змійка");
+                Console.Write("Виберіть тип матриці: ");
+                int type = Convert.ToInt32(Console.ReadLine());
+                Console.Clear();
+
+                if (type == 3 && n != m)
+                {
+                    throw new Exception("Даний тип матриці доступний тільки для квадратної матриці!");
+                }
+
+                switch (type)
+                {
+                    case 1: array.ArrayVerticalSnake(); break;
+                    case 2: array.ArrayDiagonalSnake(); break;
+                    case 3: array.ArraySpiralSnake(); break;
+                    default: throw new Exception("Введене число не відповідає ні одній з функцій!");
+                }
+                array.ArrayOutput();
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(ex.Message);
+                Console.ResetColor();
+            }
         }
-        Array.ArrayOutput(n, m, array);
     }
 }

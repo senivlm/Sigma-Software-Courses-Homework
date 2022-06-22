@@ -10,7 +10,7 @@
         weight = w;
         expdate = e;
 
-        if (DateTime.Compare(expdate, DateTime.Now) > 0) // If Dairly_products expiration date has not passed
+        if (DateTime.Compare(expdate, DateTime.Now) > 0) // If Dairy product expiration date has not passed
         {
             
             price += price * (_Notexpired/100); // it price increases on {notexpired} percent

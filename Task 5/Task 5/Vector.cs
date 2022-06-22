@@ -1,69 +1,52 @@
 ﻿class Vector
 {
     #region Variables
-    public int[] arr;
-    #endregion
-
-    #region Properties
-    public int this[int index]
-    {
-        get
-        {
-            if ((index >= 0) && (index < arr.Length))
-            {
-                return arr[index];
-            }
-            else
-            {
-                throw new Exception("Index out of array range!");
-            }
-        }
-        set
-        {
-            arr[index] = value;
-        }
-    }
+    private int[] _arr;
     #endregion
 
     #region Constructors
     public Vector(int n)
     {
-        arr = new int[n];
+        if (n <= 0)
+        {
+            throw new Exception("Розмір матриці повинен бути більше за нуль!");
+        }
+        _arr = new int[n];
     }
     #endregion
 
     #region Methods
     public void RandomInitialization(int a, int b)
     {
-        Random random = new Random();
-        for (int i = 0; i < arr.Length; i++)
+        Random random = new();
+        for (int i = 0; i < _arr.Length; i++)
         {
-            arr[i] = random.Next(a, b);
+            _arr[i] = random.Next(a, b);
         }
     }
 
     public override string ToString()
     {
         string str = "";
-        for (int i = 0; i < arr.Length; i++)
+        for (int i = 0; i < _arr.Length; i++)
         {
-            str += arr[i] + " ";
+            str += _arr[i] + " ";
         }
         return str;
     }
 
     public void InitShufle()
     {
-        for (int i = 0; i < arr.Length; i++)
+        for (int i = 0; i < _arr.Length; i++)
         {
-            arr[i] = i + 1;
+            _arr[i] = i + 1;
         }
-        Random random = new Random();
-        for (int i = 0; i < random.Next((arr.Length / 2), arr.Length); i++)
+        Random random = new();
+        for (int i = 0; i < random.Next((_arr.Length / 2), _arr.Length); i++)
         {
-            int random1 = random.Next(0, arr.Length);
-            int random2 = random.Next(0, arr.Length);
-            (arr[random1], arr[random2]) = (arr[random2], arr[random1]);
+            int random1 = random.Next(0, _arr.Length);
+            int random2 = random.Next(0, _arr.Length);
+            (_arr[random1], _arr[random2]) = (_arr[random2], _arr[random1]);
         }
     }
 
@@ -117,14 +100,14 @@
 
         while ((left <= middleIndex) && (right <= highIndex))
         {
-            if (arr[left] < arr[right])
+            if (_arr[left] < _arr[right])
             {
-                tempArray[index] = arr[left];
+                tempArray[index] = _arr[left];
                 left++;
             }
             else
             {
-                tempArray[index] = arr[right];
+                tempArray[index] = _arr[right];
                 right++;
             }
             index++;
@@ -132,19 +115,19 @@
 
         for (var i = left; i <= middleIndex; i++)
         {
-            tempArray[index] = arr[i];
+            tempArray[index] = _arr[i];
             index++;
         }
 
         for (var i = right; i <= highIndex; i++)
         {
-            tempArray[index] = arr[i];
+            tempArray[index] = _arr[i];
             index++;
         }
 
         for (var i = 0; i < tempArray.Length; i++)
         {
-            arr[lowIndex + i] = tempArray[i];
+            _arr[lowIndex + i] = tempArray[i];
         }
     }
 
@@ -173,7 +156,7 @@
 
     public void MergeSort()
     {
-        MergeSort(0, arr.Length - 1);
+        MergeSort(0, _arr.Length - 1);
     }
 
     #region Task 1
@@ -188,7 +171,8 @@
 
             }
         }
-            int midIndex = line.Length/2;
+
+        int midIndex = line.Length/2;
         while (line[midIndex] != ' ') // for cases when line is "3 15 4" and we divide it length on 2 and get 4 numbers like "4 1 5 4"
         {
             ++midIndex;
@@ -300,13 +284,13 @@
     #region Task 2
     public void HeapSort() // Task 2
     {
-        for (int i = (arr.Length / 2 - 1); i >= 0; i--)
+        for (int i = (_arr.Length / 2 - 1); i >= 0; i--)
         {
-            Heapify(arr.Length, i);
+            Heapify(_arr.Length, i);
         }
-        for (int i = (arr.Length - 1); i >= 0; i--)
+        for (int i = (_arr.Length - 1); i >= 0; i--)
         {
-            (arr[i], arr[0]) = (arr[0], arr[i]);
+            (_arr[i], _arr[0]) = (_arr[0], _arr[i]);
             Heapify(i, 0);
         }
     }
@@ -316,17 +300,17 @@
         int largest = i;
         int left = 2 * i + 1;
         int right = 2 * i + 2;
-        if ((left < n) && (arr[left] > arr[largest]))
+        if ((left < n) && (_arr[left] > _arr[largest]))
         {
             largest = left;
         }
-        if ((right < n) && (arr[right] > arr[largest]))
+        if ((right < n) && (_arr[right] > _arr[largest]))
         {
             largest = right;
         }
         if (largest != i)
         {
-            (arr[largest], arr[i]) = (arr[i], arr[largest]);
+            (_arr[largest], _arr[i]) = (_arr[i], _arr[largest]);
             Heapify(n, largest);
         }
     }

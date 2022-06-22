@@ -1,13 +1,13 @@
-﻿class Buy
+﻿static class Buy
 {
-    public List<Product> listStorage, listPurchase;
-    public int PurchaseAmount { 
+    static public List<Product> listStorage = new(), listPurchase = new();
+    public static int PurchaseAmount { 
         get 
         {
             return listPurchase.Count;
         } 
     }
-    public decimal PurchasePrice
+    public static decimal PurchasePrice
     {
         get
         {
@@ -19,7 +19,7 @@
             return purchasePrice;
         }
     }
-    public decimal PurchaseWeight
+    public static decimal PurchaseWeight
     {
         get
         {
@@ -32,23 +32,17 @@
         }
     }
 
-    public Buy()
-    {
-        listStorage = new List<Product>();
-        listPurchase = new List<Product>();
-    }
-
-    public void AddStorage(Product product)
+    public static void AddStorage(Product product)
     {
         listStorage.Add(product);
     }
 
-    public void AddPurchase(Product product)
+    public static void AddPurchase(Product product)
     {
         listPurchase.Add(product);
     }
 
-    public void StorageOutput()
+    public static void StorageOutput()
     {
         HeaderOutput();
         for (int i = 0; i < listStorage.Count; i++)
@@ -58,7 +52,7 @@
         Console.WriteLine("----------------------------------");
     }
 
-    public void PuchaseOutput()
+    public static void PuchaseOutput()
     {
         HeaderOutput();
         for (int i = 0; i < listPurchase.Count; i++)
@@ -68,7 +62,7 @@
         Console.WriteLine("----------------------------------");
     }
 
-    public static void HeaderOutput()
+    private static void HeaderOutput()
     {
         Console.WriteLine("----------------------------------");
         Console.WriteLine(String.Format("| {0,0} | {1,-10} | {2,-5} | {3,-5} |", "#", "Назва", "Ціна", "Вага"));

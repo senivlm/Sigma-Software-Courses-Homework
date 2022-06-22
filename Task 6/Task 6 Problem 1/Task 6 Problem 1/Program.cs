@@ -13,24 +13,33 @@ class Program
     {
         Console.OutputEncoding = UTF8Encoding.UTF8;
 
-        int number = UserInterface.GetNumberOfConsumers();
-        int quarter = UserInterface.GetQuarter();
-        FileWorker.path = "..\\..\\..\\data\\";
-        
-        List <Consumer> consumers = new List <Consumer> ();
-        RandomInitialization.RandomConsumers(consumers, number);
-        for (int i = 0; i < consumers.Count; i++)
+        try
         {
-            RandomInitialization.RandomMeterings(consumers[i]);
+            int number = UserInterface.GetNumberOfConsumers();
+            int quarter = UserInterface.GetQuarter();
+            FileWorker.path = "..\\..\\..\\data\\";
+
+            List<Consumer> consumers = new();
+            RandomInitialization.RandomConsumers(consumers, number);
+            for (int i = 0; i < consumers.Count; i++)
+            {
+                RandomInitialization.RandomMeterings(consumers[i]);
+            }
+            FileWorker.CreateDataFile(consumers, quarter);
+            consumers.Clear(); // clearing the list of consumers after creating the input file
+
+            FileWorker.GetDataFromFile(consumers);
+            FileWorker.OutputInFileListConsumers(consumers, quarter);
+            FileWorker.OutputInFileConsumer(consumers[0], quarter);
+            FileWorker.OutputInFileDifferenceInDates(consumers);
+
+            Console.WriteLine("Програму виконано успішно!");
         }
-        FileWorker.CreateDataFile(consumers, quarter);
-        consumers.Clear(); // clearing the list of consumers after creating the input file
-
-        FileWorker.GetDataFromFile(consumers);
-        FileWorker.OutputInFileListConsumers(consumers, quarter);
-        FileWorker.OutputInFileConsumer(consumers[0], quarter);
-        FileWorker.OutputInFileDifferenceInDates(consumers);
-
-        Console.WriteLine("Програму виконано успішно!");
+        catch (Exception ex)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(ex.Message);
+            Console.ResetColor();
+        }
     }
 }

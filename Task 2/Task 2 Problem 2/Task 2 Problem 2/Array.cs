@@ -2,123 +2,146 @@
 using System.Text;
 class Array
 {
-    public static int[,] ArrayVerticalSnake(int n, int m)
+    private int[,] _array;
+    private int _columns, _rows;
+
+    public int Columns
     {
-        int[,] arrayVerticalSnake = new int[n, m];
-        int num;
-        for (int i = 0; i < n; i++)
+        get => _columns;
+        private set
         {
-            for (int j = 0; j < m; j++)
+            if (value <= 0)
+            {
+                throw new Exception("Кількість стовпців має бути більшою за ноль!");
+            }
+            _columns = value;
+        }
+    }
+
+    public int Rows
+    {
+        get => _rows;
+        private set
+        {
+            if (value <= 0)
+            {
+                throw new Exception("Кількість рядків має бути більшою за ноль!");
+            }
+            _rows = value;
+        }
+    }
+
+    public Array(int n, int m)
+    {
+        Columns = n;
+        Rows = m;
+        _array = new int[_columns, _rows];
+    }
+
+    public void ArrayVerticalSnake()
+    {
+        int num;
+        for (int i = 0; i < Columns; i++)
+        {
+            for (int j = 0; j < Rows; j++)
             {
                 if (j % 2 == 0)
                 {
-                    num = (i + 1) + j * n;
-                    arrayVerticalSnake[i, j] = num;
+                    num = (i + 1) + j * Columns;
+                    _array[i, j] = num;
                 }
                 else
                 {
-                    num = (n - i) + j * n;
-                    arrayVerticalSnake[i, j] = num;
+                    num = (Columns - i) + j * Columns;
+                    _array[i, j] = num;
                 }
             }
         }
-        return arrayVerticalSnake;
     }
 
-    public static int[,] ArrayDiagonalSnake(int n, int m)
+    public void ArrayDiagonalSnake()
     {
-        int[,] arrayDiagonalSnake = new int[n, m];
         int i = 0, j = 0, num = 0;
         bool swap = true;
 
-        for (int k = 0; k < n*m;)
+        for (int k = 0; k < Columns*Rows;)
         {
             if (swap)
             {
-                for (; (i >= 0) && (j < m); j++, i--)
-                {
-                    arrayDiagonalSnake[i, j] = ++num;
-                    k++;
-                }
-                if ((i < 0) && (j <= m - 1))
-                {
-                    i = 0;
-                }
-                if (j == m)
-                {
-                    i += 2;
-                    j--;
-                }
+                ArrayDiagonalSnakeAlgorithm(Rows, ref i, ref j, ref num, ref k, ref swap);
             }
             else
             {
-                for (; (j >= 0) && (i < n); i++, j--)
-                {
-                    arrayDiagonalSnake[i, j] = ++num;
-                    k++;
-                }
-                if ((j < 0) && (i <= n - 1))
-                {
-                    j = 0;
-                }
-                if (i == n)
-                {
-                    j += 2;
-                    i--;
-                }
+                ArrayDiagonalSnakeAlgorithm(Columns, ref j, ref i, ref num, ref k, ref swap);
             }
             swap = !swap;
         }
-        return arrayDiagonalSnake;
     }
 
-    public static int[,] ArraySpiralSnake(int n, int m)
+    private void ArrayDiagonalSnakeAlgorithm(in int x, ref int i, ref int j, ref int num, ref int k, ref bool swap)
     {
-        int[,] arraySpiralSnake = new int[n, m];
+        for (; (j >= 0) && (i < x); i++, j--)
+        {
+            if (swap) { _array[j, i] = ++num; }
+            else { _array[i, j] = ++num; }
+            k++;
+        }
+        if ((j < 0) && (i <= x - 1))
+        {
+            j = 0;
+        }
+        if (i == x)
+        {
+            j += 2;
+            i--;
+        }
+    }
 
+    public void ArraySpiralSnake()
+    {
+        int n = Columns, m = Rows;
         int k, i = 0, j = 0, num = 0;
 
-        while (i < n && j < m)
+        while ((i < n) && (j < m))
         {
             for (k = j; k < m; ++k)
             {
-                arraySpiralSnake[k, i] = ++num;
+                _array[k, i] = ++num;
             }
             i++;
 
             for (k = i; k < n; ++k)
             {
-                arraySpiralSnake[m - 1, k] = ++num;
+                _array[m - 1, k] = ++num;
             }
             m--;
 
             if (i < n)
             {
-                for (k = m-1; k >= j; --k)
+                for (k = m - 1; k >= j; --k)
                 {
-                    arraySpiralSnake[k, n-1] = ++num;
+                    _array[k, n - 1] = ++num;
                 }
                 n--;
             }
             if (j < m)
             {
-                for (k = n-1; k >= i; --k)
+                for (k = n - 1; k >= i; --k)
                 {
-                    arraySpiralSnake[j, k] = ++num;
+                    _array[j, k] = ++num;
                 }
                 j++;
             }
         }
-        return arraySpiralSnake;
     }
 
-    public static void ArrayOutput(int n, int m, int[,] array)
+    public void ArrayOutput()
     {
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < Columns; i++)
         {
-            for (int j = 0; j < m; j++)
+            for (int j = 0; j < Rows; j++)
             {
-                Console.Write($"{array[i, j]} \t");
+                Console.Write(String.Format("{0,-3}", _array[i, j]));
             }
             Console.WriteLine();
         }

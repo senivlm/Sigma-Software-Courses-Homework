@@ -90,7 +90,7 @@
     private static void AllProductsOutput() // Output all products list
     {
         Console.WriteLine("------------------------------------------------------------------------------");
-        Console.WriteLine("| Назва      | Ціна  | Вага | Сорт мяса  | Вид мяса      | Термін придатності");
+        Console.WriteLine("| Назва      | Ціна  | Вага | Сорт мяса  | Вид мяса      | Термін придатності ");
         Console.WriteLine("------------------------------------------------------------------------------");
         foreach (Product product in Storage.listProduct)
         {
