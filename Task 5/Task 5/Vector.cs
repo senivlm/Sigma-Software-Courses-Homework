@@ -9,7 +9,7 @@
     {
         if (n <= 0)
         {
-            throw new Exception("Розмір матриці повинен бути більше за нуль!");
+            throw new Exception("Розмір матриці повинен бути більшим за нуль!");
         }
         _arr = new int[n];
     }
@@ -25,17 +25,7 @@
         }
     }
 
-    public override string ToString()
-    {
-        string str = "";
-        for (int i = 0; i < _arr.Length; i++)
-        {
-            str += _arr[i] + " ";
-        }
-        return str;
-    }
-
-    public void InitShufle()
+    public void ShufleInitialization()
     {
         for (int i = 0; i < _arr.Length; i++)
         {
@@ -50,7 +40,17 @@
         }
     }
 
-    private static int[] Merge(int[] arr, int lowIndex, int middleIndex, int highIndex)
+    public override string ToString()
+    {
+        string str = "";
+        for (int i = 0; i < _arr.Length; i++)
+        {
+            str += _arr[i] + " ";
+        }
+        return str;
+    }
+
+    private static void Merge(int[] arr, int lowIndex, int middleIndex, int highIndex)
     {
         var left = lowIndex;
         var right = middleIndex + 1;
@@ -88,75 +88,17 @@
         {
             arr[lowIndex + i] = tempArray[i];
         }
-        return arr;
     }
 
-    private void Merge(int lowIndex, int middleIndex, int highIndex)
-    {
-        var left = lowIndex;
-        var right = middleIndex + 1;
-        var tempArray = new int[highIndex - lowIndex + 1];
-        var index = 0;
-
-        while ((left <= middleIndex) && (right <= highIndex))
-        {
-            if (_arr[left] < _arr[right])
-            {
-                tempArray[index] = _arr[left];
-                left++;
-            }
-            else
-            {
-                tempArray[index] = _arr[right];
-                right++;
-            }
-            index++;
-        }
-
-        for (var i = left; i <= middleIndex; i++)
-        {
-            tempArray[index] = _arr[i];
-            index++;
-        }
-
-        for (var i = right; i <= highIndex; i++)
-        {
-            tempArray[index] = _arr[i];
-            index++;
-        }
-
-        for (var i = 0; i < tempArray.Length; i++)
-        {
-            _arr[lowIndex + i] = tempArray[i];
-        }
-    }
-
-    private static int[] MergeSort(int[] arr, int lowIndex, int highIndex)
+    private static void MergeSort(int[] arr, int lowIndex, int highIndex)
     {
         if (lowIndex < highIndex)
         {
             var middleIndex = (lowIndex + highIndex) / 2;
-            arr = MergeSort(arr, lowIndex, middleIndex);
-            arr = MergeSort(arr, middleIndex + 1, highIndex);
-            arr = Merge(arr, lowIndex, middleIndex, highIndex);
+            MergeSort(arr, lowIndex, middleIndex);
+            MergeSort(arr, middleIndex + 1, highIndex);
+            Merge(arr, lowIndex, middleIndex, highIndex);
         }
-        return arr;
-    }
-
-    private void MergeSort(int lowIndex, int highIndex)
-    {
-        if (lowIndex < highIndex)
-        {
-            var middleIndex = (lowIndex + highIndex) / 2;
-            MergeSort(lowIndex, middleIndex);
-            MergeSort(middleIndex + 1, highIndex);
-            Merge(lowIndex, middleIndex, highIndex);
-        }
-    }
-
-    public void MergeSort()
-    {
-        MergeSort(0, _arr.Length - 1);
     }
 
     #region Task 1
@@ -168,7 +110,6 @@
             while (!streamReader.EndOfStream)
             {
                 line += streamReader.ReadLine() + " ";
-
             }
         }
 
@@ -180,8 +121,8 @@
 
         using (StreamWriter streamWriter = new StreamWriter(path + "Sorted Array First Part.txt"))
         {
-            var firstPartLine = line[..(midIndex)].Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s)).ToArray();
-            int[] firstHalf = Vector.MergeSort(firstPartLine, 0, firstPartLine.Length - 1); // first half of array added to memory
+            var firstHalf = line[..(midIndex)].Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s)).ToArray();
+            Vector.MergeSort(firstHalf, 0, firstHalf.Length - 1); // first half of array added to memory
 
             for (int i = 0; i < firstHalf.Length; i++)
             {
@@ -191,8 +132,8 @@
 
         using (StreamWriter streamWriter = new StreamWriter(path + "Sorted Array Second Part.txt"))
         {
-            var secondPartLine = line[(midIndex)..].Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s)).ToArray();
-            int[] secondHalf = Vector.MergeSort(secondPartLine, 0, secondPartLine.Length - 1); // second half of array added to memory
+            var secondHalf = line[(midIndex)..].Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s)).ToArray();
+            Vector.MergeSort(secondHalf, 0, secondHalf.Length - 1); // second half of array added to memory
 
             for (int i = 0; i < secondHalf.Length; i++)
             {
@@ -231,7 +172,7 @@
                             second = GetNumberFromFile(streamReaderSecond);
                         }
 
-                        if ((first == int.MaxValue) && (second == int.MaxValue)) // solution with int.MaxValue is temporary
+                        if ((first == int.MaxValue) && (second == int.MaxValue))
                         {
                             break;
                         }
@@ -240,7 +181,6 @@
             }
         }
     }
-
     private static int GetNumberFromFile(StreamReader streamReader)
     {
         string first = "";
