@@ -2,7 +2,7 @@
 {
     #region Variables
     private string _name;
-    public List<Product> ingredients;
+    private List<Product> _ingredients;
     #endregion
 
     #region Properties
@@ -11,10 +11,7 @@
         get => _name;
         set
         {
-            if (value.Any(char.IsDigit))
-            {
-                throw new Exception($"Назва блюда не може містити числа! (\"{value}\")");
-            }
+            if (value.Any(char.IsDigit)) throw new Exception($"Назва блюда не може містити числа! (\"{value}\")");
             _name = value;
         }
     }
@@ -24,7 +21,15 @@
     public Dish(string name, List<Product> ingredients)
     {
         Name = name;
-        this.ingredients = ingredients;
+        _ingredients = ingredients;
+    }
+    #endregion
+
+
+    #region Methods
+    public List<Product> GetIngredients()
+    {
+        return _ingredients;
     }
     #endregion
 }

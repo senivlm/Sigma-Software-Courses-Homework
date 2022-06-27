@@ -47,7 +47,7 @@
             }
             catch (FormatException)
             {
-                throw new Exception($"Деякі проблеми зі зчитуванням цін товарів! [{_path}]");
+                throw new FormatException($"Деякі проблеми зі зчитуванням цін товарів! [{_path}]");
             }
         }
     }
@@ -63,26 +63,23 @@
                     do
                     {
                         dishName = dishesFile.ReadLine();
-                    } while (dishName.Count() == 0);
+                    } while (string.IsNullOrEmpty(dishName));
 
                     List<Product> listProducts = new();
                     while (true && !dishesFile.EndOfStream)
                     {
-                        string[] line = dishesFile.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
-                        if (line.Length == 0) { break; }
+                        var line = dishesFile.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                        if (line.Length == 0) break;
                         listProducts.Add(new Product(line[0].Replace(",", ""), int.Parse(line[1].Replace("г", "").Replace("мл", ""))));
                     }
 
-                    if (listProducts.Count == 0)
-                    {
-                        throw new Exception($"Інгредієнтів для блюда \"{dishName}\" не знайдено!");
-                    }
+                    if (listProducts.Count == 0) throw new Exception($"Інгредієнтів для блюда \"{dishName}\" не знайдено!");
                     Storage.menu.Add(new Dish(dishName, listProducts));
                 }
             }
             catch (FormatException)
             {
-                throw new Exception($"Деякі проблеми зі зчитуванням блюд! [{_path}]");
+                throw new FormatException($"Деякі проблеми зі зчитуванням блюд! [{_path}]");
             }
         }
     }
@@ -106,7 +103,7 @@
             }
             catch (FormatException)
             {
-                throw new Exception($"Деякі проблеми зі зчитуванням біжучого курсу валют! [{_path}]");
+                throw new FormatException($"Деякі проблеми зі зчитуванням біжучого курсу валют! [{_path}]");
             }
         }
     }

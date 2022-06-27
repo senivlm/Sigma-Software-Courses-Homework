@@ -10,10 +10,7 @@
     #region Methods
     public static decimal? FindPriceForProduct(string name) 
     {
-        if (productsPrices.ContainsKey(name))
-        {
-            return productsPrices[name];
-        }
+        if (productsPrices.ContainsKey(name)) return productsPrices[name];
         return null;
     }
     public static void GetProductPriceInDialog(string name) // this method can be moved to another class
@@ -26,17 +23,14 @@
             FileWorker fileWorker = new(FileWorker.PathToPrices);
             fileWorker.WriteNewProductPrice(name);
         }
-        else
-        {
-            throw new Exception($"Для продукту \"{name}\" вказана некоректна ціна!");
-        }
+        else throw new Exception($"Для продукту \"{name}\" вказана некоректна ціна!");
     }
     public static Dictionary<string, List<Product>> TotalProducts()
     {
         Dictionary<string, List<Product>> productsTotal = new();
         foreach(Dish dish in menu)
         {
-            foreach(Product product in dish.ingredients)
+            foreach(Product product in dish.GetIngredients())
             {
                 if(productsTotal.ContainsKey(product.Name))
                 {

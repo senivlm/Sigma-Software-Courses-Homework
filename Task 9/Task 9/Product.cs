@@ -12,10 +12,7 @@
         get => _name;
         set
         {
-            if (value.Any(char.IsDigit))
-            {
-                throw new Exception($"Назва продукту не може містити числа! (\"{value}\")");
-            }
+            if (value.Any(char.IsDigit)) throw new Exception($"Назва продукту не може містити числа! (\"{value}\")");
             _name = value;
         }
     }
@@ -24,10 +21,7 @@
         get => _price;
         set
         {
-            if (value <= 0)
-            {
-                throw new Exception($"Ціна продукту не може бути меншою або рівною нулю! ({_name} != {value}грн)");
-            }
+            if (value <= 0) throw new Exception($"Ціна продукту не може бути меншою або рівною нулю! ({_name} != {value}грн)");
             _price = value;
         }
     }
@@ -36,10 +30,8 @@
         get => _weight;
         set
         {
-            if (value <= 0)
-            {
-                throw new Exception($"Вага продукту не може бути меншою або рівною нулю! ({_name} != {value}г)");
-            }
+            if (value <= 0) throw new Exception($"Вага продукту не може бути меншою або рівною нулю! ({_name} != {value}г)");
+
             _weight = value;
         }
     }
