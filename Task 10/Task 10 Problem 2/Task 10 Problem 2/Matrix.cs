@@ -1,7 +1,7 @@
 ﻿enum MatrixDirection { Down, Right }
 class Matrix
 {
-
+// Ваш клас мав реалізовувати інтерфейс IEnumarable. Залишіться для пояснення
     private int[,] _matrix;
     private int _rows, _columns;
     public int Rows
