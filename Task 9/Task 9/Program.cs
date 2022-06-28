@@ -34,11 +34,12 @@ namespace Task_9
                 if (!Storage.courses.ContainsKey(courseCode)) throw new Exception($"Даного коду валюти немає в базі даних! ({courseCode})");
 
                 FileWorker result = new("..\\..\\..\\data\\result.txt");
+                // Не найкраща ідея суміщати в одному методі і обчислення, і запис. Можу пояснити детальніше
                 result.WriteTotalProducts(Storage.TotalProducts(), courseCode);
                 Console.Write("Програму виконано успішно, результат у файлі \"result.txt\"!");
             }
             catch (FormatException ex)
-            {
+            {// Хороша ідея підсвічувати роздруки винятків. Поділіться в групі.
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine(ex.Message);
                 Console.ResetColor();
