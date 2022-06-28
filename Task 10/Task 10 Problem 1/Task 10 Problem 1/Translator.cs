@@ -40,6 +40,7 @@ class Translator
 
     public void AddDictionary(Dictionary<string, string> dictionary)
     {
+        // проблема неглибокої копії
         this.vocabluary = dictionary;
     }
 
