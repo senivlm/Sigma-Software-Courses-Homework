@@ -1,5 +1,5 @@
 ﻿static class Storage
-{
+{// Спроектовано більш функціонально, а не в дусі ООП
     #region Variables
     public static Dictionary<string, decimal> productsPrices = new();   // Prices.txt
     public static List<Dish> menu = new();                              // Menu.txt
