@@ -53,7 +53,7 @@ class Translator
             string tempWord = "";
             int i = 0;
             if (Char.IsPunctuation(word[word.Length - 1]))
-            {
+            {// по 2 вітках виконуються дії, які можна винести за опреатор if
                 temp = word[word.Length - 1];
                 while (!vocabluary.ContainsKey(word[0..^1]) && i < countVariedle)
                 {
